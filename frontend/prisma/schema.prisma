@@ -1,0 +1,233 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Auth ───────────────────────────────────────────────────────────────────
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
+  password      String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts         Account[]
+  sessions         Session[]
+  workspaces       Workspace[]
+  posts            Post[]
+  activities       Activity[]
+  workspaceMembers WorkspaceMember[]
+  postVersions     PostVersion[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ─── Workspace ──────────────────────────────────────────────────────────────
+
+model Workspace {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  ownerId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner           User                 @relation(fields: [ownerId], references: [id])
+  members         WorkspaceMember[]
+  posts           Post[]
+  connections     PlatformConnection[]
+  calendarEntries ContentCalendar[]
+  assets          Asset[]
+  brandVoice      BrandVoice?
+}
+
+model WorkspaceMember {
+  id          String   @id @default(cuid())
+  workspaceId String
+  userId      String
+  role        String   @default("editor") // owner, admin, editor, writer, reviewer
+  createdAt   DateTime @default(now())
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, userId])
+}
+
+// ─── Content ────────────────────────────────────────────────────────────────
+
+model Post {
+  id             String    @id @default(cuid())
+  workspaceId    String
+  authorId       String
+  title          String?
+  content        String
+  mediaUrls      String[]
+  platform       String // youtube, instagram, facebook, linkedin, x
+  status         String    @default("draft") // draft, review, scheduled, publishing, published, failed
+  scheduledAt    DateTime?
+  publishedAt    DateTime?
+  platformPostId String?
+  metadata       Json?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  workspace Workspace         @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  author    User              @relation(fields: [authorId], references: [id])
+  calendar  ContentCalendar?
+  analytics AnalyticsMetric[]
+  versions  PostVersion[]
+}
+
+model PostVersion {
+  id        String   @id @default(cuid())
+  postId    String
+  content   String
+  version   Int
+  authorId  String
+  createdAt DateTime @default(now())
+
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author User @relation(fields: [authorId], references: [id])
+}
+
+// ─── Platform Connections ───────────────────────────────────────────────────
+
+model PlatformConnection {
+  id               String    @id @default(cuid())
+  workspaceId      String
+  platform         String // youtube, instagram, facebook, linkedin, x
+  platformUserId   String
+  platformUsername String
+  accessToken      String
+  refreshToken     String?
+  expiresAt        DateTime?
+  metadata         Json?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, platform, platformUserId])
+}
+
+// ─── Calendar ───────────────────────────────────────────────────────────────
+
+model ContentCalendar {
+  id          String   @id @default(cuid())
+  workspaceId String
+  postId      String   @unique
+  date        DateTime
+  timeSlot    String?
+  createdAt   DateTime @default(now())
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+// ─── Analytics ──────────────────────────────────────────────────────────────
+
+model AnalyticsMetric {
+  id          String   @id @default(cuid())
+  postId      String
+  platform    String
+  impressions Int      @default(0)
+  reach       Int      @default(0)
+  engagement  Int      @default(0)
+  likes       Int      @default(0)
+  comments    Int      @default(0)
+  shares      Int      @default(0)
+  clicks      Int      @default(0)
+  watchTime   Int?
+  subscribers Int?
+  recordedAt  DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+// ─── Brand Voice ────────────────────────────────────────────────────────────
+
+model BrandVoice {
+  id           String   @id @default(cuid())
+  workspaceId  String   @unique
+  tone         String?
+  writingStyle String?
+  ctaStyle     String?
+  emojiUsage   String?
+  formatting   String?
+  vocabulary   String?
+  samplePosts  String[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}
+
+// ─── Assets ─────────────────────────────────────────────────────────────────
+
+model Asset {
+  id          String   @id @default(cuid())
+  workspaceId String
+  name        String
+  type        String // image, video, document, template
+  url         String
+  metadata    Json?
+  createdAt   DateTime @default(now())
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}
+
+// ─── Activity Log ───────────────────────────────────────────────────────────
+
+model Activity {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String // post_created, post_published, post_failed, connection_added, comment_added
+  description String
+  metadata    Json?
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
