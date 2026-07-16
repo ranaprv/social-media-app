@@ -1,8 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from datetime import timedelta
 import uuid
+import secrets
 
 from app.core.database import get_db
 from app.core.security import (
@@ -26,9 +27,31 @@ from app.schemas import (
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
+# In-memory rate limiting for auth endpoints
+_auth_attempts: dict[str, list[float]] = {}
+AUTH_RATE_LIMIT = 5  # max attempts
+AUTH_RATE_WINDOW = 900  # 15 minutes in seconds
+
+
+def _check_auth_rate_limit(key: str) -> bool:
+    import time
+    now = time.time()
+    attempts = _auth_attempts.get(key, [])
+    attempts = [t for t in attempts if now - t < AUTH_RATE_WINDOW]
+    if len(attempts) >= AUTH_RATE_LIMIT:
+        return False
+    attempts.append(now)
+    _auth_attempts[key] = attempts
+    return True
+
 
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
-async def register(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
+async def register(user_data: UserCreate, request: Request, db: AsyncSession = Depends(get_db)):
+    # Rate limit
+    client_ip = request.client.host if request.client else "unknown"
+    if not _check_auth_rate_limit(f"register:{client_ip}"):
+        raise HTTPException(status_code=429, detail="Too many registration attempts. Try again later.")
+    
     # Check if user exists
     result = await db.execute(select(User).where(User.email == user_data.email))
     if result.scalar_one_or_none():
@@ -57,7 +80,11 @@ async def register(user_data: UserCreate, db: AsyncSession = Depends(get_db)):
 
 
 @router.post("/login", response_model=Token)
-async def login(user_data: UserLogin, db: AsyncSession = Depends(get_db)):
+async def login(user_data: UserLogin, request: Request, db: AsyncSession = Depends(get_db)):
+    # Rate limit
+    client_ip = request.client.host if request.client else "unknown"
+    if not _check_auth_rate_limit(f"login:{client_ip}"):
+        raise HTTPException(status_code=429, detail="Too many login attempts. Try again later.")
     # Find user
     result = await db.execute(select(User).where(User.email == user_data.email))
     user = result.scalar_one_or_none()
@@ -74,7 +101,13 @@ async def login(user_data: UserLogin, db: AsyncSession = Depends(get_db)):
         expires_delta=timedelta(minutes=30),
     )
     
-    return Token(access_token=access_token, token_type="bearer")
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "user_id": user.id,
+        "email": user.email,
+        "name": user.name,
+    }
 
 
 @router.get("/me", response_model=UserResponse)
@@ -113,22 +146,33 @@ async def reset_password(request: ResetPasswordRequest, db: AsyncSession = Depen
 
 @router.get("/mfa/setup", response_model=MFASetupResponse)
 async def mfa_setup(current_user: User = Depends(get_current_user)):
-    # Generate mock TOTP secret and QR code
-    mock_secret = "JBSWY3DPEHPK3PXP"
-    mock_qr = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=otpauth://totp/ContentPilot:" + current_user.email + "%3Fsecret%3D" + mock_secret + "%26issuer%3DContentPilot"
-    return MFASetupResponse(secret=mock_secret, qr_code=mock_qr)
+    """Generate real TOTP secret and QR code for MFA setup."""
+    import pyotp
+    
+    secret = pyotp.random_base32()
+    totp = pyotp.TOTP(secret)
+    provisioning_uri = totp.provisioning_uri(
+        name=current_user.email,
+        issuer_name="ContentPilot",
+    )
+    qr_url = f"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={provisioning_uri}"
+    
+    return MFASetupResponse(secret=secret, qr_code=qr_url)
 
 
 @router.post("/mfa/verify")
 async def mfa_verify(request: MFAVerifyRequest, current_user: User = Depends(get_current_user)):
-    # Verify mock TOTP code (always accept '123456' or verify format)
-    if request.code == "123456" or len(request.code) == 6:
-         return {"status": "success", "message": "MFA code verified successfully"}
+    """Verify TOTP code against secret."""
+    import pyotp
+    
+    totp = pyotp.TOTP(request.secret)
+    if totp.verify(request.code, valid_window=1):
+        return {"status": "success", "message": "MFA code verified successfully"}
     raise HTTPException(status_code=400, detail="Invalid verification code")
 
 
 @router.post("/mfa/toggle")
 async def mfa_toggle(request: MFAToggleRequest, current_user: User = Depends(get_current_user)):
-    # Toggle MFA status (mock backend state update)
+    """Toggle MFA status."""
     return {"status": "success", "mfa_enabled": request.enabled}
 

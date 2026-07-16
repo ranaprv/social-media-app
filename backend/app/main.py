@@ -1,11 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from app.core.config import get_settings
 from app.api import (
     auth, workspaces, posts, dashboard, connections,
     ai_content, ai_ideas, ai_writing_tools, ai_brand_voice,
     repurpose, calendar, scheduler_api, team, media,
     analytics, billing, security_api, recommendations, ai_media,
+    webhooks,
 )
 
 settings = get_settings()
@@ -19,13 +21,29 @@ app = FastAPI(
 )
 
 # CORS
+allowed_origins = [o.strip() for o in settings.ALLOWED_ORIGINS.split(",") if o.strip()]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:3001"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# Security Headers Middleware
+@app.middleware("http")
+async def security_headers(request: Request, call_next):
+    response: Response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+    if settings.ENVIRONMENT == "production":
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+        response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com"
+    return response
 
 # Routes
 app.include_router(auth.router, prefix="/api")
@@ -47,6 +65,7 @@ app.include_router(billing.router, prefix="/api")
 app.include_router(security_api.router, prefix="/api")
 app.include_router(recommendations.router, prefix="/api")
 app.include_router(ai_media.router, prefix="/api")
+app.include_router(webhooks.router, prefix="/api")
 
 
 @app.get("/api/health")

@@ -50,6 +50,14 @@ class Settings(BaseSettings):
     AWS_BUCKET_NAME: str = ""
     AWS_REGION: str = "us-east-1"
     
+    # Email
+    SENDGRID_API_KEY: str = ""
+    FROM_EMAIL: str = "noreply@contentpilot.ai"
+    
+    # Environment
+    ENVIRONMENT: str = "development"
+    ALLOWED_ORIGINS: str = "http://localhost:3000,http://localhost:3001"
+
     class Config:
         env_file = ".env"
 
