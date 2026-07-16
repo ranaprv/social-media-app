@@ -1,27 +1,33 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 import uuid
 from datetime import datetime, timedelta
+from sqlalchemy import select, func
 
 from app.core.database import get_db
 from app.core.security import get_current_user
 from app.models.user import User
+from app.models.content import Post, AnalyticsMetric
 
 router = APIRouter(prefix="/analytics", tags=["analytics"])
 
 
 def _gen_trend(base: float, days: int) -> list[dict]:
-    """Generate realistic trend data."""
+    """Generate fallback trend data when no real data exists."""
     import random
     data = []
     now = datetime.utcnow()
     for i in range(days):
         date = now - timedelta(days=days - 1 - i)
         data.append({
-            "date": date.strftime("%Y-%m-%d"),
+            "date": date.strftime("%m-%d"),
             "value": round(base + random.uniform(-base * 0.3, base * 0.3) + (i * base * 0.02), 0),
         })
     return data
+
+
+def _period_days(period: str) -> int:
+    return {"7d": 7, "30d": 30, "90d": 90}.get(period, 30)
 
 
 @router.get("/dashboard")
@@ -30,24 +36,80 @@ async def get_analytics_dashboard(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """Get analytics dashboard overview."""
+    """Get analytics dashboard overview — queries real data from database."""
+    days = _period_days(period)
+    cutoff = datetime.utcnow() - timedelta(days=days)
+    prev_cutoff = cutoff - timedelta(days=days)
+
+    # Current period totals
+    result = await db.execute(
+        select(
+            func.coalesce(func.sum(AnalyticsMetric.reach), 0),
+            func.coalesce(func.sum(AnalyticsMetric.impressions), 0),
+            func.coalesce(func.sum(AnalyticsMetric.engagement), 0),
+            func.coalesce(func.sum(AnalyticsMetric.clicks), 0),
+        ).where(AnalyticsMetric.recorded_at >= cutoff)
+    )
+    row = result.one()
+    reach, impressions, engagement, clicks = row
+
+    # Previous period totals for change calculation
+    prev_result = await db.execute(
+        select(
+            func.coalesce(func.sum(AnalyticsMetric.reach), 0),
+            func.coalesce(func.sum(AnalyticsMetric.impressions), 0),
+            func.coalesce(func.sum(AnalyticsMetric.engagement), 0),
+            func.coalesce(func.sum(AnalyticsMetric.clicks), 0),
+        ).where(AnalyticsMetric.recorded_at >= prev_cutoff, AnalyticsMetric.recorded_at < cutoff)
+    )
+    prev_row = prev_result.one()
+    prev_reach, prev_impressions, prev_engagement, prev_clicks = prev_row
+
+    def _pct_change(current, previous):
+        if previous == 0:
+            return 0.0
+        return round(((current - previous) / previous) * 100, 1)
+
+    def _trend(current, previous):
+        return "up" if current >= previous else "down"
+
+    # Generate trend data from actual metrics
+    trend_result = await db.execute(
+        select(AnalyticsMetric).where(AnalyticsMetric.recorded_at >= cutoff).order_by(AnalyticsMetric.recorded_at)
+    )
+    metrics = trend_result.scalars().all()
+
+    # Aggregate by day
+    daily: dict[str, dict] = {}
+    for m in metrics:
+        day = m.recorded_at.strftime("%m-%d")
+        if day not in daily:
+            daily[day] = {"reach": 0, "impressions": 0, "engagement": 0}
+        daily[day]["reach"] += m.reach
+        daily[day]["impressions"] += m.impressions
+        daily[day]["engagement"] += m.engagement
+
+    reach_trend = [{"date": d, "value": v["reach"]} for d, v in daily.items()]
+    impressions_trend = [{"date": d, "value": v["impressions"]} for d, v in daily.items()]
+    engagement_trend = [{"date": d, "value": v["engagement"]} for d, v in daily.items()]
+
+    # If no real data, provide generated fallback for chart display
+    if not reach_trend:
+        reach_trend = _gen_trend(4750, days)
+        impressions_trend = _gen_trend(9567, days)
+        engagement_trend = _gen_trend(413, days)
+
     return {
         "period": period,
         "summary": {
-            "reach": {"value": 142500, "change": 23.5, "trend": "up"},
-            "impressions": {"value": 287000, "change": 18.2, "trend": "up"},
-            "engagement": {"value": 12400, "change": -5.1, "trend": "down"},
-            "followers": {"value": 28400, "change": 8.7, "trend": "up"},
-            "subscribers": {"value": 4200, "change": 12.3, "trend": "up"},
-            "watchTime": {"value": 156000, "unit": "minutes", "change": 31.2, "trend": "up"},
-            "clicks": {"value": 8900, "change": 15.8, "trend": "up"},
-            "ctr": {"value": 3.1, "unit": "%", "change": 0.4, "trend": "up"},
-            "leads": {"value": 342, "change": 22.1, "trend": "up"},
-            "conversions": {"value": 89, "change": 14.6, "trend": "up"},
+            "reach": {"value": int(reach), "change": _pct_change(reach, prev_reach), "trend": _trend(reach, prev_reach)},
+            "impressions": {"value": int(impressions), "change": _pct_change(impressions, prev_impressions), "trend": _trend(impressions, prev_impressions)},
+            "engagement": {"value": int(engagement), "change": _pct_change(engagement, prev_engagement), "trend": _trend(engagement, prev_engagement)},
+            "clicks": {"value": int(clicks), "change": _pct_change(clicks, prev_clicks), "trend": _trend(clicks, prev_clicks)},
         },
-        "reachTrend": _gen_trend(4750, 30),
-        "impressionsTrend": _gen_trend(9567, 30),
-        "engagementTrend": _gen_trend(413, 30),
+        "reachTrend": reach_trend,
+        "impressionsTrend": impressions_trend,
+        "engagementTrend": engagement_trend,
     }
 
 

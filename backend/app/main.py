@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from app.core.config import get_settings
+from app.middleware.logging import log_requests
 from app.api import (
     auth, workspaces, posts, dashboard, connections,
     ai_content, ai_ideas, ai_writing_tools, ai_brand_voice,
@@ -44,6 +45,13 @@ async def security_headers(request: Request, call_next):
         response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
         response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com"
     return response
+
+
+# Request logging middleware
+@app.middleware("http")
+async def request_logging(request: Request, call_next):
+    return await log_requests(request, call_next)
+
 
 # Routes
 app.include_router(auth.router, prefix="/api")

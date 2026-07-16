@@ -46,10 +46,14 @@ def check_scheduled_posts():
         return {"error": str(e)}
 
 
-# Schedule the periodic task
+# Schedule the periodic tasks
 celery_app.conf.beat_schedule = {
     "check-scheduled-posts": {
         "task": "app.tasks.scheduler.check_scheduled_posts",
         "schedule": 60.0,  # every 60 seconds
+    },
+    "collect-analytics": {
+        "task": "app.tasks.analytics.collect_all_analytics",
+        "schedule": 21600.0,  # every 6 hours
     },
 }
