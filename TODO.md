@@ -316,6 +316,187 @@
 
 ---
 
+## Missing Features — Publishing & Scheduling
+
+### TASK-016: Bulk Scheduling (CSV Upload)
+**Gap:** No CSV import for scheduling up to 350 posts at once.
+**Subtasks:**
+- [ ] **016a** Create `POST /api/scheduler/bulk-upload` endpoint — accept multipart CSV file with columns: content, platform, scheduled_at, media_url, title
+- [ ] **016b** Add CSV parsing with `python-csv` — validate rows, detect platform, parse dates, reject malformed rows
+- [ ] **016c** Batch create posts from CSV — insert into posts table with status="scheduled", link to workspace
+- [ ] **016d** Enqueue Celery publish tasks for each post with `scheduled_at` delay
+- [ ] **016e** Return upload summary: total rows, valid rows, error rows with line numbers, scheduled count
+- [ ] **016f** Create `frontend/src/components/scheduler/bulk-upload.tsx` — drag-and-drop CSV upload zone, preview table with validation, confirm button
+- [ ] **016g** Add bulk upload page at `/dashboard/scheduler/bulk` with upload history
+- [ ] **016h** Add CSV template download button — pre-filled sample CSV with column headers
+
+### TASK-017: Canva & Dropbox Integration
+**Gap:** No integration with Canva (design) or Dropbox (file storage).
+**Subtasks:**
+- [ ] **017a** Create `backend/app/services/integrations/canva.py` — Canva Connect API: list designs, export as PNG/JPG, create from template
+- [ ] **017b** Create `backend/app/services/integrations/dropbox.py` — Dropbox API v2: list folders, upload, download, create shared link
+- [ ] **017c** Add OAuth2 flow for Canva — `GET /api/integrations/canva/auth` → redirect to Canva, callback stores tokens
+- [ ] **017d** Add OAuth2 flow for Dropbox — `GET /api/integrations/dropbox/auth` → redirect to Dropbox, callback stores tokens
+- [ ] **017e** Create `frontend/src/components/integrations/canva-picker.tsx` — modal to browse Canva designs, select, import to media library
+- [ ] **017f** Create `frontend/src/components/integrations/dropbox-picker.tsx` — modal to browse Dropbox folders, select files, import
+- [ ] **017g** Add integration settings page at `/dashboard/settings/integrations` — connect/disconnect buttons, status indicators
+- [ ] **017h** Store OAuth tokens encrypted in PlatformConnection table
+
+### TASK-018: Link Shortening
+**Gap:** No automatic link shortening for posts.
+**Subtasks:**
+- [ ] **018a** Create `backend/app/services/link_shortener.py` — support Bitly API and fallback to TinyURL
+- [ ] **018b** Create `POST /api/links/shorten` endpoint — accept URL, return short_url, short_id, original_url
+- [ ] **018c** Create `GET /api/links/{short_id}/stats` — click count, referrers, geographic breakdown, time series
+- [ ] **018d** Create redirect endpoint `GET /r/{short_id}` — log click (user-agent, referrer, IP), 302 redirect to original
+- [ ] **018e** Auto-shorten URLs in post content before publishing (detect http/https links, replace with short URLs)
+- [ ] **018f** Add link shortening toggle in post composer — checkbox "Shorten links in this post"
+- [ ] **018g** Store short links in `short_links` table: short_id, original_url, clicks, created_at, workspace_id
+
+---
+
+## Missing Features — Engagement & Customer Care
+
+### TASK-019: Unified Inbox
+**Gap:** No centralized inbox for messages, comments, mentions across platforms.
+**Subtasks:**
+- [ ] **019a** Create `backend/app/models/inbox.py` — Message model: platform, message_type (dm/comment/mention/story_reply), sender_name, sender_avatar, content, status (unread/read/replied/assigned), platform_message_id, thread_id, received_at
+- [ ] **019b** Create Alembic migration for `messages` table
+- [ ] **019c** Create `backend/app/api/inbox.py` — list messages (filter by platform/type/status, paginated), mark read, mark replied, get thread
+- [ ] **019d** Create Celery task `poll_inbox.py` — poll LinkedIn/X/Instagram/Facebook APIs for new messages, comments, mentions; insert into messages table
+- [ ] **019e** Add Celery beat schedule: poll inbox every 5 minutes for connected platforms
+- [ ] **019f** Create `frontend/src/app/dashboard/inbox/page.tsx` — inbox with platform tabs (All/LinkedIn/X/Instagram/Facebook), unread badge counts, message list, thread panel
+- [ ] **019g** Create `frontend/src/components/inbox/message-thread.tsx` — threaded message view with reply input, saved reply picker
+- [ ] **019h** Create `frontend/src/components/inbox/message-card.tsx` — message card with avatar, sender, preview, platform badge, time, status
+- [ ] **019i** Add real-time polling — refetch inbox every 30 seconds when page is active
+- [ ] **019j** Add "Inbox" to sidebar navigation with unread count badge
+
+### TASK-020: Message Automation & Saved Replies
+**Gap:** No auto-replies, keyword triggers, or saved reply templates.
+**Subtasks:**
+- [ ] **020a** Create `backend/app/models/automation.py` — AutomationRule: trigger_type (keyword/exact_match/time_based/sentiment), trigger_value, action_type (reply/assign/label/tag), response_text, platforms[], is_active
+- [ ] **020b** Create Alembic migration for `automation_rules` table
+- [ ] **020c** Create `backend/app/api/automation.py` — CRUD rules, toggle active, test rule against sample message
+- [ ] **020d** Create `backend/app/models/saved_reply.py` — SavedReply: title, content, category, shortcut (e.g. /thanks), workspace_id
+- [ ] **020e** Create `backend/app/api/saved_replies.py` — CRUD saved replies, search by shortcut
+- [ ] **020f** Create Celery task `apply_automation.py` — on each new inbox message, check against active rules, auto-reply if matched
+- [ ] **020g** Create `frontend/src/app/dashboard/automation/page.tsx` — rule builder with trigger type selector, action config, test panel
+- [ ] **020h** Create `frontend/src/components/inbox/saved-replies.tsx` — saved reply picker in inbox compose, shortcut search, insert button
+
+### TASK-021: Message Routing & Task Assignment
+**Gap:** No auto-routing of messages to team members or task assignment.
+**Subtasks:**
+- [ ] **021a** Create `backend/app/models/routing_rule.py` — RoutingRule: trigger (keyword/platform/sentiment/tag), assign_to_user, assign_to_role, notify_via (email/inbox/notification), is_active
+- [ ] **021b** Create `backend/app/api/routing.py` — CRUD routing rules
+- [ ] **021c** Create `backend/app/models/task.py` — Task: title, description, assigned_to, assigned_by, message_id (optional), status (open/in_progress/resolved), priority, due_date
+- [ ] **021d** Create `backend/app/api/tasks.py` — CRUD tasks, list my tasks, update status
+- [ ] **021e** Update inbox processing — apply routing rules on new messages, auto-assign to team member
+- [ ] **021f** Add "Create Task" action on inbox message — opens task modal pre-filled with message context
+- [ ] **021g** Create `frontend/src/app/dashboard/tasks/page.tsx` — task board (Kanban: Open/In Progress/Resolved), task cards with assignee, priority, due date
+- [ ] **021h** Add routing rules page at `/dashboard/settings/routing`
+
+---
+
+## Missing Features — Social Listening & Monitoring
+
+### TASK-022: Trend Discovery & Social Listening
+**Gap:** No keyword monitoring, trend detection, or brand mention tracking.
+**Subtasks:**
+- [ ] **022a** Create `backend/app/models/listening.py` — ListeningAlert: keyword, platforms[], check_interval, last_checked, is_active, workspace_id
+- [ ] **022b** Create Alembic migration for `listening_alerts` and `mentions` tables
+- [ ] **022c** Create `backend/app/services/listening/scanner.py` — scan Twitter/X search API, Google News, Reddit, review sites for keyword mentions
+- [ ] **022d** Create `backend/app/api/listening.py` — CRUD alerts, get mentions (paginated, filterable), get trend summary
+- [ ] **022e** Create Celery periodic task `scan_mentions.py` — run every hour, scan all active alerts, store new mentions
+- [ ] **022f** Create `frontend/src/app/dashboard/listening/page.tsx` — alert cards, mention feed with sentiment badges, trend chart (mentions over time), keyword cloud
+- [ ] **022g** Add notification on new brand mention (in-app + optional email)
+- [ ] **022h** Add "Listening" to sidebar navigation
+
+### TASK-023: Sentiment Analysis
+**Gap:** No AI-powered sentiment scoring on mentions, comments, or content.
+**Subtasks:**
+- [ ] **023a** Create `backend/app/services/sentiment.py` — analyze text sentiment using OpenAI (gpt-4o-mini for cost) — returns positive/negative/neutral + confidence 0-1
+- [ ] **023b** Add `sentiment` and `sentiment_score` columns to messages table
+- [ ] **023c** Run sentiment analysis on each new inbox message on arrival
+- [ ] **023d** Add sentiment aggregation endpoint — `GET /api/analytics/sentiment?period=30d` — daily sentiment counts, overall distribution
+- [ ] **023e** Create `frontend/src/components/inbox/sentiment-badge.tsx` — colored pill: green=positive, red=negative, gray=neutral
+- [ ] **023f** Add sentiment filter to inbox — filter by positive/negative/neutral
+- [ ] **023g** Add sentiment breakdown pie chart to analytics page
+- [ ] **023h** Add sentiment trend line to analytics — sentiment score over time
+
+### TASK-024: Competitor Benchmarking
+**Gap:** No competitor tracking or performance comparison.
+**Subtasks:**
+- [ ] **024a** Create `backend/app/models/competitor.py` — Competitor: name, platforms[], profile_urls, tracking_enabled, workspace_id
+- [ ] **024b** Create `backend/app/api/competitors.py` — CRUD competitors, get competitor metrics, compare with own performance
+- [ ] **024c** Create `backend/app/services/competitors/tracker.py` — fetch public metrics (followers, post count, avg engagement) from competitor profiles
+- [ ] **024d** Create Celery periodic task `track_competitors.py` — daily metric collection for all tracked competitors
+- [ ] **024e** Create `frontend/src/app/dashboard/competitors/page.tsx` — competitor cards, side-by-side comparison table, growth trend charts
+- [ ] **024f** Add competitor comparison widget to analytics page — overlay own metrics vs competitor averages
+- [ ] **024g** Add "Competitors" to sidebar navigation
+
+---
+
+## Missing Features — Analytics & Reporting
+
+### TASK-025: Custom Analytics Reports
+**Gap:** Basic charts exist but no custom report builder or export.
+**Subtasks:**
+- [ ] **025a** Create `backend/app/models/report.py` — Report: name, metrics[], date_range_start, date_range_end, platforms[], created_by, schedule (none/daily/weekly/monthly)
+- [ ] **025b** Create `backend/app/api/reports.py` — CRUD reports, generate report data, export as PDF, export as CSV
+- [ ] **025c** Create report data aggregation — combine analytics, inbox, engagement metrics into single report payload
+- [ ] **025d** Create `frontend/src/app/dashboard/reports/page.tsx` — report builder: metric picker checkboxes, date range picker, platform selector, generate button, preview
+- [ ] **025e** Add report export — PDF with charts (use `weasyprint` or `reportlab`), CSV data dump
+- [ ] **025f** Add saved reports list with "Generate Now" and "Download Last" buttons
+- [ ] **025g** Add scheduled report delivery via email (Celery beat task)
+
+### TASK-026: Paid + Organic Campaign Tracking
+**Gap:** No Facebook/Instagram/LinkedIn ad campaign tracking.
+**Subtasks:**
+- [ ] **026a** Create `backend/app/services/ads/facebook_ads.py` — Facebook Marketing API: list campaigns, ad sets, ads; fetch metrics (spend, impressions, clicks, conversions, CTR, CPC, ROAS)
+- [ ] **026b** Create `backend/app/services/ads/linkedin_ads.py` — LinkedIn Marketing API: campaign metrics
+- [ ] **026c** Create `backend/app/api/ads.py` — list campaigns, get campaign details, compare paid vs organic side-by-side
+- [ ] **026d** Create Celery periodic task `sync_ad_campaigns.py` — daily sync of ad campaign data
+- [ ] **026e** Create `frontend/src/app/dashboard/ads/page.tsx` — ad campaign dashboard: campaign cards with spend/impressions/CTR, paid vs organic comparison chart, ROAS calculator
+- [ ] **026f** Add paid vs organic toggle to analytics page — overlay organic metrics with paid campaign metrics
+
+### TASK-027: Web Analytics Integration (GA4, Adobe)
+**Gap:** No Google Analytics or Adobe Analytics connection.
+**Subtasks:**
+- [ ] **027a** Create `backend/app/services/integrations/ga4.py` — Google Analytics Data API v1: fetch sessions, users, pageviews, bounce rate, conversions by date
+- [ ] **027b** Create `backend/app/services/integrations/adobe_analytics.py` — Adobe Analytics Reporting API
+- [ ] **027c** Add OAuth2 flow for GA4 (Google OAuth) and Adobe (Adobe I/O)
+- [ ] **027d** Create `frontend/src/components/analytics/web-stats.tsx` — widget showing GA4/Adobe data: sessions, users, top pages, traffic sources
+- [ ] **027e** Correlate social post publish times with website traffic spikes — overlay chart
+- [ ] **027f** Add web analytics to analytics page as a collapsible section
+
+---
+
+## Missing Features — Team Collaboration & Enterprise
+
+### TASK-028: Multi-Tier Approval Workflows
+**Gap:** Basic review exists but no configurable multi-tier approval chains.
+**Subtasks:**
+- [ ] **028a** Create `backend/app/models/approval_workflow.py` — ApprovalWorkflow: name, stages[] (each with approver_role, required_approvals, auto_advance), is_default
+- [ ] **028b** Create `backend/app/api/approvals.py` — CRUD workflows, submit post to workflow, approve/reject at each stage, get approval status
+- [ ] **028c** Add `approval_workflow_id` and `approval_stage` columns to posts table
+- [ ] **028d** Update post scheduling flow — if post has approval_workflow_id, block scheduling until all stages approved
+- [ ] **028e** Create `frontend/src/app/dashboard/approvals/page.tsx` — approval queue: pending items with stage indicators (Stage 1/3 ✓, Stage 2/3 pending), approve/reject buttons, comment field
+- [ ] **028f** Add email/notification on each stage transition (submitted → stage1_approved → stage2_approved → ready_to_publish)
+- [ ] **028g** Add approval workflow settings at `/dashboard/settings/approvals` — create/edit workflows, assign to post types
+
+### TASK-029: Employee Advocacy (Amplify)
+**Gap:** No system for employees to share approved company content on personal networks.
+**Subtasks:**
+- [ ] **029a** Create `backend/app/models/advocacy.py` — AdvocacyPost: original_post_id, employee_id, platform, shared_at, clicks, shares_generated
+- [ ] **029b** Create `backend/app/api/advocacy.py` — list shareable content, share post (generate pre-written share text + link), get advocacy metrics
+- [ ] **029c** Create `frontend/src/app/dashboard/advocacy/page.tsx` — shareable content feed with pre-written captions, one-click share buttons (LinkedIn, X, Facebook), advocacy metrics (total shares, reach from shares, top advocates leaderboard)
+- [ ] **029d** Add email invite flow — send invitation emails to employees to join advocacy program, track acceptance
+- [ ] **029e** Add advocacy metrics dashboard — shares per employee, reach from employee shares, engagement from shared content
+- [ ] **029f** Add "Advocacy" to sidebar navigation
+- [ ] **029g** Add share tracking — when employee shares, track clicks and engagement from their personal network
+
+---
+
 ## Task Dependency Graph
 
 ```
@@ -346,7 +527,14 @@ TASK-012 (Analytics) — depends on TASK-006 (publishing), TASK-002 (schema)
 | P1 High | 5 | 47 | ~3 weeks |
 | P2 Medium | 4 | 29 | ~2 weeks |
 | P3 Low | 3 | 14 | ~1 week |
-| **Total** | **15** | **118** | **~8 weeks** |
+| **Existing Total** | **15** | **118** | **~8 weeks** |
+| Missing Features (Publishing) | 3 | 24 | ~2 weeks |
+| Missing Features (Engagement) | 3 | 28 | ~3 weeks |
+| Missing Features (Listening) | 3 | 24 | ~2 weeks |
+| Missing Features (Analytics) | 3 | 19 | ~2 weeks |
+| Missing Features (Team) | 2 | 14 | ~1.5 weeks |
+| **Feature Audit Total** | **14** | **109** | **~10.5 weeks** |
+| **Grand Total** | **29** | **227** | **~18.5 weeks** |
 
 ---
 
