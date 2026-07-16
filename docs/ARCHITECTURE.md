@@ -261,6 +261,12 @@ Layer 4: Role Permission (user's role grants required permission)
 ```
 AI Request
     │
+    ├──► provider_override from request body
+    │       └── Present → Use specified provider
+    │
+    ├──► platform_provider_configs table (UI settings)
+    │       └── Row exists for (workspace, platform) → Use configured provider
+    │
     ├──► Check OPENAI_API_KEY
     │       ├── Present → Call OpenAI (GPT-4o / DALL-E / TTS-1)
     │       └── Absent → Skip
@@ -272,7 +278,35 @@ AI Request
     └──► All absent → Return placeholder/mock response
 ```
 
-### 7.2 AI Feature Mapping
+### 7.2 Autonomous AI Workflow
+
+```
+POST /content/trigger-workflow
+    │
+    ▼
+ContentOrchestrator.run_workflow()
+    ├── Stage 1: Research (context gathering)
+    ├── Stage 2: Draft ──► PlatformWorkflowFactory.create(platform)
+    │                       └──► ClaudeLinkedInGenerator / OpenAIXGenerator / GeminiInstagramGenerator
+    ├── Stage 3: Visual Prompt Generation (via same generator)
+    ├── Stage 4: Save to DB (ContentItem model)
+    └── Stage 5: HITL Staging (pending_approval)
+
+POST /content/approve-post/{post_id}
+    └── pending_approval → scheduled
+
+POST /analytics/ingest
+    ├── Store raw metrics (PlatformAnalytics model)
+    ├── Calculate Ps = w1*(eng/imp) + w2*(shares/imp) + w3*(clicks/imp)
+    └── If Ps > 7.5 → mock embedding → MockVectorStore (RAG context)
+```
+
+**Provider Resolution (no hardcoded platform→provider mapping):**
+1. `provider_override` from API request body (optional per-request)
+2. `platform_provider_configs` table (set via UI settings page)
+3. First available provider with a configured API key (fallback)
+
+### 7.3 AI Feature Mapping
 
 | Feature | Primary Provider | Model | Fallback |
 |---------|-----------------|-------|----------|

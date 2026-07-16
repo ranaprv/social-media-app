@@ -10,6 +10,7 @@ Social Media Manager is a full-stack platform for creating, scheduling, managing
 
 ### Content Creation
 - **AI Content Generator** — Generate platform-specific posts (LinkedIn articles, X threads, Instagram captions, YouTube scripts) with tone, length, and keyword controls
+- **Autonomous AI Workflow** — 5-stage pipeline: Research → Draft → Visual Prompt → Save DB → Human-in-the-Loop approval. Provider selection is UI-driven (Claude/OpenAI/Gemini per platform)
 - **AI Idea Generator** — Get content ideas by industry, keywords, audience, and category (educational, tutorials, case studies, tips, etc.)
 - **Writing Tools** — 10 AI-powered tools: rewrite, expand, summarize, translate, grammar check, generate hooks/CTAs/hashtags, SEO optimize, tone adjust
 - **Brand Voice Training** — Configure tone, writing style, CTA style, emoji usage, formatting, vocabulary, and train on sample posts
@@ -464,6 +465,11 @@ Once the backend is running, interactive API documentation is available at:
 | Billing | `/api/billing/plans` | GET | List subscription plans |
 | AI | `/api/ai/generate` | POST | Generate content |
 | AI Media | `/api/ai/media/generate-image` | POST | Generate AI image |
+| AI Workflow | `/api/content/trigger-workflow` | POST | Trigger autonomous content pipeline |
+| AI Workflow | `/api/content/approve-post/{id}` | POST | HITL approve → schedule |
+| AI Workflow | `/api/analytics/ingest` | POST | Ingest analytics + feedback loop |
+| AI Workflow | `/api/content/provider-config/{ws}` | GET | List provider configs |
+| AI Workflow | `/api/content/provider-config/{ws}/{platform}` | PUT | Set provider for platform |
 | Security | `/api/security/audit-logs` | GET | View audit logs |
 | Calendar | `/api/calendar/events` | GET | List calendar events |
 | Team | `/api/team/members` | GET | List team members |

@@ -2,7 +2,22 @@
 
 All notable changes to Social Media Manager.
 
-## [1.0.0] - 2026-07-16
+## [1.1.0] - 2026-07-16
+
+### Added
+- **Autonomous AI Workflow Pipeline:** 5-stage orchestration (Research → Draft → Visual Prompt → Save DB → HITL Staging) with async state machine
+- **Multi-Model AI Engine:** Abstract base class `AIContentGenerator` with concrete generators for Claude (LinkedIn), OpenAI (X/Twitter), Gemini (Instagram)
+- **UI-Driven Provider Selection:** `platform_provider_configs` table — users pick AI provider per platform via settings UI, no hardcoded mapping
+- **Provider Config CRUD:** GET/PUT endpoints for managing workspace-level provider preferences
+- **Analytics Feedback Loop:** Normalised performance score `Ps = w1*(eng/imp) + w2*(shares/imp) + w3*(clicks/imp)` with mock vector store for high-performers (score > 7.5)
+- **SQLAlchemy Models:** `content_items`, `platform_posts`, `platform_analytics`, `platform_provider_configs` tables
+- **Pydantic V2 Schemas:** Request/response models for workflow trigger, post approval, analytics ingestion, provider config
+- **Bug Fixes:** Fixed `BrandVoice` import in `ai_content.py`, removed unimplemented tasks from TODO.md
+
+### Fixed
+- Orchestrator `_advance` called incorrectly in pipeline loop
+- `to_response()` hardcoded topic/platform instead of using actual values
+- Unused imports in API router
 
 ### Added
 - **Authentication:** Email/password login, OAuth (Google, GitHub), JWT sessions, MFA (TOTP)
