@@ -22,6 +22,14 @@ export default function LoginPage() {
     setLoading(true)
 
     try {
+      // Check backend is reachable first
+      const healthRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"}/health`).catch(() => null)
+      if (!healthRes || !healthRes.ok) {
+        setError("Backend server is not running. Start it with: cd backend && uvicorn app.main:app --reload")
+        setLoading(false)
+        return
+      }
+
       const result = await signIn("credentials", {
         email,
         password,
@@ -29,13 +37,13 @@ export default function LoginPage() {
       })
 
       if (result?.error) {
-        setError("Invalid email or password")
+        setError("Invalid email or password. Register first if you don't have an account.")
       } else {
         router.push("/dashboard")
         router.refresh()
       }
     } catch {
-      setError("Something went wrong. Please try again.")
+      setError("Cannot connect to server. Make sure the backend is running on port 8000.")
     } finally {
       setLoading(false)
     }

@@ -25,6 +25,14 @@ export default function RegisterPage() {
     setLoading(true)
 
     try {
+      // Check backend is reachable first
+      const healthRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"}/health`).catch(() => null)
+      if (!healthRes || !healthRes.ok) {
+        setError("Backend server is not running. Start it with: cd backend && uvicorn app.main:app --reload")
+        setLoading(false)
+        return
+      }
+
       // Register with backend
       const res = await fetch(`${API_URL}/auth/register`, {
         method: "POST",

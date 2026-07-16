@@ -8,12 +8,12 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 export const authOptions: AuthOptions = {
   providers: [
     Google({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
     GitHub({
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      clientId: process.env.GITHUB_CLIENT_ID || "",
+      clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
     }),
     Credentials({
       name: "credentials",
@@ -24,23 +24,31 @@ export const authOptions: AuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null
 
-        const res = await fetch(`${API_URL}/auth/login`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: credentials.email,
-            password: credentials.password,
-          }),
-        })
+        try {
+          const res = await fetch(`${API_URL}/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: credentials.email,
+              password: credentials.password,
+            }),
+          })
 
-        if (!res.ok) return null
+          if (!res.ok) {
+            console.error("[Auth] Login failed:", res.status, await res.text().catch(() => ""))
+            return null
+          }
 
-        const data = await res.json()
-        return {
-          id: data.user_id || "user-1",
-          email: credentials.email as string,
-          name: credentials.email as string,
-          accessToken: data.access_token,
+          const data = await res.json()
+          return {
+            id: data.user_id || "user-1",
+            email: credentials.email as string,
+            name: data.name || credentials.email as string,
+            accessToken: data.access_token,
+          }
+        } catch (error) {
+          console.error("[Auth] Backend unreachable:", API_URL, error)
+          return null
         }
       },
     }),
