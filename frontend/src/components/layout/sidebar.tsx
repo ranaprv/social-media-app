@@ -25,6 +25,8 @@ import {
   Shield,
   Mail,
   MessageSquare,
+  AlertCircle,
+  CheckCircle,
 } from "lucide-react"
 import { useAppStore } from "@/stores/app-store"
 import { Button } from "@/components/ui/button"
@@ -41,10 +43,17 @@ const navigation = [
   { name: "AI Assistant", href: "/dashboard/ai-assistant", icon: Wand2 },
   { name: "Recommendations", href: "/dashboard/recommendations", icon: Lightbulb },
   { name: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
+  { name: "Ads", href: "/dashboard/ads", icon: PenTool },
+  { name: "Reports", href: "/dashboard/reports", icon: BarChart3 },
+  { name: "Competitors", href: "/dashboard/competitors", icon: Users },
   { name: "Team", href: "/dashboard/team", icon: Users },
 ]
 
 const bottomNavigation = [
+  { name: "Approvals", href: "/dashboard/approvals", icon: CheckCircle },
+  { name: "Tasks", href: "/dashboard/tasks", icon: AlertCircle },
+  { name: "Automation", href: "/dashboard/automation", icon: Zap },
+  { name: "Advocacy", href: "/dashboard/advocacy", icon: Users },
   { name: "Billing", href: "/dashboard/billing", icon: CreditCard },
   { name: "Security", href: "/dashboard/security", icon: Shield },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
