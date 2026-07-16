@@ -153,7 +153,7 @@ async def mfa_setup(current_user: User = Depends(get_current_user)):
     totp = pyotp.TOTP(secret)
     provisioning_uri = totp.provisioning_uri(
         name=current_user.email,
-        issuer_name="ContentPilot",
+        issuer_name="Social Media Manager",
     )
     qr_url = f"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={provisioning_uri}"
     

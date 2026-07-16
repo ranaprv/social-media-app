@@ -4,7 +4,7 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     # Database
-    DATABASE_URL: str = "postgresql+asyncpg://user:password@localhost:5432/contentpilot"
+    DATABASE_URL: str = "postgresql+asyncpg://user:password@localhost:5432/socialmediamanager"
     
     # Redis
     REDIS_URL: str = "redis://localhost:6379/0"
@@ -52,7 +52,7 @@ class Settings(BaseSettings):
     
     # Email
     SENDGRID_API_KEY: str = ""
-    FROM_EMAIL: str = "noreply@contentpilot.ai"
+    FROM_EMAIL: str = "noreply@socialmediamanager.ai"
     
     # Environment
     ENVIRONMENT: str = "development"

@@ -78,7 +78,7 @@ export default function RegisterPage() {
             <Zap className="h-6 w-6 text-primary" />
           </div>
           <CardTitle className="text-2xl">Create account</CardTitle>
-          <p className="text-sm text-muted-foreground">Start creating with ContentPilot AI</p>
+          <p className="text-sm text-muted-foreground">Start creating with Social Media Manager</p>
         </CardHeader>
         <CardContent className="space-y-4">
           {error && (

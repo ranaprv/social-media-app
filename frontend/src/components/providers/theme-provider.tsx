@@ -43,12 +43,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   const setTheme = useCallback((newTheme: Theme) => {
     setThemeState(newTheme)
-    localStorage.setItem("contentpilot-theme", newTheme)
+    localStorage.setItem("social-media-manager-theme", newTheme)
     applyTheme(newTheme)
   }, [applyTheme])
 
   useEffect(() => {
-    const stored = localStorage.getItem("contentpilot-theme") as Theme | null
+    const stored = localStorage.getItem("social-media-manager-theme") as Theme | null
     const initial = stored || "system"
     setThemeState(initial)
     applyTheme(initial)

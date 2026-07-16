@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ContentPilot AI — AI-Powered Social Media Content",
+  title: "Social Media Manager — AI-Powered Social Media Content",
   description: "Generate, schedule, and manage social media content across LinkedIn, X, Instagram, Facebook, and YouTube with AI.",
 };
 

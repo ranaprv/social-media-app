@@ -65,6 +65,6 @@ describe("ThemeProvider", () => {
       </ThemeProvider>
     )
     screen.getByText("Set Light").click()
-    expect(localStorageMock.getItem("contentpilot-theme")).toBe("light")
+    expect(localStorageMock.getItem("social-media-manager-theme")).toBe("light")
   })
 })

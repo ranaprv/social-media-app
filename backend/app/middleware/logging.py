@@ -3,7 +3,7 @@ import logging
 import time
 from fastapi import Request
 
-logger = logging.getLogger("contentpilot.api")
+logger = logging.getLogger("socialmediamanager.api")
 
 
 async def log_requests(request: Request, call_next):

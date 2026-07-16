@@ -1,4 +1,4 @@
-# Low-Level Design — ContentPilot AI
+# Low-Level Design — Social Media Manager
 
 **Version:** 1.0.0
 **Date:** 2026-07-16
@@ -412,7 +412,7 @@ ThemeProvider (React Context)
   ├── resolvedTheme: "light" | "dark"
   └── setTheme(theme)
 
-Storage: localStorage["contentpilot-theme"]
+Storage: localStorage["social-media-manager-theme"]
 
 CSS Strategy:
   :root { /* light variables */ }

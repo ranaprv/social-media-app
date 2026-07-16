@@ -1,6 +1,6 @@
 version: "3.8"
 
-# ContentPilot AI — Docker Compose
+# Social Media Manager — Docker Compose
 # Usage: docker compose up --build
 # Production: docker compose -f docker-compose.yml up -d
 
@@ -9,15 +9,15 @@ services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: contentpilot
-      POSTGRES_PASSWORD: contentpilot_dev
-      POSTGRES_DB: contentpilot
+      POSTGRES_USER: socialmediamanager
+      POSTGRES_PASSWORD: socialmediamanager_dev
+      POSTGRES_DB: socialmediamanager
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U contentpilot"]
+      test: ["CMD-SHELL", "pg_isready -U socialmediamanager"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -53,7 +53,7 @@ services:
     ports:
       - "8002:8000"
     environment:
-      DATABASE_URL: postgresql+asyncpg://contentpilot:contentpilot_dev@postgres:5432/contentpilot
+      DATABASE_URL: postgresql+asyncpg://socialmediamanager:socialmediamanager_dev@postgres:5432/socialmediamanager
       REDIS_URL: redis://redis:6379/0
       SECRET_KEY: ${SECRET_KEY:-change-this-in-production}
       ENVIRONMENT: ${ENVIRONMENT:-development}
@@ -82,7 +82,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     environment:
-      DATABASE_URL: postgresql+asyncpg://contentpilot:contentpilot_dev@postgres:5432/contentpilot
+      DATABASE_URL: postgresql+asyncpg://socialmediamanager:socialmediamanager_dev@postgres:5432/socialmediamanager
       REDIS_URL: redis://redis:6379/0
     depends_on:
       postgres:
@@ -104,7 +104,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     environment:
-      DATABASE_URL: postgresql+asyncpg://contentpilot:contentpilot_dev@postgres:5432/contentpilot
+      DATABASE_URL: postgresql+asyncpg://socialmediamanager:socialmediamanager_dev@postgres:5432/socialmediamanager
       REDIS_URL: redis://redis:6379/0
     depends_on:
       redis:

@@ -10,7 +10,7 @@ export default function Home() {
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <Link href="/" className="flex items-center gap-2">
             <Zap className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">ContentPilot</span>
+            <span className="text-xl font-bold">Social Media Manager</span>
           </Link>
           <div className="flex items-center gap-4">
             <Link href="/auth/login">
@@ -102,7 +102,7 @@ export default function Home() {
           </h2>
           <p className="mb-8 text-lg opacity-90">
             Join thousands of creators, founders, and agencies already using
-            ContentPilot.
+            Social Media Manager.
           </p>
           <Link href="/auth/register">
             <Button
@@ -120,7 +120,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="border-t py-8">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          © 2026 ContentPilot. All rights reserved.
+          © 2026 Social Media Manager. All rights reserved.
         </div>
       </footer>
     </div>

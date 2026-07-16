@@ -1,4 +1,4 @@
-# High-Level Design — ContentPilot AI
+# High-Level Design — Social Media Manager
 
 **Version:** 1.0.0
 **Date:** 2026-07-16

@@ -66,10 +66,10 @@ async def get_scheduler_config(
         "queue_enabled": True,
         "max_daily_posts": 5,
         "platform_settings": {
-            "linkedin": {"connected": True, "username": "contentpilot", "auto_publish": False, "queue_enabled": True},
-            "x": {"connected": True, "username": "@contentpilot", "auto_publish": True, "queue_enabled": True},
+            "linkedin": {"connected": True, "username": "socialmediamanager", "auto_publish": False, "queue_enabled": True},
+            "x": {"connected": True, "username": "@socialmediamanager", "auto_publish": True, "queue_enabled": True},
             "instagram": {"connected": False, "username": None, "auto_publish": False, "queue_enabled": False},
-            "facebook": {"connected": True, "username": "ContentPilot Page", "auto_publish": False, "queue_enabled": True},
+            "facebook": {"connected": True, "username": "Social Media Manager Page", "auto_publish": False, "queue_enabled": True},
             "youtube": {"connected": False, "username": None, "auto_publish": False, "queue_enabled": False},
         },
         "timezones": TIMEZONES,

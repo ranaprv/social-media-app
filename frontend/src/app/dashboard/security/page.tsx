@@ -56,10 +56,10 @@ const fallbackRoles = {
 
 const fallbackConnections = [
   { provider: "google", connected: true, username: "user@gmail.com", scopes: ["email", "profile"] },
-  { provider: "github", connected: true, username: "contentpilot", scopes: ["repo", "user"] },
-  { provider: "linkedin", connected: true, username: "ContentPilot", scopes: ["w_member_social", "r_liteprofile"] },
+  { provider: "github", connected: true, username: "socialmediamanager", scopes: ["repo", "user"] },
+  { provider: "linkedin", connected: true, username: "Social Media Manager", scopes: ["w_member_social", "r_liteprofile"] },
   { provider: "twitter", connected: false, username: null as string | null, scopes: [] as string[] },
-  { provider: "facebook", connected: true, username: "ContentPilot Page", scopes: ["pages_manage_posts"] },
+  { provider: "facebook", connected: true, username: "Social Media Manager Page", scopes: ["pages_manage_posts"] },
   { provider: "youtube", connected: false, username: null as string | null, scopes: [] as string[] },
 ]
 
@@ -69,7 +69,7 @@ export default function SecurityPage() {
   const [connections, setConnections] = useState(fallbackConnections)
   const [rateLimit, setRateLimit] = useState({ remaining: 87, limit: 100, window_seconds: 60, reset_at: "" })
   const [encryption, setEncryption] = useState({ api_keys_encrypted: true, oauth_tokens_encrypted: true, encryption_algorithm: "AES-256-GCM", key_rotation_enabled: true, last_key_rotation: "" })
-  const [gdpr, setGdpr] = useState({ data_processing_agreement: true, consent_recorded: true, data_retention_days: 365, right_to_erasure: true, data_portability: true, privacy_policy_url: "/legal/privacy", terms_of_service_url: "/legal/terms", last_audit: "", dpo_contact: "privacy@contentpilot.ai" })
+  const [gdpr, setGdpr] = useState({ data_processing_agreement: true, consent_recorded: true, data_retention_days: 365, right_to_erasure: true, data_portability: true, privacy_policy_url: "/legal/privacy", terms_of_service_url: "/legal/terms", last_audit: "", dpo_contact: "privacy@socialmediamanager.ai" })
   const [actionFilter, setActionFilter] = useState("")
   const [loading, setLoading] = useState(true)
 

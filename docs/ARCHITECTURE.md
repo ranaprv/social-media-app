@@ -1,4 +1,4 @@
-# Architecture — ContentPilot AI
+# Architecture — Social Media Manager
 
 **Version:** 1.0.0
 **Date:** 2026-07-16
@@ -28,7 +28,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    ContentPilot AI                        │
+│                    Social Media Manager                        │
 │                                                          │
 │  ┌─────────────┐    REST API    ┌─────────────┐         │
 │  │   Frontend   │◄─────────────►│   Backend   │         │

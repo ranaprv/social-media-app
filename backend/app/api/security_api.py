@@ -154,10 +154,10 @@ async def get_oauth_connections(
     return {
         "connections": [
             {"provider": "google", "connected": True, "email": current_user.email, "scopes": ["email", "profile"]},
-            {"provider": "github", "connected": True, "username": "contentpilot", "scopes": ["repo", "user"]},
-            {"provider": "linkedin", "connected": True, "username": "ContentPilot", "scopes": ["w_member_social", "r_liteprofile"]},
+            {"provider": "github", "connected": True, "username": "socialmediamanager", "scopes": ["repo", "user"]},
+            {"provider": "linkedin", "connected": True, "username": "Social Media Manager", "scopes": ["w_member_social", "r_liteprofile"]},
             {"provider": "twitter", "connected": False, "username": None, "scopes": []},
-            {"provider": "facebook", "connected": True, "username": "ContentPilot Page", "scopes": ["pages_manage_posts", "pages_read_engagement"]},
+            {"provider": "facebook", "connected": True, "username": "Social Media Manager Page", "scopes": ["pages_manage_posts", "pages_read_engagement"]},
             {"provider": "youtube", "connected": False, "username": None, "scopes": []},
         ]
     }
@@ -190,5 +190,5 @@ async def get_gdpr_status(
         "privacy_policy_url": "/legal/privacy",
         "terms_of_service_url": "/legal/terms",
         "last_audit": (datetime.utcnow() - timedelta(days=90)).isoformat(),
-        "dpo_contact": "privacy@contentpilot.ai",
+        "dpo_contact": "privacy@socialmediamanager.ai",
     }

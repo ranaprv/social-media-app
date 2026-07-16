@@ -1,4 +1,4 @@
-# Product Requirements Document — ContentPilot AI
+# Product Requirements Document — Social Media Manager
 
 **Version:** 1.0.0
 **Date:** 2026-07-16
@@ -8,7 +8,7 @@
 
 ## 1. Product Overview
 
-ContentPilot AI is an AI-powered social media content management platform that enables individuals, creators, and teams to generate, schedule, manage, and analyze content across LinkedIn, X (Twitter), Instagram, Facebook, and YouTube from a single dashboard.
+Social Media Manager is an AI-powered social media content management platform that enables individuals, creators, and teams to generate, schedule, manage, and analyze content across LinkedIn, X (Twitter), Instagram, Facebook, and YouTube from a single dashboard.
 
 ---
 

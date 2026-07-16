@@ -14,7 +14,7 @@ from app.api import (
 settings = get_settings()
 
 app = FastAPI(
-    title="ContentPilot API",
+    title="Social Media Manager API",
     description="AI-Powered Social Media Content Management Platform",
     version="1.0.0",
     docs_url="/api/docs",
@@ -78,4 +78,4 @@ app.include_router(webhooks.router, prefix="/api")
 
 @app.get("/api/health")
 async def health_check():
-    return {"status": "healthy", "service": "contentpilot-api"}
+    return {"status": "healthy", "service": "social-media-manager-api"}

@@ -15,7 +15,7 @@ async def seed():
         user_id = str(uuid.uuid4())
         user = User(
             id=user_id,
-            email="admin@contentpilot.ai",
+            email="admin@socialmediamanager.ai",
             name="Admin User",
             hashed_password=get_password_hash("password123"),
             is_active=True,
@@ -26,8 +26,8 @@ async def seed():
         workspace_id = str(uuid.uuid4())
         workspace = Workspace(
             id=workspace_id,
-            name="ContentPilot Team",
-            slug="contentpilot-team",
+            name="Social Media Manager Team",
+            slug="social-media-manager-team",
             owner_id=user_id,
         )
         db.add(workspace)

@@ -1,8 +1,8 @@
-# ContentPilot AI
+# Social Media Manager
 
 **AI-Powered Social Media Content Management Platform**
 
-ContentPilot AI is a full-stack platform for creating, scheduling, managing, and analyzing social media content across LinkedIn, X (Twitter), Instagram, Facebook, and YouTube — powered by AI.
+Social Media Manager is a full-stack platform for creating, scheduling, managing, and analyzing social media content across LinkedIn, X (Twitter), Instagram, Facebook, and YouTube — powered by AI.
 
 ---
 
@@ -295,7 +295,7 @@ cp backend/.env.example backend/.env
 
 ```env
 # Database
-DATABASE_URL=postgresql+asyncpg://contentpilot:contentpilot_dev@localhost:5432/contentpilot
+DATABASE_URL=postgresql+asyncpg://socialmediamanager:socialmediamanager_dev@localhost:5432/socialmediamanager
 
 # Redis
 REDIS_URL=redis://localhost:6379/0
@@ -515,7 +515,7 @@ docker compose exec backend bash
 docker compose exec frontend sh
 
 # Database access
-docker compose exec postgres psql -U contentpilot -d contentpilot
+docker compose exec postgres psql -U socialmediamanager -d socialmediamanager
 
 # Redis CLI
 docker compose exec redis redis-cli

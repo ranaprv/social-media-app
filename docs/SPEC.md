@@ -1,4 +1,4 @@
-# Specification — ContentPilot AI
+# Specification — Social Media Manager
 
 **Version:** 1.0.0
 **Date:** 2026-07-16
@@ -225,7 +225,7 @@ POST /api/ai/repurpose/generate
 ### Environment Variables
 ```env
 # Database
-DATABASE_URL=postgresql+asyncpg://user:password@localhost:5432/contentpilot
+DATABASE_URL=postgresql+asyncpg://user:password@localhost:5432/socialmediamanager
 
 # Redis
 REDIS_URL=redis://localhost:6379/0

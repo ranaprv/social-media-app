@@ -74,7 +74,7 @@ export default function LoginPage() {
             <Zap className="h-6 w-6 text-primary" />
           </div>
           <CardTitle className="text-2xl">Welcome back</CardTitle>
-          <p className="text-sm text-muted-foreground">Sign in to ContentPilot AI</p>
+          <p className="text-sm text-muted-foreground">Sign in to Social Media Manager</p>
         </CardHeader>
         <CardContent className="space-y-4">
           {error && (

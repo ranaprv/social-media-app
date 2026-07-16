@@ -1,4 +1,4 @@
-# TODO.md — ContentPilot AI
+# TODO.md — Social Media Manager
 
 > Living checklist. Mark items complete with `**Completed:** date` and move to `## Completed` section.
 
@@ -41,7 +41,7 @@
 - [ ] **002e** Generate initial migration: `alembic revision --autogenerate -m "initial schema"`
 - [ ] **002f** Review generated migration — ensure all 13 tables are present with correct columns, types, constraints, indexes
 - [ ] **002g** Apply migration: `alembic upgrade head`
-- [ ] **002h** Create `backend/app/seeds/seed.py` — seed script that creates: 1 demo user (admin@contentpilot.ai / password123), 1 workspace ("ContentPilot Team"), 5 demo posts across platforms, sample analytics metrics
+- [ ] **002h** Create `backend/app/seeds/seed.py` — seed script that creates: 1 demo user (admin@socialmediamanager.ai / password123), 1 workspace ("Social Media Manager Team"), 5 demo posts across platforms, sample analytics metrics
 - [ ] **002i** Add seed command to backend: `python -m app.seeds.seed`
 - [ ] **002j** Update `docker-compose.yml` — add `command` override for backend that runs migrations then starts server
 

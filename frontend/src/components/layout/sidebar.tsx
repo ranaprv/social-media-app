@@ -63,7 +63,7 @@ export function Sidebar() {
           {sidebarOpen && (
             <Link href="/dashboard" className="flex items-center gap-2">
               <Zap className="h-6 w-6 text-primary" />
-              <span className="text-xl font-bold">ContentPilot</span>
+              <span className="text-xl font-bold">Social Media Manager</span>
             </Link>
           )}
           {!sidebarOpen && (
