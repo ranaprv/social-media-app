@@ -89,7 +89,7 @@ async def create_post(
         scheduled_at=post.scheduled_at,
         published_at=post.published_at,
         platform_post_id=post.platform_post_id,
-        metadata=post.metadata or {},
+        metadata=post.meta or {},
         created_at=post.created_at,
         updated_at=post.updated_at,
     )
@@ -139,7 +139,7 @@ async def list_posts(
                 scheduled_at=p.scheduled_at,
                 published_at=p.published_at,
                 platform_post_id=p.platform_post_id,
-                metadata=p.metadata or {},
+                metadata=p.meta or {},
                 created_at=p.created_at,
                 updated_at=p.updated_at,
             )
@@ -183,7 +183,7 @@ async def get_post(
         scheduled_at=post.scheduled_at,
         published_at=post.published_at,
         platform_post_id=post.platform_post_id,
-        metadata=post.metadata or {},
+        metadata=post.meta or {},
         created_at=post.created_at,
         updated_at=post.updated_at,
     )
@@ -228,7 +228,7 @@ async def update_post(
         scheduled_at=post.scheduled_at,
         published_at=post.published_at,
         platform_post_id=post.platform_post_id,
-        metadata=post.metadata or {},
+        metadata=post.meta or {},
         created_at=post.created_at,
         updated_at=post.updated_at,
     )

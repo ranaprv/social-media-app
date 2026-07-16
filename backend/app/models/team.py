@@ -96,7 +96,7 @@ class MediaAsset(Base):
     tags = Column(JSON, default=[])
     folder = Column(String)
     uploaded_by = Column(String, ForeignKey("users.id"), nullable=False)
-    metadata = Column(JSON, default={})
+    meta = Column("metadata", JSON, default={})
     created_at = Column(DateTime, default=datetime.utcnow)
     
     workspace = relationship("Workspace", back_populates="media_assets")

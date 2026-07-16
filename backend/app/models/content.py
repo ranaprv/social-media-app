@@ -13,16 +13,15 @@ class Post(Base):
     title = Column(String)
     content = Column(String, nullable=False)
     media_urls = Column(ARRAY(String), default=[])
-    platform = Column(String, nullable=False)  # youtube, instagram, facebook, linkedin, x
-    status = Column(String, default="draft")  # draft, review, scheduled, publishing, published, failed
+    platform = Column(String, nullable=False)
+    status = Column(String, default="draft")
     scheduled_at = Column(DateTime)
     published_at = Column(DateTime)
     platform_post_id = Column(String)
-    metadata = Column(JSON, default={})
+    meta = Column("metadata", JSON, default={})
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
-    # Relationships
     workspace = relationship("Workspace", back_populates="posts")
     author = relationship("User", back_populates="posts")
     calendar = relationship("ContentCalendar", back_populates="post", uselist=False)
@@ -49,13 +48,13 @@ class PlatformConnection(Base):
     
     id = Column(String, primary_key=True)
     workspace_id = Column(String, ForeignKey("workspaces.id"), nullable=False)
-    platform = Column(String, nullable=False)  # youtube, instagram, facebook, linkedin, x
+    platform = Column(String, nullable=False)
     platform_user_id = Column(String, nullable=False)
     platform_username = Column(String, nullable=False)
     access_token = Column(String, nullable=False)
     refresh_token = Column(String)
     expires_at = Column(DateTime)
-    metadata = Column(JSON, default={})
+    meta = Column("metadata", JSON, default={})
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
@@ -124,9 +123,9 @@ class Asset(Base):
     id = Column(String, primary_key=True)
     workspace_id = Column(String, ForeignKey("workspaces.id"), nullable=False)
     name = Column(String, nullable=False)
-    type = Column(String, nullable=False)  # image, video, document, template
+    type = Column(String, nullable=False)
     url = Column(String, nullable=False)
-    metadata = Column(JSON, default={})
+    meta = Column("metadata", JSON, default={})
     created_at = Column(DateTime, default=datetime.utcnow)
     
     workspace = relationship("Workspace", back_populates="assets")
@@ -137,9 +136,9 @@ class Activity(Base):
     
     id = Column(String, primary_key=True)
     user_id = Column(String, ForeignKey("users.id"), nullable=False)
-    type = Column(String, nullable=False)  # post_created, post_published, post_failed, connection_added
+    type = Column(String, nullable=False)
     description = Column(String, nullable=False)
-    metadata = Column(JSON, default={})
+    meta = Column("metadata", JSON, default={})
     created_at = Column(DateTime, default=datetime.utcnow)
     
     user = relationship("User", back_populates="activities")

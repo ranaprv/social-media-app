@@ -22,14 +22,6 @@ export default function LoginPage() {
     setLoading(true)
 
     try {
-      // Check backend is reachable first
-      const healthRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"}/health`).catch(() => null)
-      if (!healthRes || !healthRes.ok) {
-        setError("Backend server is not running. Start it with: cd backend && uvicorn app.main:app --reload")
-        setLoading(false)
-        return
-      }
-
       const result = await signIn("credentials", {
         email,
         password,
@@ -37,13 +29,34 @@ export default function LoginPage() {
       })
 
       if (result?.error) {
-        setError("Invalid email or password. Register first if you don't have an account.")
+        // Distinguish between "user not found" and "backend down"
+        try {
+          const healthRes = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"}/health`
+          )
+          if (!healthRes.ok) throw new Error()
+          // Backend is up but login failed = wrong credentials
+          setError("Invalid email or password. If you don't have an account, register first.")
+        } catch {
+          // Backend is down
+          setError(
+            "Backend server is not running.\n\n" +
+            "Start it with:\n" +
+            "  cd backend\n" +
+            "  pip install -r requirements.txt\n" +
+            "  uvicorn app.main:app --reload --port 8000"
+          )
+        }
       } else {
         router.push("/dashboard")
         router.refresh()
       }
     } catch {
-      setError("Cannot connect to server. Make sure the backend is running on port 8000.")
+      setError(
+        "Cannot connect to the backend server.\n\n" +
+        "Make sure it's running on port 8000:\n" +
+        "  cd backend && uvicorn app.main:app --reload"
+      )
     } finally {
       setLoading(false)
     }
