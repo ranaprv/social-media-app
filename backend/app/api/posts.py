@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import select, func
 from datetime import datetime
 import uuid
 
@@ -10,6 +10,7 @@ from app.models.user import User
 from app.models.workspace import Workspace, WorkspaceMember
 from app.models.content import Post, Activity
 from app.schemas import PostCreate, PostUpdate, PostResponse
+from app.services.sanitizer import sanitize_html
 
 router = APIRouter(prefix="/posts", tags=["posts"])
 
@@ -57,7 +58,7 @@ async def create_post(
         workspace_id=workspace_id,
         author_id=current_user.id,
         title=post_data.title,
-        content=post_data.content,
+        content=sanitize_html(post_data.content),
         media_urls=post_data.media_urls,
         platform=post_data.platform,
         status=post_data.status,
@@ -88,52 +89,66 @@ async def create_post(
         scheduled_at=post.scheduled_at,
         published_at=post.published_at,
         platform_post_id=post.platform_post_id,
-        metadata=post.metadata or {},
+        metadata=post.meta or {},
         created_at=post.created_at,
         updated_at=post.updated_at,
     )
 
 
-@router.get("/{workspace_id}", response_model=list[PostResponse])
+@router.get("/{workspace_id}")
 async def list_posts(
     workspace_id: str,
     platform: str = None,
     status: str = None,
+    offset: int = Query(0, ge=0),
+    limit: int = Query(20, ge=1, le=100),
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
+    """List posts with filtering and pagination."""
     await verify_workspace_access(workspace_id, current_user, db)
     
     query = select(Post).where(Post.workspace_id == workspace_id)
+    count_query = select(func.count(Post.id)).where(Post.workspace_id == workspace_id)
     
     if platform:
         query = query.where(Post.platform == platform)
+        count_query = count_query.where(Post.platform == platform)
     if status:
         query = query.where(Post.status == status)
+        count_query = count_query.where(Post.status == status)
     
-    query = query.order_by(Post.created_at.desc())
+    total_result = await db.execute(count_query)
+    total = total_result.scalar() or 0
+    
+    query = query.order_by(Post.created_at.desc()).offset(offset).limit(limit)
     result = await db.execute(query)
     posts = result.scalars().all()
     
-    return [
-        PostResponse(
-            id=p.id,
-            workspace_id=p.workspace_id,
-            author_id=p.author_id,
-            title=p.title,
-            content=p.content,
-            media_urls=p.media_urls,
-            platform=p.platform,
-            status=p.status,
-            scheduled_at=p.scheduled_at,
-            published_at=p.published_at,
-            platform_post_id=p.platform_post_id,
-            metadata=p.metadata or {},
-            created_at=p.created_at,
-            updated_at=p.updated_at,
-        )
-        for p in posts
-    ]
+    return {
+        "items": [
+            PostResponse(
+                id=p.id,
+                workspace_id=p.workspace_id,
+                author_id=p.author_id,
+                title=p.title,
+                content=p.content,
+                media_urls=p.media_urls,
+                platform=p.platform,
+                status=p.status,
+                scheduled_at=p.scheduled_at,
+                published_at=p.published_at,
+                platform_post_id=p.platform_post_id,
+                metadata=p.meta or {},
+                created_at=p.created_at,
+                updated_at=p.updated_at,
+            )
+            for p in posts
+        ],
+        "total": total,
+        "offset": offset,
+        "limit": limit,
+    }
 
 
 @router.get("/{workspace_id}/{post_id}", response_model=PostResponse)
@@ -168,7 +183,7 @@ async def get_post(
         scheduled_at=post.scheduled_at,
         published_at=post.published_at,
         platform_post_id=post.platform_post_id,
-        metadata=post.metadata or {},
+        metadata=post.meta or {},
         created_at=post.created_at,
         updated_at=post.updated_at,
     )
@@ -213,7 +228,7 @@ async def update_post(
         scheduled_at=post.scheduled_at,
         published_at=post.published_at,
         platform_post_id=post.platform_post_id,
-        metadata=post.metadata or {},
+        metadata=post.meta or {},
         created_at=post.created_at,
         updated_at=post.updated_at,
     )

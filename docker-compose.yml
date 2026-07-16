@@ -1,22 +1,31 @@
 version: "3.8"
 
+# Social Media Manager — Docker Compose
+# Usage: docker compose up --build
+# Production: docker compose -f docker-compose.yml up -d
+
 services:
   # PostgreSQL
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: contentpilot
-      POSTGRES_PASSWORD: contentpilot_dev
-      POSTGRES_DB: contentpilot
+      POSTGRES_USER: socialmediamanager
+      POSTGRES_PASSWORD: socialmediamanager_dev
+      POSTGRES_DB: socialmediamanager
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U contentpilot"]
+      test: ["CMD-SHELL", "pg_isready -U socialmediamanager"]
       interval: 10s
       timeout: 5s
       retries: 5
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
 
   # Redis
   redis:
@@ -30,6 +39,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 256M
 
   # Backend API
   backend:
@@ -37,10 +51,17 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8001:8000"
+      - "8002:8000"
     environment:
-      DATABASE_URL: postgresql+asyncpg://contentpilot:contentpilot_dev@postgres:5432/contentpilot
+      DATABASE_URL: postgresql+asyncpg://socialmediamanager:socialmediamanager_dev@postgres:5432/socialmediamanager
       REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: ${SECRET_KEY:-change-this-in-production}
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:3000,http://localhost:3001}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
     depends_on:
       postgres:
         condition: service_healthy
@@ -49,6 +70,53 @@ services:
     volumes:
       - ./backend:/app
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+
+  # Celery Worker
+  celery-worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://socialmediamanager:socialmediamanager_dev@postgres:5432/socialmediamanager
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+    command: celery -A app.tasks worker --loglevel=info --concurrency=2
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  # Celery Beat (Scheduler)
+  celery-beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgresql+asyncpg://socialmediamanager:socialmediamanager_dev@postgres:5432/socialmediamanager
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+    command: celery -A app.tasks beat --loglevel=info
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 256M
 
   # Frontend
   frontend:
@@ -58,13 +126,20 @@ services:
     ports:
       - "3001:3000"
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:8001/api
+      NEXT_PUBLIC_API_URL: http://localhost:8002/api
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3001}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:-change-this-in-production}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID:-}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET:-}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
     depends_on:
       - backend
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    command: npm run dev
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
 
 volumes:
   postgres_data:

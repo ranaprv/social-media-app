@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, DateTime, Boolean
+from sqlalchemy import Column, String, DateTime, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.core.database import Base
@@ -28,7 +28,7 @@ class Account(Base):
     __tablename__ = "accounts"
     
     id = Column(String, primary_key=True)
-    user_id = Column(String, nullable=False)
+    user_id = Column(String, ForeignKey("users.id"), nullable=False)
     type = Column(String, nullable=False)
     provider = Column(String, nullable=False)
     provider_account_id = Column(String, nullable=False)
@@ -48,7 +48,7 @@ class Session(Base):
     
     id = Column(String, primary_key=True)
     session_token = Column(String, unique=True, nullable=False)
-    user_id = Column(String, nullable=False)
+    user_id = Column(String, ForeignKey("users.id"), nullable=False)
     expires = Column(DateTime, nullable=False)
     
     user = relationship("User", back_populates="sessions")

@@ -4,7 +4,7 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     # Database
-    DATABASE_URL: str = "postgresql+asyncpg://user:password@localhost:5432/contentpilot"
+    DATABASE_URL: str = "postgresql+asyncpg://user:password@localhost:5432/socialmediamanager"
     
     # Redis
     REDIS_URL: str = "redis://localhost:6379/0"
@@ -39,12 +39,29 @@ class Settings(BaseSettings):
     YOUTUBE_CLIENT_ID: str = ""
     YOUTUBE_CLIENT_SECRET: str = ""
     
+    # Stripe
+    STRIPE_SECRET_KEY: str = ""
+    STRIPE_WEBHOOK_SECRET: str = ""
+    STRIPE_PUBLISHABLE_KEY: str = ""
+
     # Storage
     AWS_ACCESS_KEY_ID: str = ""
     AWS_SECRET_ACCESS_KEY: str = ""
     AWS_BUCKET_NAME: str = ""
     AWS_REGION: str = "us-east-1"
     
+    # Google Drive
+    GOOGLE_DRIVE_CREDENTIALS_FILE: str = ""
+    GOOGLE_DRIVE_FOLDER_ID: str = ""
+    
+    # Email
+    SENDGRID_API_KEY: str = ""
+    FROM_EMAIL: str = "noreply@socialmediamanager.ai"
+    
+    # Environment
+    ENVIRONMENT: str = "development"
+    ALLOWED_ORIGINS: str = "http://localhost:3000,http://localhost:3001"
+
     class Config:
         env_file = ".env"
 
