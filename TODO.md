@@ -352,4 +352,18 @@ TASK-012 (Analytics) — depends on TASK-006 (publishing), TASK-002 (schema)
 
 ## Completed
 
-_(None yet)_
+**2026-07-16 — P0 Critical:**
+- [x] TASK-001: Fixed authentication flow (9 subtasks)
+- [x] TASK-002: Database schema, Alembic migrations, seed script (10 subtasks)
+- [x] TASK-003: Security headers, real MFA (pyotp), auth rate limiting, CORS from env, email service (10 subtasks)
+
+**2026-07-16 — P1 High:**
+- [x] TASK-004: Backend test suite — pytest with 5 test modules (12 subtasks)
+- [x] TASK-005: Frontend test suite — Vitest with 3 component tests (10 subtasks)
+- [x] TASK-006: Social publishing — publisher interface, Celery workers, scheduler (13 subtasks)
+- [x] TASK-007: Stripe billing — webhook handler, signature verification (10 subtasks)
+- [x] TASK-008: S3 media storage — upload, presigned URLs, delete (8 subtasks)
+
+**2026-07-16 — P2 Medium:**
+- [x] TASK-009: Frontend UX — ErrorBoundary, Skeleton, Toast system (10 subtasks)
+- [x] TASK-011: CI/CD — GitHub Actions CI pipeline, Docker build (8 subtasks)
