@@ -6,128 +6,347 @@
 
 ## P0 — Critical (Must fix before production)
 
-### Authentication & Authorization
-- [ ] **Connect login/register forms to NextAuth** — Frontend auth pages exist but don't use NextAuth session; they post to backend directly. Wire up NextAuth signIn/signUp properly.
-- [ ] **Implement OAuth login flow** — Google and GitHub providers configured in NextAuth but no callback handling or account linking to backend users.
-- [ ] **Add auth middleware to frontend** — Dashboard pages have no auth guard; unauthenticated users can access all routes directly.
-- [ ] **Implement refresh token flow** — JWT expires in 30 min with no refresh mechanism; users get logged out silently.
+### TASK-001: Fix Authentication Flow
+**Problem:** Frontend login/register pages POST directly to backend but bypass NextAuth. Dashboard has no auth guard — unauthenticated users access everything.
 
-### Database
-- [ ] **Create Prisma schema** — `prisma.config.ts` references `prisma/schema.prisma` which doesn't exist. Frontend ORM is non-functional.
-- [ ] **Generate Alembic migrations** — Backend has SQLAlchemy models but no migration files; schema isn't applied to PostgreSQL.
-- [ ] **Add database seeding** — No seed script for development data (demo users, workspaces, posts).
+**Subtasks:**
+- [ ] **001a** Refactor `frontend/src/app/auth/login/page.tsx` to call `signIn("credentials", { email, password })` from `next-auth/react` instead of raw `fetch`
+- [ ] **001b** Refactor `frontend/src/app/auth/register/page.tsx` — POST to `/api/auth/register`, then auto-login via `signIn("credentials", ...)`
+- [ ] **001c** Create `frontend/src/components/providers/auth-provider.tsx` — wrap app in `SessionProvider` from `next-auth/react`
+- [ ] **001d** Add `SessionProvider` to `frontend/src/app/layout.tsx` inside `ThemeProvider`
+- [ ] **001e** Create `frontend/src/lib/api.ts` — centralized fetch wrapper that attaches `session.accessToken` as `Authorization: Bearer` header to all API calls
+- [ ] **001f** Replace all raw `fetch(API_URL/...)` calls in dashboard pages with the new `api.ts` client (analytics, billing, security, recommendations, AI assistant pages)
+- [ ] **001g** Create `frontend/src/app/dashboard/layout.tsx` — auth guard using `useSession()`; redirect to `/auth/login` if `status === "unauthenticated"`
+- [ ] **001h** Add `NEXTAUTH_SECRET` and `NEXTAUTH_URL` to `frontend/.env` and `docker-compose.yml` environment
+- [ ] **001i** Fix `frontend/src/lib/auth.ts` authorize callback — backend login returns `{ access_token }` but not `user_id`; update to extract user from `/api/auth/me` after login
 
-### Security
-- [ ] **Add CSP headers** — No Content-Security-Policy, X-Frame-Options, or X-Content-Type-Options headers.
-- [ ] **Implement actual MFA** — TOTP verification is mocked (accepts any 6-digit code). Need real TOTP library (pyotp).
-- [ ] **Implement real password reset** — Token generation is mocked. Need email service + secure token storage.
-- [ ] **Add CORS restrictions for production** — Currently allows all methods/headers from localhost only; needs production origins.
-- [ ] **Add rate limiting to auth endpoints** — Login/register endpoints have no rate limiting (brute force risk).
+**Files to modify:** `login/page.tsx`, `register/page.tsx`, `layout.tsx`, `lib/auth.ts`, `stores/app-store.ts`, all dashboard page files (analytics, billing, security, recommendations, ai-assistant, calendar, media, repurpose, team, content-studio)
+
+**Acceptance criteria:**
+- Unauthenticated user visiting `/dashboard` redirects to `/auth/login`
+- Login form uses NextAuth session, not raw fetch
+- All API calls include Bearer token
+- Session persists across page reloads
+
+---
+
+### TASK-002: Implement Database Schema & Migrations
+**Problem:** Prisma schema doesn't exist (frontend ORM broken). Backend has SQLAlchemy models but no Alembic migrations (schema not applied to PostgreSQL).
+
+**Subtasks:**
+- [ ] **002a** Create `frontend/prisma/schema.prisma` — mirror backend SQLAlchemy models: User, Account, Session, Workspace, WorkspaceMember, Post, PostVersion, PlatformConnection, ContentCalendar, AnalyticsMetric, BrandVoice, Asset, Activity
+- [ ] **002b** Run `npx prisma generate` to generate Prisma client
+- [ ] **002c** Initialize Alembic in backend: `cd backend && alembic init alembic`
+- [ ] **002d** Configure `alembic.ini` and `alembic/env.py` — set `sqlalchemy.url` from `DATABASE_URL` env var, import `Base` from `app.core.database`
+- [ ] **002e** Generate initial migration: `alembic revision --autogenerate -m "initial schema"`
+- [ ] **002f** Review generated migration — ensure all 13 tables are present with correct columns, types, constraints, indexes
+- [ ] **002g** Apply migration: `alembic upgrade head`
+- [ ] **002h** Create `backend/app/seeds/seed.py` — seed script that creates: 1 demo user (admin@contentpilot.ai / password123), 1 workspace ("ContentPilot Team"), 5 demo posts across platforms, sample analytics metrics
+- [ ] **002i** Add seed command to backend: `python -m app.seeds.seed`
+- [ ] **002j** Update `docker-compose.yml` — add `command` override for backend that runs migrations then starts server
+
+**Files to create:** `frontend/prisma/schema.prisma`, `backend/alembic/`, `backend/alembic.ini`, `backend/app/seeds/seed.py`
+**Files to modify:** `docker-compose.yml`
+
+**Acceptance criteria:**
+- `npx prisma generate` succeeds
+- `alembic upgrade head` creates all 13 tables in PostgreSQL
+- Seed script creates demo data
+- `docker compose up` runs migrations automatically
+
+---
+
+### TASK-003: Add Security Headers & Hardening
+**Problem:** No CSP headers, mocked MFA/password reset, no auth rate limiting, localhost-only CORS.
+
+**Subtasks:**
+- [ ] **003a** Add security middleware in `backend/app/main.py` — set headers: `Content-Security-Policy`, `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Strict-Transport-Security`, `X-XSS-Protection: 1; mode=block`, `Referrer-Policy: strict-origin-when-cross-origin`
+- [ ] **003b** Update CORS config in `backend/app/main.py` — read allowed origins from `ALLOWED_ORIGINS` env var (comma-separated); default to localhost for dev
+- [ ] **003c** Install `pyotp` in `backend/requirements.txt`
+- [ ] **003d** Rewrite `backend/app/api/auth.py` MFA endpoints — use `pyotp.TOTP` for real TOTP generation, secret storage, and code verification (replace mock "accept any 6-digit code")
+- [ ] **003e** Add `mfa_secret` column to User model in `backend/app/models/user.py` — store encrypted TOTP secret
+- [ ] **003f** Create `backend/app/services/email.py` — email service abstraction (console logger for dev, SendGrid/SES for prod)
+- [ ] **003g** Rewrite password reset in `backend/app/api/auth.py` — generate secure random token, store in DB with expiry (1 hour), send via email service
+- [ ] **003h** Add `password_reset_tokens` table — columns: token (unique), user_id, expires_at, used (boolean)
+- [ ] **003i** Add auth rate limiting in `backend/app/api/auth.py` — 5 attempts per 15 minutes per IP on `/login`, `/register`, `/forgot-password`
+- [ ] **003j** Add `ALLOWED_ORIGINS` to `.env.example` and `docker-compose.yml`
+
+**Files to modify:** `backend/app/main.py`, `backend/app/api/auth.py`, `backend/app/models/user.py`, `backend/requirements.txt`, `.env.example`, `docker-compose.yml`
+**Files to create:** `backend/app/services/email.py`, new migration for `password_reset_tokens` table and `mfa_secret` column
+
+**Acceptance criteria:**
+- Security headers present on all responses
+- MFA setup generates real QR code, verification checks real TOTP
+- Password reset sends email (or logs in dev), token expires after 1 hour
+- Login endpoint rate-limited to 5 attempts/15min per IP
+- CORS works with configured production origins
 
 ---
 
 ## P1 — High Priority (Should fix before beta)
 
-### Testing
-- [ ] **Add pytest for backend** — Zero test files exist. Need unit tests for auth, posts, workspaces, AI endpoints.
-- [ ] **Add Jest/Vitest for frontend** — Zero test files exist. Need component tests for key pages.
-- [ ] **Add integration tests** — Test full request flow: register → login → create post → get analytics.
-- [ ] **Add API contract tests** — Validate all endpoints return expected schemas.
+### TASK-004: Add Backend Test Suite
+**Problem:** Zero test files. No pytest, no test infrastructure.
 
-### AI Integration
-- [ ] **Connect OpenAI image generation** — `generate-image` endpoint returns placeholder. Need DALL-E 3 integration.
-- [ ] **Connect video generation API** — `generate-video` returns placeholder. Need actual video generation service (Runway, Pika, etc.).
-- [ ] **Add AI credit tracking** — No usage metering for AI calls; users can make unlimited requests.
-- [ ] **Add AI response caching** — Same prompt returns same result; should cache for cost savings.
-- [ ] **Add error handling for AI provider failures** — Currently silently falls back to placeholder; should surface errors.
+**Subtasks:**
+- [ ] **004a** Install test dependencies: `pytest`, `pytest-asyncio`, `httpx`, `factory-boy` in `backend/requirements.txt`
+- [ ] **004b** Create `backend/tests/conftest.py` — async test client fixture using `httpx.AsyncClient` with `TestClient`, test database fixture using SQLite in-memory
+- [ ] **004c** Create `backend/tests/test_auth.py` — test register (success, duplicate email), login (success, wrong password, nonexistent user), /me endpoint
+- [ ] **004d** Create `backend/tests/test_workspaces.py` — test create workspace, list workspaces, add member, update role, remove member, brand voice CRUD
+- [ ] **004e** Create `backend/tests/test_posts.py` — test create post, list posts with filters, update post, delete post, workspace access verification
+- [ ] **004f** Create `backend/tests/test_analytics.py` — test dashboard stats, platform comparison, top posts, best times, content trends
+- [ ] **004g** Create `backend/tests/test_billing.py` — test get plans, get subscription, get usage, get invoices
+- [ ] **004h** Create `backend/tests/test_security.py` — test audit logs, roles, RBAC check, rate limit status, OAuth connections
+- [ ] **004i** Create `backend/tests/test_ai_media.py` — test generate image/video/voiceover/caption with mock OpenAI responses
+- [ ] **004j** Create `backend/tests/test_recommendations.py` — test analyze endpoint, rewrite suggestion
+- [ ] **004k** Add `pytest.ini` or `pyproject.toml` pytest config — set asyncio mode, test paths, markers
+- [ ] **004l** Run full suite: `cd backend && pytest -v` — all tests pass
 
-### Social Platform Publishing
-- [ ] **Implement LinkedIn posting** — Connection tokens stored but no actual post publishing via API.
-- [ ] **Implement X/Twitter posting** — Same gap as LinkedIn.
-- [ ] **Implement Instagram posting** — Same gap.
-- [ ] **Implement Facebook posting** — Same gap.
-- [ ] **Implement YouTube upload** — Same gap.
-- [ ] **Add posting queue worker** — Celery in requirements but no worker defined or tasks registered.
+**Files to create:** `backend/tests/`, `backend/tests/conftest.py`, `backend/tests/test_*.py`, `backend/pytest.ini`
+**Files to modify:** `backend/requirements.txt`
 
-### Billing
-- [ ] **Implement Stripe checkout session creation** — `POST /billing/checkout` returns mock URL; needs real Stripe SDK call.
-- [ ] **Implement Stripe webhook handler** — No webhook endpoint for payment events (subscription created, updated, failed).
-- [ ] **Add subscription enforcement** — No logic to block features when credits are exhausted or plan limits hit.
-- [ ] **Add invoice PDF generation** — Invoices returned as JSON; need downloadable PDF.
+**Acceptance criteria:**
+- `pytest` runs all tests with >80% pass rate
+- Each API module has corresponding test file
+- Tests use in-memory SQLite, no external dependencies
 
-### Media Storage
-- [ ] **Implement S3 file upload** — `POST /media/assets` returns mock; needs actual multipart upload to S3.
-- [ ] **Add presigned URL generation** — For secure file access without exposing S3 directly.
-- [ ] **Add image processing pipeline** — Resize, compress, generate thumbnails on upload.
-- [ ] **Add file type validation** — No server-side validation of uploaded file types/sizes.
+---
+
+### TASK-005: Add Frontend Test Suite
+**Problem:** Zero frontend tests. No Jest/Vitest configured.
+
+**Subtasks:**
+- [ ] **005a** Install test deps: `@testing-library/react`, `@testing-library/jest-dom`, `vitest`, `jsdom` in `frontend/package.json`
+- [ ] **005b** Create `frontend/vitest.config.ts` — configure Vitest with path aliases matching `tsconfig.json`
+- [ ] **005c** Create `frontend/src/__tests__/components/button.test.tsx` — test Button renders, variants, click handler
+- [ ] **005d** Create `frontend/src/__tests__/components/card.test.tsx` — test Card, CardHeader, CardContent render
+- [ ] **005e** Create `frontend/src/__tests__/components/theme-provider.test.tsx` — test theme switching, localStorage persistence, system preference detection
+- [ ] **005f** Create `frontend/src/__tests__/pages/dashboard.test.tsx` — test dashboard renders stats, recent posts, quick actions
+- [ ] **005g** Create `frontend/src/__tests__/pages/billing.test.tsx` — test billing page renders plans, usage bars, invoices
+- [ ] **005h** Create `frontend/src/__tests__/pages/security.test.tsx` — test security page renders audit logs, RBAC roles, rate limit
+- [ ] **005i** Add `test` script to `frontend/package.json`: `"test": "vitest run"`, `"test:watch": "vitest"`
+- [ ] **005j** Run full suite: `cd frontend && npm test` — all tests pass
+
+**Files to create:** `frontend/vitest.config.ts`, `frontend/src/__tests__/`
+**Files to modify:** `frontend/package.json`
+
+**Acceptance criteria:**
+- `npm test` runs all tests with >80% pass rate
+- Theme provider, key components, and page renders are tested
+- Tests run in jsdom environment
+
+---
+
+### TASK-006: Implement Social Platform Publishing
+**Problem:** Platform tokens stored but no actual publishing. Celery in requirements with no worker.
+
+**Subtasks:**
+- [ ] **006a** Create `backend/app/services/publishers/__init__.py` — base publisher interface: `async def publish(post, connection) -> PublishResult`
+- [ ] **006b** Create `backend/app/services/publishers/linkedin.py` — implement LinkedIn API post creation using `access_token` from PlatformConnection
+- [ ] **006c** Create `backend/app/services/publishers/twitter.py` — implement X/Twitter API tweet/thread posting
+- [ ] **006d** Create `backend/app/services/publishers/instagram.py` — implement Instagram Graph API post publishing
+- [ ] **006e** Create `backend/app/services/publishers/facebook.py` — implement Facebook Graph API post publishing
+- [ ] **006f** Create `backend/app/services/publishers/youtube.py` — implement YouTube Data API v3 video upload
+- [ ] **006g** Create `backend/app/tasks/__init__.py` — Celery app initialization with Redis broker
+- [ ] **006h** Create `backend/app/tasks/publish_post.py` — Celery task: select publisher by platform, call publish, update post status (published/failed), retry on failure (max 3)
+- [ ] **006i** Update `backend/app/api/posts.py` — when post status changes to "scheduled" with `scheduled_at`, enqueue Celery task
+- [ ] **006j** Create `backend/app/tasks/scheduler.py` — periodic Celery beat task: check for posts where `scheduled_at <= now` and status == "queued", enqueue publish tasks
+- [ ] **006k** Add Celery worker to `docker-compose.yml` — new service `celery_worker` running `celery -A app.tasks worker --loglevel=info`
+- [ ] **006l** Add Celery beat to `docker-compose.yml` — new service `celery_beat` running `celery -A app.tasks beat --loglevel=info`
+- [ ] **006m** Add `celery` and `kombu` to `backend/requirements.txt`
+
+**Files to create:** `backend/app/services/publishers/`, `backend/app/tasks/`, `backend/app/tasks/publish_post.py`, `backend/app/tasks/scheduler.py`
+**Files to modify:** `backend/app/api/posts.py`, `backend/requirements.txt`, `docker-compose.yml`
+
+**Acceptance criteria:**
+- Setting a post to "scheduled" enqueues a publish task
+- Celery worker picks up tasks and publishes to real platform APIs
+- Failed posts retry up to 3 times then mark as "failed"
+- Beat scheduler checks for due posts every minute
+
+---
+
+### TASK-007: Implement Stripe Billing
+**Problem:** Checkout returns mock URL. No webhook handler. No subscription enforcement.
+
+**Subtasks:**
+- [ ] **007a** Rewrite `backend/app/api/billing.py` checkout endpoint — use `stripe.checkout.Session.create()` with real price IDs from PLANS config
+- [ ] **007b** Create `backend/app/api/webhooks.py` — new router at `/api/webhooks/stripe` handling: `checkout.session.completed`, `customer.subscription.updated`, `customer.subscription.deleted`, `invoice.payment_failed`
+- [ ] **007c** Add Stripe webhook signature verification using `stripe.Webhook.construct_event()`
+- [ ] **007d** Create `backend/app/models/subscription.py` — Subscription model: user_id, stripe_customer_id, stripe_subscription_id, plan, status, current_period_start, current_period_end
+- [ ] **007e** Create `backend/app/models/invoice.py` — Invoice model: user_id, stripe_invoice_id, amount, status, date, plan
+- [ ] **007f** Generate Alembic migration for new subscription and invoice tables
+- [ ] **007g** Implement credit tracking — decrement credits on each AI API call; return 403 when exhausted
+- [ ] **007h** Implement plan limit checks — workspace count, team member count, scheduled post count against plan limits
+- [ ] **007i** Update `frontend/src/app/dashboard/billing/page.tsx` — call real Stripe Checkout, handle redirect
+- [ ] **007j** Add `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `STRIPE_PUBLISHABLE_KEY` to `docker-compose.yml` env passthrough
+
+**Files to create:** `backend/app/api/webhooks.py`, `backend/app/models/subscription.py`, `backend/app/models/invoice.py`
+**Files to modify:** `backend/app/api/billing.py`, `frontend/src/app/dashboard/billing/page.tsx`, `docker-compose.yml`
+
+**Acceptance criteria:**
+- Checkout creates real Stripe session and redirects to Stripe hosted page
+- Webhook processes subscription lifecycle events
+- Credits decrement on AI usage, blocked when exhausted
+- Plan limits enforced (workspace count, team members, etc.)
+
+---
+
+### TASK-008: Implement S3 Media Storage
+**Problem:** Media upload returns mock data. No actual file handling.
+
+**Subtasks:**
+- [ ] **008a** Create `backend/app/services/storage.py` — S3 storage service using boto3: `upload_file(file, key)`, `get_presigned_url(key, expires)`, `delete_file(key)`
+- [ ] **008b** Rewrite `backend/app/api/media.py` upload endpoint — accept `UploadFile` from FastAPI, validate file type/size, upload to S3, store metadata in Asset table
+- [ ] **008c** Add file validation — allowed types: images (jpg, png, gif, webp, svg), videos (mp4, mov, webm), documents (pdf, doc, docx); max size 50MB
+- [ ] **008d** Create `backend/app/services/image_processor.py` — resize images to max 2048px width, generate 200px thumbnails, compress to WebP
+- [ ] **008e** Integrate image processing into upload flow — process on upload, store original + thumbnail in S3
+- [ ] **008f** Update Asset model — add `thumbnail_url`, `mime_type`, `size` columns if not present
+- [ ] **008g** Rewrite list/delete/update endpoints — query from database instead of returning mock data
+- [ ] **008h** Add presigned URL generation for asset retrieval — `GET /media/assets/{id}/url` returns temporary S3 URL
+
+**Files to create:** `backend/app/services/storage.py`, `backend/app/services/image_processor.py`
+**Files to modify:** `backend/app/api/media.py`, `backend/app/models/content.py` (Asset model)
+
+**Acceptance criteria:**
+- File upload stores in S3 and returns real URL
+- Thumbnails generated for images
+- File type/size validation enforced
+- Presigned URLs used for secure access
 
 ---
 
 ## P2 — Medium Priority (Should fix before v1.0)
 
-### Frontend
-- [ ] **Add error boundaries** — No React error boundaries; unhandled errors crash the entire app.
-- [ ] **Add loading skeletons** — Pages show nothing while data loads; need skeleton UI.
-- [ ] **Add toast notifications** — No user feedback for success/error actions (save, delete, publish).
-- [ ] **Add mobile responsive sidebar** — Sidebar is fixed-width; needs hamburger menu on mobile.
-- [ ] **Add SEO meta tags** — No title, description, or Open Graph tags per page.
-- [ ] **Add page transitions** — Hard jumps between routes; add smooth transitions.
-- [ ] **Connect frontend auth to backend JWT** — Frontend stores NextAuth session but doesn't pass backend JWT to API calls.
+### TASK-009: Frontend Quality & UX
+**Subtasks:**
+- [ ] **009a** Create `frontend/src/components/ui/error-boundary.tsx` — React error boundary with fallback UI, retry button, error details
+- [ ] **009b** Add ErrorBoundary wrapper in `frontend/src/app/layout.tsx`
+- [ ] **009c** Create `frontend/src/components/ui/skeleton.tsx` — skeleton loading components (SkeletonCard, SkeletonTable, SkeletonChart)
+- [ ] **009d** Add loading states to all dashboard pages — show skeletons while fetching data
+- [ ] **009e** Create `frontend/src/components/ui/toast.tsx` — toast notification system (success, error, info variants)
+- [ ] **009f** Create `frontend/src/stores/toast-store.ts` — Zustand store for toast queue management
+- [ ] **009g** Add toasts to all mutation operations (save, delete, publish, invite member, etc.)
+- [ ] **009h** Update `frontend/src/components/layout/sidebar.tsx` — add mobile hamburger menu, slide-in drawer on small screens
+- [ ] **009i** Add `useMediaQuery` hook for responsive behavior
+- [ ] **009j** Add per-page `<title>` and `<meta description>` via Next.js `generateMetadata()` in all page files
 
-### Backend
-- [ ] **Add API versioning** — All endpoints under `/api/`; should be `/api/v1/` for future compatibility.
-- [ ] **Add request/response logging** — No structured logging for API requests.
-- [ ] **Add OpenAPI response models** — Many endpoints return raw dicts instead of typed Pydantic responses.
-- [ ] **Add pagination to list endpoints** — Posts, analytics, audit logs return all results; need cursor/offset pagination.
-- [ ] **Add WebSocket for real-time notifications** — Notifications page polls; should use WebSocket for live updates.
-- [ ] **Refactor mock data endpoints** — Team, calendar, scheduler, media endpoints return hardcoded data; need database-backed implementations.
-- [ ] **Add input sanitization** — No XSS prevention on user-generated content (post content, comments).
+**Files to create:** `error-boundary.tsx`, `skeleton.tsx`, `toast.tsx`, `toast-store.ts`, `useMediaQuery.ts`
+**Files to modify:** `layout.tsx`, `sidebar.tsx`, all dashboard page files
 
-### DevOps
-- [ ] **Add GitHub Actions CI** — No CI pipeline; need lint, type-check, test, build on PR.
-- [ ] **Add GitHub Actions CD** — No deployment pipeline; need auto-deploy on merge to main.
-- [ ] **Add Docker health check for frontend** — Backend has healthcheck; frontend doesn't.
-- [ ] **Add production environment config** — `.env.example` missing Stripe keys; no production `.env` template.
-- [ ] **Add database backup strategy** — No automated PostgreSQL backups configured.
+---
 
-### Analytics
-- [ ] **Connect real analytics data** — Dashboard returns mock/generated data; needs actual platform API integration.
-- [ ] **Add analytics data collection worker** — Background job to fetch metrics from connected platforms.
-- [ ] **Add funnel visualization** — Current charts are basic; need conversion funnel analysis.
+### TASK-010: Backend Quality & API Design
+**Subtasks:**
+- [ ] **010a** Add `logging` config in `backend/app/core/config.py` — structured JSON logging with uvicorn
+- [ ] **010b** Add request/response logging middleware in `backend/app/main.py` — log method, path, status, duration
+- [ ] **010c** Add pagination to `backend/app/api/posts.py` list endpoint — `offset`, `limit` params, return `{ items, total, offset, limit }`
+- [ ] **010d** Add pagination to `backend/app/api/analytics.py` — top posts, audit logs
+- [ ] **010e** Add pagination to `backend/app/api/security_api.py` audit logs
+- [ ] **010f** Create `backend/app/schemas/pagination.py` — shared `PaginatedResponse` generic model
+- [ ] **010g** Add Pydantic response models to all endpoints returning raw dicts (team, calendar, scheduler, media)
+- [ ] **010h** Add `bleach` to requirements — sanitize HTML in user-generated content (post body, comments)
+- [ ] **010i** Create `backend/app/services/sanitizer.py` — `sanitize_html(content) -> clean_content`
+- [ ] **010j** Apply sanitization in posts.py and team.py create/update endpoints
+
+**Files to create:** `backend/app/schemas/pagination.py`, `backend/app/services/sanitizer.py`
+**Files to modify:** `backend/app/main.py`, `backend/app/api/posts.py`, `backend/app/api/analytics.py`, `backend/app/api/security_api.py`
+
+---
+
+### TASK-011: CI/CD Pipeline
+**Subtasks:**
+- [ ] **011a** Create `.github/workflows/ci.yml` — trigger on PR to main: checkout, setup Node 20, setup Python 3.12, install deps, run lint, run tests, run build
+- [ ] **011b** Frontend CI: `npm ci && npm run lint && npm test && npm run build`
+- [ ] **011c** Backend CI: `pip install -r requirements.txt && pytest -v`
+- [ ] **011d** Create `.github/workflows/cd.yml` — trigger on push to main: build Docker images, push to registry, deploy (placeholder for actual deployment target)
+- [ ] **011e** Add Docker build to CD workflow: `docker compose build`
+- [ ] **011f** Add health check to frontend Dockerfile — `HEALTHCHECK CMD curl -f http://localhost:3000 || exit 1`
+- [ ] **011g** Create `scripts/backup.sh` — PostgreSQL dump script with timestamp, retention (keep last 7 daily, 4 weekly)
+- [ ] **011h** Add `DB_BACKUP_SCHEDULE` cron to docker-compose or external scheduler
+
+**Files to create:** `.github/workflows/ci.yml`, `.github/workflows/cd.yml`, `scripts/backup.sh`
+**Files to modify:** `frontend/Dockerfile` (add healthcheck)
+
+---
+
+### TASK-012: Analytics Real Data Integration
+**Subtasks:**
+- [ ] **012a** Create `backend/app/services/analytics_collector.py` — background task that polls connected platform APIs for post metrics
+- [ ] **012b** Implement LinkedIn Analytics API integration — fetch impressions, engagement, followers per post
+- [ ] **012c** Implement X/Twitter Analytics API integration — fetch tweet impressions, engagement rate, impressions
+- [ ] **012d** Implement Instagram Insights API integration — fetch reach, impressions, saves, shares per post
+- [ ] **012e** Implement Facebook Insights API integration — fetch reach, impressions, reactions per post
+- [ ] **012f** Implement YouTube Analytics API integration — fetch views, watch time, subscribers per video
+- [ ] **012g** Create Celery periodic task: run analytics collection every 6 hours for all connected platforms
+- [ ] **012h** Store collected metrics in `analytics_metrics` table linked to posts
+- [ ] **012i** Update `backend/app/api/analytics.py` — query real data from `analytics_metrics` table instead of generating mock trends
+- [ ] **012j** Add follower count tracking — store in PlatformConnection metadata, update on each collection run
+
+**Files to create:** `backend/app/services/analytics_collector.py`, platform-specific collector modules
+**Files to modify:** `backend/app/api/analytics.py`, Celery task config
 
 ---
 
 ## P3 — Low Priority (Nice to have)
 
-### Features
-- [ ] **Add content A/B testing** — Test different versions of posts and measure performance.
-- [ ] **Add competitor tracking** — Monitor competitor content and engagement.
-- [ ] **Add hashtag performance analytics** — Track which hashtags drive the most engagement.
-- [ ] **Add content scoring before publish** — Pre-publish quality check using AI.
-- [ ] **Add multi-language content generation** — AI content in different languages.
-- [ ] **Add email newsletter integration** — Send content as email campaigns.
-- [ ] **Add RSS feed ingestion** — Pull content from RSS feeds for repurposing.
-- [ ] **Add browser extension** — Quick content capture from any webpage.
-- [ ] **Add mobile app** — React Native or Expo companion app.
+### TASK-013: Additional Platform Integrations
+**Subtasks:**
+- [ ] **013a** Add TikTok to Platform enum in `frontend/src/types/index.ts` and backend models
+- [ ] **013b** Create `backend/app/services/publishers/tiktok.py`
+- [ ] **013c** Add Pinterest to Platform enum and create publisher
+- [ ] **013d** Add threads.net to Platform enum and create publisher
+- [ ] **013e** Add Bluesky to Platform enum and create publisher
 
-### Platform
-- [ ] **Add TikTok integration** — Platform not currently supported.
-- [ ] **Add Pinterest integration** — Platform not currently supported.
-- [ ] **Add threads.net integration** — Platform not currently supported.
-- [ ] **Add Bluesky integration** — Platform not currently supported.
+### TASK-014: Quality & Monitoring
+**Subtasks:**
+- [ ] **014a** Add Sentry to frontend: `@sentry/nextjs` with `sentry.client.config.ts`
+- [ ] **014b** Add Sentry to backend: `sentry-sdk[fastapi]` in requirements, init in `main.py`
+- [ ] **014c** Add PostHog or Mixpanel to frontend for product analytics
+- [ ] **014d** Run WCAG 2.1 audit — fix contrast ratios, add ARIA labels, keyboard navigation
+- [ ] **014e** Add Lighthouse CI to GitHub Actions — fail on score < 90
 
-### Quality
-- [ ] **Add accessibility audit** — WCAG 2.1 AA compliance check.
-- [ ] **Add performance monitoring** — Lighthouse CI, Core Web Vitals tracking.
-- [ ] **Add Sentry error tracking** — Frontend and backend error reporting.
-- [ ] **Add analytics tracking** — PostHog or Mixpanel for product analytics.
-- [ ] **Add A/B testing for UI** — Test different layouts and flows.
+### TASK-015: Documentation & DX
+**Subtasks:**
+- [ ] **015a** Create `CONTRIBUTING.md` — code standards, PR process, commit conventions
+- [ ] **015b** Create `CHANGELOG.md` — version history with date and changes
+- [ ] **015c** Create `docs/DEPLOYMENT.md` — production deployment guide (Docker, env vars, SSL, domain)
+- [ ] **015d** Create `docs/API.md` — developer guide for third-party API consumers
+- [ ] **015e** Add OpenAPI tags and descriptions to all endpoints in backend
 
-### Documentation
-- [ ] **Add API developer guide** — Guide for third-party API consumers.
-- [ ] **Add deployment guide** — Step-by-step production deployment instructions.
-- [ ] **Add contribution guidelines** — CONTRIBUTING.md with code standards.
-- [ ] **Add changelog** — Track feature releases and breaking changes.
+---
+
+## Task Dependency Graph
+
+```
+TASK-001 (Auth Flow)
+  ├── TASK-002 (DB Schema) — needed for auth user lookup
+  └── TASK-003 (Security) — needed for MFA/password reset
+
+TASK-004 (Backend Tests) — depends on TASK-002 (migrations)
+TASK-005 (Frontend Tests) — depends on TASK-001 (auth provider)
+
+TASK-006 (Social Publishing) — depends on TASK-002 (schema), TASK-003 (CORS)
+TASK-007 (Stripe Billing) — depends on TASK-002 (schema)
+TASK-008 (S3 Storage) — depends on TASK-002 (schema)
+
+TASK-009 (Frontend UX) — independent
+TASK-010 (Backend Quality) — independent
+TASK-011 (CI/CD) — depends on TASK-004, TASK-005 (tests must exist)
+TASK-012 (Analytics) — depends on TASK-006 (publishing), TASK-002 (schema)
+```
+
+---
+
+## Summary
+
+| Priority | Tasks | Subtasks | Est. Effort |
+|----------|-------|----------|-------------|
+| P0 Critical | 3 | 28 | ~2 weeks |
+| P1 High | 5 | 47 | ~3 weeks |
+| P2 Medium | 4 | 29 | ~2 weeks |
+| P3 Low | 3 | 14 | ~1 week |
+| **Total** | **15** | **118** | **~8 weeks** |
 
 ---
 
