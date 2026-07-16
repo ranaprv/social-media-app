@@ -14,15 +14,13 @@ import {
   Upload,
   FolderOpen,
   X,
-  Tag,
-  MoreHorizontal,
+  Globe,
+  Camera,
+  Share2,
+  Tv,
+  Eye,
   Download,
   Trash2,
-  Eye,
-  Youtube,
-  Instagram,
-  Linkedin,
-  Facebook,
 } from "lucide-react"
 import type { MediaType, MediaAsset } from "@/types"
 
@@ -48,7 +46,7 @@ const PLATFORMS: PlatformDef[] = [
   {
     id: "youtube",
     name: "YouTube",
-    icon: Youtube,
+    icon: Tv,
     color: "text-red-500",
     contentTypes: [
       { id: "image", label: "Thumbnails & Images", icon: Image },
@@ -58,7 +56,7 @@ const PLATFORMS: PlatformDef[] = [
   {
     id: "instagram",
     name: "Instagram",
-    icon: Instagram,
+    icon: Camera,
     color: "text-pink-500",
     contentTypes: [
       { id: "reel", label: "Reels", icon: Video },
@@ -70,7 +68,7 @@ const PLATFORMS: PlatformDef[] = [
   {
     id: "linkedin",
     name: "LinkedIn",
-    icon: Linkedin,
+    icon: Share2,
     color: "text-blue-600",
     contentTypes: [
       { id: "post", label: "Posts", icon: FileText },
@@ -82,7 +80,7 @@ const PLATFORMS: PlatformDef[] = [
   {
     id: "facebook",
     name: "Facebook",
-    icon: Facebook,
+    icon: Globe,
     color: "text-blue-500",
     contentTypes: [
       { id: "image", label: "Images", icon: Image },

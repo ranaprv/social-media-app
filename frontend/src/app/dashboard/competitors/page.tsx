@@ -33,7 +33,7 @@ export default function CompetitorsPage() {
   const addCompetitor = async () => {
     if (!newName.trim()) return
     const res = await fetch(`${API_URL}/competitors`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name: newName }) })
-    if (res.ok) { setCompetitors((p) => [...p, await res.json()]); setNewName("") }
+    if (res.ok) { const data = await res.json(); setCompetitors((p) => [...p, data]); setNewName("") }
   }
 
   const removeCompetitor = async (id: string) => {

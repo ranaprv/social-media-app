@@ -59,15 +59,11 @@ export default function AdsPage() {
 
             {/* Paid vs Organic */}
             <PaidVsOrganic />
-          </div>
+          </>
         )}
       </div>
     </DashboardLayout>
   )
-}
-
-function MousePointerClick({ className }: { className?: string }) {
-  return <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 9l5 5M9 14l5-5M12 3a9 9 0 110 18 9 9 0 010-18z" /></svg>
 }
 
 function PaidVsOrganic() {

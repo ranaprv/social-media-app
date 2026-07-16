@@ -444,14 +444,21 @@ export interface MediaAsset {
   name: string
   type: MediaType
   url: string
+  thumbnail_url?: string
   thumbnailUrl?: string
+  platform?: string
+  content_type?: string
   size: number // bytes
-  mimeType: string
+  mime_type?: string
+  mimeType?: string
   tags: string[]
   folder?: string
-  uploadedBy: string
-  uploadedByName: string
-  createdAt: string
+  uploaded_by?: string
+  uploadedBy?: string
+  uploaded_by_name?: string
+  uploadedByName?: string
+  created_at?: string
+  createdAt?: string
   metadata: Record<string, unknown>
 }
 

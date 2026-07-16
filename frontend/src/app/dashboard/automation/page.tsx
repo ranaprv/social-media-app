@@ -24,7 +24,7 @@ export default function AutomationPage() {
   const createRule = async () => {
     if (!newTrigger.trim() || !newResponse.trim()) return
     const res = await fetch(`${API_URL}/automation/rules`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ trigger_type: "keyword", trigger_value: newTrigger, action_type: "reply", response_text: newResponse, platforms: ["x", "linkedin"] }) })
-    if (res.ok) { setRules((p) => [...p, await res.json()]); setNewTrigger(""); setNewResponse(""); setShowForm(false) }
+    if (res.ok) { const data = await res.json(); setRules((p) => [...p, data]); setNewTrigger(""); setNewResponse(""); setShowForm(false) }
   }
 
   const toggleRule = async (id: string) => {
