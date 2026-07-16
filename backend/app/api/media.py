@@ -1,52 +1,130 @@
-from fastapi import APIRouter, Depends, HTTPException
+"""Media library API with platform-specific directories."""
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 import uuid
 from datetime import datetime, timedelta
+from typing import Optional
 
 from app.core.database import get_db
 from app.core.security import get_current_user
 from app.models.user import User
+from app.models.content import Asset
 
 router = APIRouter(prefix="/media", tags=["media"])
 
 
+# ── Platform directory structure ────────────────────────────────────────────
+
+PLATFORM_DIRECTORIES: dict[str, dict[str, str]] = {
+    "youtube": {
+        "image": "YouTube Thumbnails & Images",
+        "video": "YouTube Videos",
+    },
+    "instagram": {
+        "reel": "Instagram Reels",
+        "carousel": "Instagram Carousels",
+        "vertical_video": "Instagram Vertical Videos",
+        "image": "Instagram Images",
+    },
+    "linkedin": {
+        "post": "LinkedIn Posts",
+        "carousel": "LinkedIn Carousels",
+        "video": "LinkedIn Videos",
+        "document": "LinkedIn Documents",
+    },
+    "facebook": {
+        "image": "Facebook Images",
+        "video": "Facebook Videos",
+    },
+}
+
+
+@router.get("/platforms")
+async def get_platform_directories(
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get all platform directories with asset counts.
+
+    Returns the full directory tree: platform → content_type → {label, count}.
+    The scheduler uses this to know where to pull content from for each platform.
+    """
+    result = {}
+    for platform, content_types in PLATFORM_DIRECTORIES.items():
+        result[platform] = {}
+        for content_type, label in content_types.items():
+            count_result = await db.execute(
+                select(Asset).where(
+                    Asset.workspace_id == current_user.id,
+                    Asset.platform == platform,
+                    Asset.content_type == content_type,
+                )
+            )
+            count = len(count_result.scalars().all())
+            result[platform][content_type] = {
+                "label": label,
+                "count": count,
+            }
+    return {"platforms": result}
+
+
 @router.get("/assets")
 async def get_media_assets(
-    type: str = None,
-    search: str = None,
-    tags: str = None,
-    folder: str = None,
+    type: Optional[str] = Query(None, description="Filter by asset type: image, video, pdf, etc."),
+    platform: Optional[str] = Query(None, description="Filter by platform: youtube, instagram, linkedin, facebook"),
+    content_type: Optional[str] = Query(None, description="Filter by content type: reel, carousel, vertical_video, post, document"),
+    search: Optional[str] = Query(None, description="Search by name or tags"),
+    tags: Optional[str] = Query(None, description="Comma-separated tag filter"),
+    folder: Optional[str] = Query(None, description="Filter by folder"),
     sort_by: str = "date",
     sort_order: str = "desc",
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """Get media assets with filtering and search."""
-    assets = [
-        {"id": "ma-1", "name": "hero-banner.png", "type": "image", "url": "/assets/hero-banner.png", "thumbnail_url": "/assets/thumbs/hero-banner.png", "size": 245000, "mime_type": "image/png", "tags": ["banner", "hero", "marketing"], "folder": "campaigns", "uploaded_by": current_user.id, "uploaded_by_name": current_user.name or "User", "created_at": (datetime.utcnow() - timedelta(days=5)).isoformat(), "metadata": {"width": 1200, "height": 630}},
-        {"id": "ma-2", "name": "product-demo.mp4", "type": "video", "url": "/assets/product-demo.mp4", "thumbnail_url": "/assets/thumbs/product-demo.png", "size": 15400000, "mime_type": "video/mp4", "tags": ["demo", "product", "tutorial"], "folder": "videos", "uploaded_by": "user-2", "uploaded_by_name": "Sarah Chen", "created_at": (datetime.utcnow() - timedelta(days=3)).isoformat(), "metadata": {"duration": 120, "resolution": "1080p"}},
-        {"id": "ma-3", "name": "brand-guidelines.pdf", "type": "pdf", "url": "/assets/brand-guidelines.pdf", "size": 890000, "mime_type": "application/pdf", "tags": ["brand", "guidelines", "design"], "folder": "brand", "uploaded_by": current_user.id, "uploaded_by_name": current_user.name or "User", "created_at": (datetime.utcnow() - timedelta(days=30)).isoformat(), "metadata": {"pages": 24}},
-        {"id": "ma-4", "name": "company-logo.svg", "type": "logo", "url": "/assets/company-logo.svg", "size": 12000, "mime_type": "image/svg+xml", "tags": ["logo", "brand"], "folder": "brand", "uploaded_by": current_user.id, "uploaded_by_name": current_user.name or "User", "created_at": (datetime.utcnow() - timedelta(days=60)).isoformat(), "metadata": {}},
-        {"id": "ma-5", "name": "post-template-linkedin.psd", "type": "template", "url": "/assets/templates/linkedin-post.psd", "size": 3400000, "mime_type": "application/octet-stream", "tags": ["template", "linkedin", "design"], "folder": "templates", "uploaded_by": "user-3", "uploaded_by_name": "Marcus Johnson", "created_at": (datetime.utcnow() - timedelta(days=14)).isoformat(), "metadata": {"dimensions": "1200x627"}},
-        {"id": "ma-6", "name": "infographic-q2.png", "type": "image", "url": "/assets/infographic-q2.png", "thumbnail_url": "/assets/thumbs/infographic-q2.png", "size": 520000, "mime_type": "image/png", "tags": ["infographic", "data", "q2"], "folder": "campaigns", "uploaded_by": "user-4", "uploaded_by_name": "Priya Patel", "created_at": (datetime.utcnow() - timedelta(days=7)).isoformat(), "metadata": {"width": 1080, "height": 1920}},
-        {"id": "ma-7", "name": "webinar-recording.mp4", "type": "video", "url": "/assets/webinar-recording.mp4", "thumbnail_url": "/assets/thumbs/webinar.png", "size": 89000000, "mime_type": "video/mp4", "tags": ["webinar", "recording", "education"], "folder": "videos", "uploaded_by": current_user.id, "uploaded_by_name": current_user.name or "User", "created_at": (datetime.utcnow() - timedelta(days=10)).isoformat(), "metadata": {"duration": 2400, "resolution": "1080p"}},
-        {"id": "ma-8", "name": "social-templates-bundle.zip", "type": "template", "url": "/assets/templates/social-bundle.zip", "size": 12000000, "mime_type": "application/zip", "tags": ["template", "bundle", "social"], "folder": "templates", "uploaded_by": "user-2", "uploaded_by_name": "Sarah Chen", "created_at": (datetime.utcnow() - timedelta(days=20)).isoformat(), "metadata": {"count": 15}},
-        {"id": "ma-9", "name": "icon-set-brand.svg", "type": "brand-asset", "url": "/assets/brand/icon-set.svg", "size": 45000, "mime_type": "image/svg+xml", "tags": ["icons", "brand", "ui"], "folder": "brand", "uploaded_by": current_user.id, "uploaded_by_name": current_user.name or "User", "created_at": (datetime.utcnow() - timedelta(days=45)).isoformat(), "metadata": {"icons": 50}},
-    ]
+    """Get media assets with filtering. Supports platform and content_type filters."""
+    # Query real assets from database
+    query = select(Asset).where(Asset.workspace_id == current_user.id)
+    result = await db.execute(query)
+    assets = result.scalars().all()
+
+    # Build response
+    assets_list = []
+    for a in assets:
+        assets_list.append({
+            "id": a.id,
+            "name": a.name,
+            "type": a.type,
+            "url": a.url,
+            "platform": a.platform,
+            "content_type": a.content_type,
+            "size": (a.meta or {}).get("size", 0),
+            "mime_type": (a.meta or {}).get("mime_type", ""),
+            "tags": (a.meta or {}).get("tags", []),
+            "folder": (a.meta or {}).get("folder", ""),
+            "uploaded_by": current_user.id,
+            "uploaded_by_name": current_user.name or "User",
+            "created_at": a.created_at.isoformat() if a.created_at else datetime.utcnow().isoformat(),
+            "metadata": a.meta or {},
+        })
 
     # Apply filters
     if type and type != "all":
-        assets = [a for a in assets if a["type"] == type]
+        assets_list = [a for a in assets_list if a["type"] == type]
+    if platform:
+        assets_list = [a for a in assets_list if a["platform"] == platform]
+    if content_type:
+        assets_list = [a for a in assets_list if a["content_type"] == content_type]
     if search:
         q = search.lower()
-        assets = [a for a in assets if q in a["name"].lower() or any(q in t for t in a["tags"])]
+        assets_list = [a for a in assets_list if q in a["name"].lower() or any(q in t for t in a["tags"])]
     if tags:
         tag_list = [t.strip().lower() for t in tags.split(",")]
-        assets = [a for a in assets if any(t in [tag.lower() for tag in a["tags"]] for t in tag_list)]
+        assets_list = [a for a in assets_list if any(t in [tag.lower() for tag in a["tags"]] for t in tag_list)]
     if folder:
-        assets = [a for a in assets if a["folder"] == folder]
+        assets_list = [a for a in assets_list if a["folder"] == folder]
 
-    return {"assets": assets, "total": len(assets)}
+    return {"assets": assets_list, "total": len(assets_list)}
 
 
 @router.post("/assets")
@@ -55,22 +133,47 @@ async def upload_asset(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """Upload a new media asset."""
-    return {
-        "id": str(uuid.uuid4()),
-        "message": "Asset uploaded",
-        "asset": {
-            "id": str(uuid.uuid4()),
-            "name": request.get("name", "uploaded-file"),
-            "type": request.get("type", "image"),
-            "url": request.get("url", ""),
+    """Upload a new media asset. Optionally assign to a platform directory."""
+    platform = request.get("platform")
+    content_type = request.get("content_type")
+
+    # Validate platform/content_type combination
+    if platform and content_type:
+        valid_types = PLATFORM_DIRECTORIES.get(platform, {})
+        if content_type not in valid_types:
+            raise HTTPException(
+                status_code=422,
+                detail=f"Invalid content_type '{content_type}' for platform '{platform}'. "
+                       f"Valid types: {list(valid_types.keys())}",
+            )
+
+    asset_id = str(uuid.uuid4())
+    now = datetime.utcnow()
+
+    asset = Asset(
+        id=asset_id,
+        workspace_id=current_user.id,
+        name=request.get("name", "uploaded-file"),
+        type=request.get("type", "image"),
+        url=request.get("url", ""),
+        platform=platform,
+        content_type=content_type,
+        meta={
             "size": request.get("size", 0),
+            "mime_type": request.get("mime_type", ""),
             "tags": request.get("tags", []),
             "folder": request.get("folder"),
-            "uploaded_by": current_user.id,
-            "uploaded_by_name": current_user.name or "User",
-            "created_at": datetime.utcnow().isoformat(),
         },
+        created_at=now,
+    )
+    db.add(asset)
+    await db.flush()
+
+    return {
+        "id": asset_id,
+        "message": "Asset uploaded",
+        "platform": platform,
+        "content_type": content_type,
     }
 
 
@@ -81,8 +184,30 @@ async def update_asset(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """Update asset metadata (tags, name, folder)."""
-    return {"id": asset_id, "message": "Asset updated", "updates": request}
+    """Update asset metadata (tags, name, folder, platform, content_type)."""
+    result = await db.execute(
+        select(Asset).where(Asset.id == asset_id, Asset.workspace_id == current_user.id)
+    )
+    asset = result.scalar_one_or_none()
+    if not asset:
+        raise HTTPException(status_code=404, detail="Asset not found")
+
+    if "name" in request:
+        asset.name = request["name"]
+    if "platform" in request:
+        asset.platform = request["platform"]
+    if "content_type" in request:
+        asset.content_type = request["content_type"]
+    if "tags" in request or "folder" in request:
+        meta = asset.meta or {}
+        if "tags" in request:
+            meta["tags"] = request["tags"]
+        if "folder" in request:
+            meta["folder"] = request["folder"]
+        asset.meta = meta
+
+    await db.flush()
+    return {"id": asset_id, "message": "Asset updated"}
 
 
 @router.delete("/assets/{asset_id}")
@@ -92,6 +217,15 @@ async def delete_asset(
     db: AsyncSession = Depends(get_db),
 ):
     """Delete a media asset."""
+    result = await db.execute(
+        select(Asset).where(Asset.id == asset_id, Asset.workspace_id == current_user.id)
+    )
+    asset = result.scalar_one_or_none()
+    if not asset:
+        raise HTTPException(status_code=404, detail="Asset not found")
+
+    await db.delete(asset)
+    await db.flush()
     return {"id": asset_id, "message": "Asset deleted"}
 
 
@@ -132,5 +266,12 @@ async def get_tags(
     db: AsyncSession = Depends(get_db),
 ):
     """Get all unique tags across assets."""
-    tags = ["banner", "hero", "marketing", "demo", "product", "tutorial", "brand", "guidelines", "design", "logo", "template", "linkedin", "infographic", "data", "webinar", "recording", "education", "icons", "ui", "social"]
-    return {"tags": tags}
+    result = await db.execute(
+        select(Asset).where(Asset.workspace_id == current_user.id)
+    )
+    assets = result.scalars().all()
+    all_tags: set[str] = set()
+    for a in assets:
+        tags = (a.meta or {}).get("tags", [])
+        all_tags.update(tags)
+    return {"tags": sorted(all_tags)}

@@ -125,6 +125,8 @@ class Asset(Base):
     name = Column(String, nullable=False)
     type = Column(String, nullable=False)
     url = Column(String, nullable=False)
+    platform = Column(String(32), index=True)           # youtube / instagram / linkedin / facebook / general
+    content_type = Column(String(64), index=True)        # image / video / reel / carousel / vertical_video / post / document
     meta = Column("metadata", JSON, default={})
     created_at = Column(DateTime, default=datetime.utcnow)
     
