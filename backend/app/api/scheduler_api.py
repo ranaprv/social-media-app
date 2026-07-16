@@ -86,6 +86,97 @@ async def update_scheduler_config(
     return {"message": "Config updated", "config": request}
 
 
+@router.post("/schedule")
+async def schedule_content(
+    request: dict,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Schedule content for publishing. Supports content types and Google Drive sources."""
+    content_type = request.get("content_type", "linkedin_post")
+    platform = request.get("platform", "linkedin")
+    title = request.get("title", "")
+    content = request.get("content", "")
+    drive_file_id = request.get("drive_file_id", None)
+    drive_file_url = request.get("drive_file_url", None)
+    scheduled_at = request.get("scheduled_at", "")
+    media_urls = request.get("media_urls", [])
+
+    # If content is on Drive, fetch it
+    if drive_file_id and not content:
+        from app.services.google_drive import drive_service
+        url = await drive_service.get_file_url(drive_file_id)
+        if url:
+            drive_file_url = url
+
+    return {
+        "id": str(uuid.uuid4()),
+        "content_type": content_type,
+        "platform": platform,
+        "title": title,
+        "scheduled_at": scheduled_at,
+        "drive_file_url": drive_file_url,
+        "media_urls": media_urls,
+        "status": "queued",
+        "message": f"Content scheduled for {platform} at {scheduled_at}",
+    }
+
+
+@router.post("/content-planner")
+async def create_content_plan(
+    request: dict,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Create a content plan: what content type, for which platform, at what time."""
+    plan_name = request.get("name", "Content Plan")
+    items = request.get("items", [])
+    # Each item: {content_type, platform, scheduled_at, drive_file_id, title, media_urls}
+
+    created = []
+    for item in items:
+        created.append({
+            "id": str(uuid.uuid4()),
+            "content_type": item.get("content_type", "linkedin_post"),
+            "platform": item.get("platform", "linkedin"),
+            "title": item.get("title", ""),
+            "scheduled_at": item.get("scheduled_at", ""),
+            "drive_file_id": item.get("drive_file_id"),
+            "media_urls": item.get("media_urls", []),
+            "status": "planned",
+        })
+
+    return {
+        "id": str(uuid.uuid4()),
+        "name": plan_name,
+        "items": created,
+        "total_items": len(created),
+        "message": f"Content plan '{plan_name}' created with {len(created)} items",
+    }
+
+
+@router.get("/content-plans")
+async def list_content_plans(
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """List all content plans."""
+    return {"plans": []}
+
+
+@router.get("/drive-files")
+async def list_drive_files(
+    folder_id: str = None,
+    query: str = "",
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """List files from Google Drive for content selection."""
+    from app.services.google_drive import drive_service
+    files = await drive_service.list_files(folder_id=folder_id, query=query)
+    return {"files": files, "count": len(files)}
+
+
 @router.get("/queue")
 async def get_queue(
     current_user: User = Depends(get_current_user),

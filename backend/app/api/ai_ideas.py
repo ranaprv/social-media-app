@@ -1,15 +1,16 @@
+"""AI Ideas Generator — multi-LLM brainstorming with voting."""
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
 import uuid
 import json
 
 from app.core.database import get_db
 from app.core.security import get_current_user
-from app.core.config import get_settings
 from app.models.user import User
-from app.models.workspace import WorkspaceMember
-from app.schemas import AIResearchIdeasResponse
+from app.services.llm import (
+    call_llm_json, multi_model_brainstorm, vote_on_ideas,
+    get_available_models, AVAILABLE_MODELS,
+)
 
 router = APIRouter(prefix="/ai/ideas", tags=["ai-ideas"])
 
@@ -19,66 +20,11 @@ IDEA_CATEGORIES = [
     "tips", "mistakes", "comparisons", "myths",
 ]
 
-PLATFORMS = ["linkedin", "x", "instagram", "facebook", "youtube"]
 
-
-async def _call_ai(prompt: str, system_prompt: str = "") -> str:
-    """Call OpenAI or return placeholder."""
-    settings = get_settings()
-    if settings.OPENAI_API_KEY:
-        try:
-            from openai import AsyncOpenAI
-            client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
-            messages = []
-            if system_prompt:
-                messages.append({"role": "system", "content": system_prompt})
-            messages.append({"role": "user", "content": prompt})
-            response = await client.chat.completions.create(
-                model="gpt-4o",
-                messages=messages,
-                temperature=0.8,
-                max_tokens=3000,
-            )
-            return response.choices[0].message.content or ""
-        except Exception:
-            pass
-    return ""
-
-
-def _placeholder_ideas(industry: str, keywords: list[str], count: int) -> list[dict]:
-    """Generate placeholder ideas when AI is unavailable."""
-    templates = [
-        ("How {industry} is Changing in 2026", "educational", "high"),
-        ("Top {n} Mistakes in {industry}", "mistakes", "high"),
-        ("{keyword} vs {keyword}: Which is Better?", "comparisons", "medium"),
-        ("Myths About {keyword} Debunked", "myths", "medium"),
-        ("Case Study: How We Used {keyword}", "case-studies", "high"),
-        ("Tutorial: Getting Started with {keyword}", "tutorials", "high"),
-        ("Behind the Scenes: Our {industry} Journey", "stories", "medium"),
-        ("Quick Tips for {keyword}", "tips", "medium"),
-        ("What's New in {industry} This Month", "industry-news", "low"),
-        ("How to Build Your Personal Brand in {industry}", "personal-branding", "medium"),
-        ("Product Update: New {keyword} Features", "product-updates", "low"),
-        ("The Future of {keyword} in {industry}", "educational", "high"),
-    ]
-    ideas = []
-    for i in range(min(count, len(templates))):
-        title_tpl, category, engagement = templates[i]
-        kw = keywords[i % len(keywords)] if keywords else industry
-        title = title_tpl.format(
-            industry=industry, keyword=kw, keyword2=keywords[(i + 1) % len(keywords)] if len(keywords) > 1 else kw,
-            n=len(keywords) or 5,
-        )
-        ideas.append({
-            "id": str(uuid.uuid4()),
-            "title": title,
-            "description": f"Create engaging {category} content about {kw} for {industry} audience.",
-            "category": category,
-            "platforms": ["linkedin", "x"],
-            "estimated_engagement": engagement,
-            "tags": [kw, industry, category],
-        })
-    return ideas
+@router.get("/models")
+async def list_models():
+    """List available LLM models by provider."""
+    return {"models": get_available_models(), "all": AVAILABLE_MODELS}
 
 
 @router.post("/generate")
@@ -87,69 +33,119 @@ async def generate_ideas(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """Generate content ideas based on industry context."""
-    industry = request.get("industry", "")
-    keywords = request.get("keywords", [])
-    audience = request.get("audience", "")
-    competitors = request.get("competitors", [])
-    products = request.get("products", [])
-    website_url = request.get("website_url")
+    """Generate content ideas using selected LLM model(s) with optional voting."""
+    niche = request.get("niche", "")
+    topic = request.get("topic", "")
     count = request.get("count", 10)
-    categories = request.get("categories", [])
+    providers = request.get("providers", [])  # ["openai", "anthropic", "gemini"]
+    model = request.get("model", None)  # specific model ID
+    provider = request.get("provider", "openai")  # single provider fallback
+    use_voting = request.get("use_voting", False)
+    custom_prompt = request.get("custom_prompt", "")
 
-    if not industry:
-        raise HTTPException(status_code=400, detail="Industry is required")
+    if not niche and not topic:
+        raise HTTPException(status_code=400, detail="Either 'niche' or 'topic' is required")
 
-    # Build prompt
-    system_prompt = """You are a content strategy expert. Generate content ideas as a JSON array.
-Each idea must have: id (uuid), title, description, category, platforms (array), estimated_engagement (high/medium/low), tags (array).
-Categories: educational, tutorials, stories, case-studies, product-updates, industry-news, personal-branding, tips, mistakes, comparisons, myths.
-Platforms: linkedin, x, instagram, facebook, youtube.
-Return ONLY valid JSON array, no markdown."""
+    # Build the brainstorming prompt — niche-focused, not industry-level
+    context_parts = []
+    if niche:
+        context_parts.append(f"Niche: {niche}")
+    if topic:
+        context_parts.append(f"Topic to brainstorm around: {topic}")
+    if custom_prompt:
+        context_parts.append(f"Additional context: {custom_prompt}")
 
-    prompt_parts = [f"Generate {count} content ideas for the {industry} industry."]
-    if keywords:
-        prompt_parts.append(f"Keywords: {', '.join(keywords)}")
-    if audience:
-        prompt_parts.append(f"Target audience: {audience}")
-    if competitors:
-        prompt_parts.append(f"Competitors to reference: {', '.join(competitors)}")
-    if products:
-        prompt_parts.append(f"Products/services: {', '.join(products)}")
-    if website_url:
-        prompt_parts.append(f"Website: {website_url}")
-    if categories:
-        prompt_parts.append(f"Focus on categories: {', '.join(categories)}")
+    context = "\n".join(context_parts) if context_parts else f"Niche topic: {niche or topic}"
+
+    system_prompt = f"""You are a creative content strategist specializing in niche content.
+Generate {count} unique, specific content ideas that are deeply rooted in the given niche/topic.
+Each idea must be actionable and specific — not generic industry advice.
+
+Return a JSON array. Each element must have:
+- "title": catchy title (string)
+- "description": 1-2 sentence description of the content piece (string)
+- "category": one of {IDEA_CATEGORIES} (string)
+- "content_type": "image" | "carousel" | "article" | "linkedin_post" | "short_video" | "long_video" | "reel" | "story" (string)
+- "platforms": array of platform strings (linkedin, x, instagram, facebook, youtube)
+- "estimated_engagement": "high" | "medium" | "low" (string)
+- "tags": array of relevant niche tags (array of strings)
+- "angles": array of 2-3 unique angles/hooks for this idea (array of strings)
+
+Return ONLY valid JSON array, no markdown fences."""
+
+    prompt = f"""{context}
+
+Generate {count} content ideas that are specific to this niche, not generic.
+Focus on unique angles, trending topics within this niche, and content that would
+stand out from typical competitor content."""
+
+    if use_voting and len(providers) > 1:
+        # Multi-model brainstorming with voting
+        multi_responses = await multi_model_brainstorm(
+            prompt, system_prompt, providers=providers, temperature=0.8
+        )
+        ideas = vote_on_ideas(multi_responses)
+
+        if not ideas:
+            ideas = _fallback_ideas(niche or topic, count)
+
+        for idea in ideas:
+            if "id" not in idea:
+                idea["id"] = str(uuid.uuid4())
+
+        return {
+            "ideas": ideas[:count],
+            "method": "multi_model_voting",
+            "providers_used": list(multi_responses.keys()),
+            "providers_responded": [p for p, r in multi_responses.items() if r],
+        }
     else:
-        prompt_parts.append(f"Spread across all categories: {', '.join(IDEA_CATEGORIES)}")
+        # Single model generation
+        ideas = await call_llm_json(prompt, system_prompt, provider=provider, model=model)
 
-    full_prompt = "\n".join(prompt_parts)
+        if not ideas or not isinstance(ideas, list):
+            ideas = _fallback_ideas(niche or topic, count)
 
-    ai_response = await _call_ai(full_prompt, system_prompt)
+        for idea in ideas:
+            if "id" not in idea:
+                idea["id"] = str(uuid.uuid4())
 
+        return {
+            "ideas": ideas[:count],
+            "method": "single_model",
+            "provider": provider,
+            "model": model,
+        }
+
+
+def _fallback_ideas(niche: str, count: int) -> list[dict]:
+    """Placeholder ideas when AI is unavailable."""
+    templates = [
+        ("Deep Dive: {niche} Fundamentals Explained", "educational", "article", "high"),
+        ("Top 5 {niche} Mistakes Beginners Make", "mistakes", "carousel", "high"),
+        ("{niche} vs Traditional Approach: Which Wins?", "comparisons", "linkedin_post", "medium"),
+        ("Behind the Scenes: Our {niche} Process", "stories", "short_video", "medium"),
+        ("Quick Tip: {niche} Hack You Need to Know", "tips", "reel", "high"),
+        ("Case Study: How {niche} Changed Everything", "case-studies", "article", "high"),
+        ("Tutorial: Master {niche} in 10 Minutes", "tutorials", "long_video", "medium"),
+        ("Myth Busted: Common {niche} Misconceptions", "myths", "carousel", "medium"),
+        ("Personal Brand: Building Authority in {niche}", "personal-branding", "linkedin_post", "medium"),
+        ("Industry Update: What's New in {niche}", "industry-news", "image", "low"),
+    ]
     ideas = []
-    if ai_response:
-        try:
-            # Strip markdown code fences if present
-            cleaned = ai_response.strip()
-            if cleaned.startswith("```"):
-                cleaned = cleaned.split("\n", 1)[1]
-            if cleaned.endswith("```"):
-                cleaned = cleaned.rsplit("```", 1)[0]
-            cleaned = cleaned.strip()
-            parsed = json.loads(cleaned)
-            if isinstance(parsed, list):
-                ideas = parsed
-        except (json.JSONDecodeError, IndexError):
-            pass
-
-    if not ideas:
-        ideas = _placeholder_ideas(industry, keywords, count)
-
-    # Ensure IDs and limit count
-    for idea in ideas:
-        if "id" not in idea:
-            idea["id"] = str(uuid.uuid4())
-    ideas = ideas[:count]
-
-    return {"ideas": ideas}
+    for i in range(min(count, len(templates))):
+        title_tpl, category, content_type, engagement = templates[i]
+        ideas.append({
+            "id": str(uuid.uuid4()),
+            "title": title_tpl.format(niche=niche),
+            "description": f"Create engaging {category} content about {niche}.",
+            "category": category,
+            "content_type": content_type,
+            "platforms": ["linkedin", "x"],
+            "estimated_engagement": engagement,
+            "tags": [niche, category],
+            "angles": [f"Approach from a {category} perspective", f"Focus on practical takeaways"],
+            "vote_count": 0,
+            "voted_by": [],
+        })
+    return ideas

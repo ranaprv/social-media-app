@@ -50,6 +50,10 @@ class Settings(BaseSettings):
     AWS_BUCKET_NAME: str = ""
     AWS_REGION: str = "us-east-1"
     
+    # Google Drive
+    GOOGLE_DRIVE_CREDENTIALS_FILE: str = ""
+    GOOGLE_DRIVE_FOLDER_ID: str = ""
+    
     # Email
     SENDGRID_API_KEY: str = ""
     FROM_EMAIL: str = "noreply@socialmediamanager.ai"

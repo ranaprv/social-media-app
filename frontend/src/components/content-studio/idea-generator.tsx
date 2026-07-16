@@ -1,339 +1,293 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
-  Lightbulb,
-  Sparkles,
-  Plus,
-  X,
-  Loader2,
-  Copy,
-  Check,
-  BookOpen,
-  GraduationCap,
-  Newspaper,
-  Megaphone,
-  AlertTriangle,
-  GitCompare,
-  TrendingUp,
-  Target,
-  PenTool,
-  RefreshCw,
+  Lightbulb, Sparkles, Plus, X, Loader2, Copy, Check, RefreshCw,
+  GraduationCap, BookOpen, Newspaper, Megaphone, AlertTriangle,
+  GitCompare, TrendingUp, Target, PenTool, Cpu, Vote, Users,
 } from "lucide-react"
-import type { GeneratedIdea, IdeaCategory, Platform } from "@/types"
 
-const CATEGORIES: { value: IdeaCategory; label: string; icon: React.ElementType; color: string }[] = [
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+
+const CATEGORIES = [
   { value: "educational", label: "Educational", icon: GraduationCap, color: "bg-blue-100 text-blue-700" },
   { value: "tutorials", label: "Tutorials", icon: BookOpen, color: "bg-green-100 text-green-700" },
   { value: "stories", label: "Stories", icon: PenTool, color: "bg-purple-100 text-purple-700" },
   { value: "case-studies", label: "Case Studies", icon: Target, color: "bg-orange-100 text-orange-700" },
-  { value: "product-updates", label: "Product Updates", icon: Megaphone, color: "bg-cyan-100 text-cyan-700" },
-  { value: "industry-news", label: "Industry News", icon: Newspaper, color: "bg-yellow-100 text-yellow-700" },
-  { value: "personal-branding", label: "Personal Branding", icon: TrendingUp, color: "bg-pink-100 text-pink-700" },
   { value: "tips", label: "Tips", icon: Lightbulb, color: "bg-amber-100 text-amber-700" },
   { value: "mistakes", label: "Mistakes", icon: AlertTriangle, color: "bg-red-100 text-red-700" },
   { value: "comparisons", label: "Comparisons", icon: GitCompare, color: "bg-indigo-100 text-indigo-700" },
   { value: "myths", label: "Myths", icon: RefreshCw, color: "bg-teal-100 text-teal-700" },
 ]
 
-const PLATFORM_COLORS: Record<Platform, string> = {
-  linkedin: "bg-blue-600",
-  x: "bg-black",
-  instagram: "bg-gradient-to-r from-purple-500 to-pink-500",
-  facebook: "bg-blue-500",
-  youtube: "bg-red-600",
+interface Idea {
+  id: string
+  title: string
+  description: string
+  category: string
+  content_type: string
+  platforms: string[]
+  estimated_engagement: string
+  tags: string[]
+  angles: string[]
+  vote_count?: number
+  voted_by?: string[]
+}
+
+interface ModelInfo {
+  name: string
+  models: { id: string; name: string; cost_tier: string }[]
 }
 
 export function IdeaGenerator() {
-  const [industry, setIndustry] = useState("")
-  const [keywords, setKeywords] = useState<string[]>([])
-  const [keywordInput, setKeywordInput] = useState("")
-  const [audience, setAudience] = useState("")
-  const [competitors, setCompetitors] = useState<string[]>([])
-  const [competitorInput, setCompetitorInput] = useState("")
-  const [products, setProducts] = useState<string[]>([])
-  const [productInput, setProductInput] = useState("")
-  const [websiteUrl, setWebsiteUrl] = useState("")
-  const [selectedCategories, setSelectedCategories] = useState<IdeaCategory[]>([])
-  const [ideas, setIdeas] = useState<GeneratedIdea[]>([])
+  const [niche, setNiche] = useState("")
+  const [topic, setTopic] = useState("")
+  const [customPrompt, setCustomPrompt] = useState("")
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+  const [count, setCount] = useState(10)
+
+  // Model selection
+  const [availableModels, setAvailableModels] = useState<Record<string, ModelInfo>>({})
+  const [selectedProvider, setSelectedProvider] = useState("openai")
+  const [selectedModel, setSelectedModel] = useState("")
+  const [selectedProviders, setSelectedProviders] = useState<string[]>([])
+  const [useVoting, setUseVoting] = useState(false)
+
+  const [ideas, setIdeas] = useState<Idea[]>([])
   const [loading, setLoading] = useState(false)
   const [copiedId, setCopiedId] = useState<string | null>(null)
   const [expandedIdea, setExpandedIdea] = useState<string | null>(null)
+  const [method, setMethod] = useState("")
+  const [providersUsed, setProvidersUsed] = useState<string[]>([])
 
-  const addToList = (
-    value: string,
-    list: string[],
-    setter: (v: string[]) => void,
-    inputSetter: (v: string) => void,
-  ) => {
-    if (value.trim() && !list.includes(value.trim())) {
-      setter([...list, value.trim()])
-      inputSetter("")
+  useEffect(() => {
+    async function fetchModels() {
+      try {
+        const res = await fetch(`${API_URL}/ai/ideas/models`)
+        if (res.ok) {
+          const data = await res.json()
+          setAvailableModels(data.models || {})
+          // Set default provider
+          const providers = Object.keys(data.models || {})
+          if (providers.length > 0) setSelectedProvider(providers[0])
+        }
+      } catch { /* use defaults */ }
     }
-  }
+    fetchModels()
+  }, [])
 
-  const removeFromList = (
-    index: number,
-    list: string[],
-    setter: (v: string[]) => void,
-  ) => {
-    setter(list.filter((_, i) => i !== index))
-  }
-
-  const toggleCategory = (cat: IdeaCategory) => {
-    setSelectedCategories((prev) =>
-      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]
+  const toggleProvider = (p: string) => {
+    setSelectedProviders((prev) =>
+      prev.includes(p) ? prev.filter((x) => x !== p) : [...prev, p]
     )
   }
 
   const generateIdeas = async () => {
-    if (!industry.trim()) return
+    if (!niche.trim() && !topic.trim()) return
     setLoading(true)
     try {
-      const res = await fetch("/api/ai/ideas/generate", {
+      const body: Record<string, unknown> = {
+        niche: niche || topic,
+        topic,
+        count,
+        custom_prompt: customPrompt,
+      }
+
+      if (useVoting && selectedProviders.length > 1) {
+        body.providers = selectedProviders
+        body.use_voting = true
+      } else {
+        body.provider = selectedProvider
+        body.model = selectedModel || undefined
+      }
+
+      if (selectedCategories.length > 0) {
+        body.categories = selectedCategories
+      }
+
+      const res = await fetch(`${API_URL}/ai/ideas/generate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          industry,
-          keywords,
-          audience,
-          competitors,
-          products,
-          website_url: websiteUrl || null,
-          count: 10,
-          categories: selectedCategories.length > 0 ? selectedCategories : undefined,
-        }),
+        body: JSON.stringify(body),
       })
+
       const data = await res.json()
       setIdeas(data.ideas || [])
+      setMethod(data.method || "")
+      setProvidersUsed(data.providers_used || data.provider ? [data.provider] : [])
     } catch {
-      // Generate client-side placeholder
-      setIdeas(generatePlaceholderIdeas())
+      setIdeas([])
     } finally {
       setLoading(false)
     }
   }
 
-  const generatePlaceholderIdeas = (): GeneratedIdea[] => {
-    const templates = [
-      { title: `How ${industry} is Changing in 2026`, category: "educational" as IdeaCategory, engagement: "high" as const },
-      { title: `Top 5 Mistakes in ${industry}`, category: "mistakes" as IdeaCategory, engagement: "high" as const },
-      { title: `${keywords[0] || "Topic"}: Everything You Need to Know`, category: "tutorials" as IdeaCategory, engagement: "medium" as const },
-      { title: `Case Study: How We Grew with ${keywords[0] || "Strategy"}`, category: "case-studies" as IdeaCategory, engagement: "high" as const },
-      { title: `Myths About ${keywords[0] || industry} Debunked`, category: "myths" as IdeaCategory, engagement: "medium" as const },
-      { title: `Quick Tips for ${keywords[0] || "Beginners"} in ${industry}`, category: "tips" as IdeaCategory, engagement: "medium" as const },
-      { title: `${keywords[0] || "Tool A"} vs ${keywords[1] || "Tool B"}: Which is Better?`, category: "comparisons" as IdeaCategory, engagement: "medium" as const },
-      { title: `Behind the Scenes: Our ${industry} Journey`, category: "stories" as IdeaCategory, engagement: "low" as const },
-      { title: `What's New in ${industry} This Month`, category: "industry-news" as IdeaCategory, engagement: "low" as const },
-      { title: `Building Your Personal Brand in ${industry}`, category: "personal-branding" as IdeaCategory, engagement: "medium" as const },
-    ]
-
-    return templates.map((t, i) => ({
-      id: `idea-${i}`,
-      title: t.title,
-      description: `Create engaging ${t.category} content about ${keywords[0] || industry} targeting ${audience || "professionals"}.`,
-      category: t.category,
-      platforms: ["linkedin", "x"] as Platform[],
-      estimatedEngagement: t.engagement,
-      tags: [keywords[0] || industry, t.category],
-    }))
-  }
-
-  const copyIdea = (idea: GeneratedIdea) => {
-    navigator.clipboard.writeText(`${idea.title}\n\n${idea.description}`)
-    setCopiedId(idea.id)
+  const copyToClipboard = (text: string, id: string) => {
+    navigator.clipboard.writeText(text)
+    setCopiedId(id)
     setTimeout(() => setCopiedId(null), 2000)
   }
 
+  const providers = Object.keys(availableModels)
+  const currentModels = availableModels[selectedProvider]?.models || []
+
   return (
     <div className="space-y-6">
-      {/* Input Form */}
+      {/* Input Panel */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Lightbulb className="h-5 w-5 text-amber-500" />
-            AI Idea Generator
+            <Lightbulb className="h-5 w-5 text-primary" />
+            Niche Idea Generator
           </CardTitle>
           <p className="text-sm text-muted-foreground">
-            Generate content ideas tailored to your industry, audience, and goals.
+            Brainstorm niche-specific content ideas. Focus on a topic, not a broad industry.
           </p>
         </CardHeader>
-        <CardContent className="space-y-5">
-          {/* Industry */}
+        <CardContent className="space-y-4">
+          {/* Niche/Topic Input */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="mb-1 block text-sm font-medium">Niche *</label>
+              <Input
+                placeholder="e.g. sustainable fashion, keto recipes, indie game dev"
+                value={niche}
+                onChange={(e) => setNiche(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-sm font-medium">Specific Topic</label>
+              <Input
+                placeholder="e.g. summer capsule wardrobe on a budget"
+                value={topic}
+                onChange={(e) => setTopic(e.target.value)}
+              />
+            </div>
+          </div>
+
           <div>
-            <label className="text-sm font-medium mb-1.5 block">Industry *</label>
-            <Input
-              placeholder="e.g., SaaS, E-commerce, Health Tech, Finance"
-              value={industry}
-              onChange={(e) => setIndustry(e.target.value)}
+            <label className="mb-1 block text-sm font-medium">Custom Instructions (optional)</label>
+            <textarea
+              className="w-full rounded-lg border bg-background p-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              rows={2}
+              placeholder="Additional context: trending angle, audience detail, content goal..."
+              value={customPrompt}
+              onChange={(e) => setCustomPrompt(e.target.value)}
             />
           </div>
 
-          {/* Keywords */}
-          <div>
-            <label className="text-sm font-medium mb-1.5 block">Keywords</label>
-            <div className="flex gap-2">
-              <Input
-                placeholder="Add a keyword and press Enter"
-                value={keywordInput}
-                onChange={(e) => setKeywordInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault()
-                    addToList(keywordInput, keywords, setKeywords, setKeywordInput)
-                  }
-                }}
-              />
-              <Button
-                type="button"
-                variant="outline"
-                size="icon"
-                onClick={() => addToList(keywordInput, keywords, setKeywords, setKeywordInput)}
-              >
-                <Plus className="h-4 w-4" />
-              </Button>
+          {/* Model Selection */}
+          <div className="rounded-lg border p-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <label className="text-sm font-medium flex items-center gap-2">
+                <Cpu className="h-4 w-4" />
+                AI Model Selection
+              </label>
+              {providers.length > 1 && (
+                <label className="flex items-center gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={useVoting}
+                    onChange={(e) => {
+                      setUseVoting(e.target.checked)
+                      if (e.target.checked && selectedProviders.length === 0) {
+                        setSelectedProviders(providers.slice(0, 2))
+                      }
+                    }}
+                    className="rounded"
+                  />
+                  <Vote className="h-3 w-3" />
+                  Multi-model voting
+                </label>
+              )}
             </div>
-            {keywords.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mt-2">
-                {keywords.map((kw, i) => (
-                  <span
-                    key={i}
-                    className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary"
+
+            {!useVoting ? (
+              /* Single model selection */
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="mb-1 block text-xs text-muted-foreground">Provider</label>
+                  <select
+                    className="w-full rounded-lg border bg-background p-2 text-sm"
+                    value={selectedProvider}
+                    onChange={(e) => {
+                      setSelectedProvider(e.target.value)
+                      setSelectedModel("")
+                    }}
                   >
-                    {kw}
-                    <button onClick={() => removeFromList(i, keywords, setKeywords)}>
-                      <X className="h-3 w-3" />
+                    {providers.map((p) => (
+                      <option key={p} value={p}>{availableModels[p]?.name || p}</option>
+                    ))}
+                    {providers.length === 0 && <option value="openai">OpenAI (configure API key)</option>}
+                  </select>
+                </div>
+                <div>
+                  <label className="mb-1 block text-xs text-muted-foreground">Model</label>
+                  <select
+                    className="w-full rounded-lg border bg-background p-2 text-sm"
+                    value={selectedModel}
+                    onChange={(e) => setSelectedModel(e.target.value)}
+                  >
+                    <option value="">Auto (default)</option>
+                    {currentModels.map((m) => (
+                      <option key={m.id} value={m.id}>{m.name} ({m.cost_tier})</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            ) : (
+              /* Multi-model voting */
+              <div>
+                <label className="mb-2 block text-xs text-muted-foreground">
+                  Select 2+ providers to brainstorm and vote
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {providers.map((p) => (
+                    <button
+                      key={p}
+                      onClick={() => toggleProvider(p)}
+                      className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors ${
+                        selectedProviders.includes(p)
+                          ? "bg-primary text-primary-foreground"
+                          : "border bg-background hover:bg-muted"
+                      }`}
+                    >
+                      {availableModels[p]?.name || p}
+                      {selectedProviders.includes(p) && <Check className="ml-1 inline h-3 w-3" />}
                     </button>
-                  </span>
-                ))}
+                  ))}
+                </div>
+                {selectedProviders.length >= 2 && (
+                  <p className="mt-2 text-xs text-muted-foreground flex items-center gap-1">
+                    <Users className="h-3 w-3" />
+                    {selectedProviders.length} models will brainstorm. Ideas agreed by multiple models rank higher.
+                  </p>
+                )}
               </div>
             )}
           </div>
 
-          {/* Audience */}
+          {/* Categories */}
           <div>
-            <label className="text-sm font-medium mb-1.5 block">Target Audience</label>
-            <Input
-              placeholder="e.g., CTOs, Marketing Managers, Startup Founders"
-              value={audience}
-              onChange={(e) => setAudience(e.target.value)}
-            />
-          </div>
-
-          {/* Competitors */}
-          <div>
-            <label className="text-sm font-medium mb-1.5 block">Competitors</label>
-            <div className="flex gap-2">
-              <Input
-                placeholder="Add competitor name"
-                value={competitorInput}
-                onChange={(e) => setCompetitorInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault()
-                    addToList(competitorInput, competitors, setCompetitors, setCompetitorInput)
-                  }
-                }}
-              />
-              <Button
-                type="button"
-                variant="outline"
-                size="icon"
-                onClick={() => addToList(competitorInput, competitors, setCompetitors, setCompetitorInput)}
-              >
-                <Plus className="h-4 w-4" />
-              </Button>
-            </div>
-            {competitors.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mt-2">
-                {competitors.map((c, i) => (
-                  <span
-                    key={i}
-                    className="inline-flex items-center gap-1 rounded-full bg-secondary/10 px-2.5 py-0.5 text-xs font-medium text-secondary"
-                  >
-                    {c}
-                    <button onClick={() => removeFromList(i, competitors, setCompetitors)}>
-                      <X className="h-3 w-3" />
-                    </button>
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Products */}
-          <div>
-            <label className="text-sm font-medium mb-1.5 block">Products / Services</label>
-            <div className="flex gap-2">
-              <Input
-                placeholder="Add product or service"
-                value={productInput}
-                onChange={(e) => setProductInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault()
-                    addToList(productInput, products, setProducts, setProductInput)
-                  }
-                }}
-              />
-              <Button
-                type="button"
-                variant="outline"
-                size="icon"
-                onClick={() => addToList(productInput, products, setProducts, setProductInput)}
-              >
-                <Plus className="h-4 w-4" />
-              </Button>
-            </div>
-            {products.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mt-2">
-                {products.map((p, i) => (
-                  <span
-                    key={i}
-                    className="inline-flex items-center gap-1 rounded-full bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent"
-                  >
-                    {p}
-                    <button onClick={() => removeFromList(i, products, setProducts)}>
-                      <X className="h-3 w-3" />
-                    </button>
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Website URL */}
-          <div>
-            <label className="text-sm font-medium mb-1.5 block">Website URL</label>
-            <Input
-              placeholder="https://yourcompany.com"
-              value={websiteUrl}
-              onChange={(e) => setWebsiteUrl(e.target.value)}
-              type="url"
-            />
-          </div>
-
-          {/* Category Filter */}
-          <div>
-            <label className="text-sm font-medium mb-2 block">Filter by Categories</label>
+            <label className="mb-2 block text-sm font-medium">Categories</label>
             <div className="flex flex-wrap gap-2">
               {CATEGORIES.map((cat) => {
                 const Icon = cat.icon
-                const isSelected = selectedCategories.includes(cat.value)
+                const active = selectedCategories.includes(cat.value)
                 return (
                   <button
                     key={cat.value}
-                    onClick={() => toggleCategory(cat.value)}
-                    className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
-                      isSelected
-                        ? "bg-primary text-primary-foreground shadow-sm"
-                        : "bg-muted text-muted-foreground hover:bg-muted/80"
+                    onClick={() => setSelectedCategories((prev) =>
+                      active ? prev.filter((c) => c !== cat.value) : [...prev, cat.value]
+                    )}
+                    className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                      active ? cat.color : "border bg-background text-muted-foreground hover:bg-muted"
                     }`}
                   >
-                    <Icon className="h-3.5 w-3.5" />
+                    <Icon className="h-3 w-3" />
                     {cat.label}
                   </button>
                 )
@@ -341,117 +295,128 @@ export function IdeaGenerator() {
             </div>
           </div>
 
-          <Button
-            onClick={generateIdeas}
-            disabled={!industry.trim() || loading}
-            className="w-full gap-2"
-            size="lg"
-          >
-            {loading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <Sparkles className="h-4 w-4" />
-            )}
-            {loading ? "Generating Ideas..." : "Generate Ideas"}
-          </Button>
+          {/* Count + Generate */}
+          <div className="flex items-end gap-4">
+            <div className="w-24">
+              <label className="mb-1 block text-xs text-muted-foreground">Count</label>
+              <Input
+                type="number"
+                min={1}
+                max={20}
+                value={count}
+                onChange={(e) => setCount(Number(e.target.value))}
+              />
+            </div>
+            <Button onClick={generateIdeas} disabled={loading || (!niche && !topic)} className="gap-2">
+              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+              Generate Ideas
+            </Button>
+          </div>
         </CardContent>
       </Card>
 
       {/* Results */}
       {ideas.length > 0 && (
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold">{ideas.length} Ideas Generated</h3>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => {
-                const all = ideas.map((i) => `${i.title}\n${i.description}`).join("\n\n---\n\n")
-                navigator.clipboard.writeText(all)
-              }}
-            >
-              <Copy className="h-4 w-4 mr-1.5" />
-              Copy All
-            </Button>
-          </div>
-
-          <div className="grid gap-3">
-            {ideas.map((idea) => {
-              const catInfo = CATEGORIES.find((c) => c.value === idea.category)
-              const CatIcon = catInfo?.icon || Lightbulb
-              const isExpanded = expandedIdea === idea.id
-
-              return (
-                <Card
-                  key={idea.id}
-                  className="cursor-pointer transition-all hover:shadow-md"
-                  onClick={() => setExpandedIdea(isExpanded ? null : idea.id)}
-                >
-                  <CardContent className="p-4">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1.5">
-                          <span className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium ${catInfo?.color || "bg-gray-100 text-gray-700"}`}>
-                            <CatIcon className="h-3 w-3" />
-                            {catInfo?.label || idea.category}
-                          </span>
-                          <span className={`text-xs font-medium px-1.5 py-0.5 rounded ${
-                            idea.estimatedEngagement === "high"
-                              ? "bg-green-100 text-green-700"
-                              : idea.estimatedEngagement === "medium"
-                              ? "bg-yellow-100 text-yellow-700"
-                              : "bg-gray-100 text-gray-600"
-                          }`}>
-                            {idea.estimatedEngagement} engagement
-                          </span>
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle className="flex items-center gap-2">
+                <Lightbulb className="h-5 w-5 text-yellow-500" />
+                Generated Ideas ({ideas.length})
+              </CardTitle>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                {method === "multi_model_voting" && (
+                  <span className="rounded-full bg-primary/10 px-2 py-1 text-primary">
+                    <Vote className="mr-1 inline h-3 w-3" />
+                    {providersUsed.join(" + ")} voting
+                  </span>
+                )}
+                {method === "single_model" && (
+                  <span className="rounded-full bg-muted px-2 py-1">
+                    <Cpu className="mr-1 inline h-3 w-3" />
+                    {providersUsed[0] || "AI"}
+                  </span>
+                )}
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {ideas.map((idea, i) => {
+                const isExpanded = expandedIdea === idea.id
+                return (
+                  <div key={idea.id} className="rounded-lg border p-4 transition-all hover:shadow-sm">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-xs text-muted-foreground">#{i + 1}</span>
+                          {idea.vote_count !== undefined && idea.vote_count > 0 && (
+                            <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
+                              {idea.vote_count} vote{idea.vote_count > 1 ? "s" : ""}
+                              {idea.voted_by && ` (${idea.voted_by.join(", ")})`}
+                            </span>
+                          )}
+                          <span className="rounded-full bg-muted px-2 py-0.5 text-xs">{idea.category}</span>
+                          {idea.content_type && (
+                            <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs text-primary">{idea.content_type}</span>
+                          )}
+                          <span className={`rounded-full px-2 py-0.5 text-xs ${
+                            idea.estimated_engagement === "high" ? "bg-green-100 text-green-700" :
+                            idea.estimated_engagement === "medium" ? "bg-yellow-100 text-yellow-700" :
+                            "bg-gray-100 text-gray-700"
+                          }`}>{idea.estimated_engagement}</span>
                         </div>
-                        <h4 className="font-medium text-sm">{idea.title}</h4>
-                        {isExpanded && (
-                          <p className="text-sm text-muted-foreground mt-2">{idea.description}</p>
-                        )}
-                        {isExpanded && idea.platforms.length > 0 && (
-                          <div className="flex gap-1.5 mt-2">
-                            {idea.platforms.map((p) => (
-                              <span
-                                key={p}
-                                className={`inline-block w-5 h-5 rounded-full ${PLATFORM_COLORS[p]} opacity-80`}
-                                title={p}
-                              />
+                        <h4 className="font-medium">{idea.title}</h4>
+                        <p className="text-sm text-muted-foreground mt-1">{idea.description}</p>
+                      </div>
+                      <div className="flex items-center gap-1 ml-2">
+                        <Button
+                          variant="ghost" size="sm"
+                          onClick={() => copyToClipboard(idea.title, idea.id)}
+                        >
+                          {copiedId === idea.id ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                        </Button>
+                        <Button
+                          variant="ghost" size="sm"
+                          onClick={() => setExpandedIdea(isExpanded ? null : idea.id)}
+                        >
+                          {isExpanded ? <X className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                        </Button>
+                      </div>
+                    </div>
+
+                    {isExpanded && (
+                      <div className="mt-3 border-t pt-3 space-y-2">
+                        {idea.angles && idea.angles.length > 0 && (
+                          <div>
+                            <p className="text-xs font-medium text-muted-foreground mb-1">Angles:</p>
+                            {idea.angles.map((angle, j) => (
+                              <p key={j} className="text-sm ml-2">• {angle}</p>
                             ))}
                           </div>
                         )}
-                        {isExpanded && idea.tags.length > 0 && (
-                          <div className="flex flex-wrap gap-1 mt-2">
-                            {idea.tags.map((tag, i) => (
-                              <span key={i} className="text-xs text-muted-foreground bg-muted rounded px-1.5 py-0.5">
-                                #{tag}
-                              </span>
+                        {idea.platforms && (
+                          <div className="flex gap-1">
+                            {idea.platforms.map((p) => (
+                              <span key={p} className="rounded bg-muted px-2 py-0.5 text-xs capitalize">{p}</span>
+                            ))}
+                          </div>
+                        )}
+                        {idea.tags && (
+                          <div className="flex flex-wrap gap-1">
+                            {idea.tags.map((t, j) => (
+                              <span key={j} className="rounded-full bg-primary/10 px-2 py-0.5 text-xs text-primary">#{t}</span>
                             ))}
                           </div>
                         )}
                       </div>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 flex-shrink-0"
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          copyIdea(idea)
-                        }}
-                      >
-                        {copiedId === idea.id ? (
-                          <Check className="h-4 w-4 text-green-500" />
-                        ) : (
-                          <Copy className="h-4 w-4" />
-                        )}
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              )
-            })}
-          </div>
-        </div>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </CardContent>
+        </Card>
       )}
     </div>
   )

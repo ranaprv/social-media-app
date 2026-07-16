@@ -1,169 +1,103 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
-  PenTool,
-  Sparkles,
-  Loader2,
-  Copy,
-  Check,
-  RefreshCw,
-  Plus,
-  X,
+  PenTool, Sparkles, Loader2, Copy, Check, Cpu, Save, RefreshCw, Image, Film, FileText,
+  Mic, Layout, MessageSquare, Mail, Video,
 } from "lucide-react"
-import type { Platform, ContentType } from "@/types"
 
-interface PlatformConfig {
-  id: Platform
-  name: string
-  color: string
-  contentTypes: { id: ContentType; label: string }[]
-}
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
 
-const PLATFORMS: PlatformConfig[] = [
-  {
-    id: "linkedin",
-    name: "LinkedIn",
-    color: "bg-blue-600",
-    contentTypes: [
-      { id: "post", label: "Post" },
-      { id: "carousel", label: "Carousel" },
-      { id: "poll", label: "Poll" },
-      { id: "article", label: "Article" },
-    ],
-  },
-  {
-    id: "x",
-    name: "X (Twitter)",
-    color: "bg-black",
-    contentTypes: [
-      { id: "tweet", label: "Tweet" },
-      { id: "thread", label: "Thread" },
-    ],
-  },
-  {
-    id: "instagram",
-    name: "Instagram",
-    color: "bg-gradient-to-r from-purple-500 to-pink-500",
-    contentTypes: [
-      { id: "reel", label: "Reel Script" },
-      { id: "carousel-copy", label: "Carousel Copy" },
-      { id: "caption", label: "Caption" },
-    ],
-  },
-  {
-    id: "facebook",
-    name: "Facebook",
-    color: "bg-blue-500",
-    contentTypes: [
-      { id: "post", label: "Post" },
-      { id: "story", label: "Story" },
-    ],
-  },
-  {
-    id: "youtube",
-    name: "YouTube",
-    color: "bg-red-600",
-    contentTypes: [
-      { id: "short-script", label: "Shorts Script" },
-      { id: "long-script", label: "Long Video Script" },
-      { id: "title", label: "Title" },
-      { id: "description", label: "Description" },
-      { id: "chapter", label: "Chapters" },
-      { id: "tags", label: "Tags" },
-    ],
-  },
+const CONTENT_TYPES = [
+  { id: "image", label: "Image Prompt", icon: Image, color: "bg-pink-100 text-pink-700" },
+  { id: "carousel", label: "Carousel", icon: Layout, color: "bg-purple-100 text-purple-700" },
+  { id: "article", label: "Article", icon: FileText, color: "bg-blue-100 text-blue-700" },
+  { id: "linkedin_post", label: "LinkedIn Post", icon: MessageSquare, color: "bg-blue-600 text-white" },
+  { id: "short_video", label: "Short Video", icon: Video, color: "bg-red-100 text-red-700" },
+  { id: "long_video", label: "Long Video", icon: Film, color: "bg-orange-100 text-orange-700" },
+  { id: "reel", label: "Reel", icon: Mic, color: "bg-gradient-to-r from-purple-500 to-pink-500 text-white" },
+  { id: "tweet_thread", label: "X Thread", icon: MessageSquare, color: "bg-gray-900 text-white" },
 ]
 
-const TONES = [
-  "Professional", "Casual", "Humorous", "Inspirational",
-  "Educational", "Provocative", "Empathetic", "Authoritative",
-  "Friendly", "Urgent",
-]
-
-const LENGTHS = [
-  { value: "short", label: "Short", desc: "Under 100 words" },
-  { value: "medium", label: "Medium", desc: "100-250 words" },
-  { value: "long", label: "Long", desc: "250-500 words" },
-]
+const PLATFORMS = ["linkedin", "x", "instagram", "facebook", "youtube"]
+const TONES = ["professional", "casual", "humorous", "inspirational", "educational", "provocative", "storytelling"]
+const LENGTHS = ["short", "medium", "long"]
 
 export function ContentGenerator() {
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform>("linkedin")
-  const [contentType, setContentType] = useState<ContentType>("post")
+  const [contentType, setContentType] = useState("linkedin_post")
+  const [platform, setPlatform] = useState("linkedin")
   const [topic, setTopic] = useState("")
-  const [tone, setTone] = useState("Professional")
-  const [length, setLength] = useState<"short" | "medium" | "long">("medium")
-  const [keywords, setKeywords] = useState<string[]>([])
-  const [keywordInput, setKeywordInput] = useState("")
-  const [additionalContext, setAdditionalContext] = useState("")
+  const [tone, setTone] = useState("professional")
+  const [length, setLength] = useState("medium")
+  const [keywords, setKeywords] = useState("")
+  const [customPrompt, setCustomPrompt] = useState("")
 
-  const [generatedContent, setGeneratedContent] = useState("")
-  const [generatedHashtags, setGeneratedHashtags] = useState<string[]>([])
-  const [suggestions, setSuggestions] = useState<string[]>([])
+  // Model selection
+  const [availableModels, setAvailableModels] = useState<Record<string, { name: string; models: { id: string; name: string }[] }>>({})
+  const [selectedProvider, setSelectedProvider] = useState("openai")
+  const [selectedModel, setSelectedModel] = useState("")
+
+  // Result
+  const [result, setResult] = useState<{ content: string; hashtags: string[]; drive_url: string | null } | null>(null)
   const [loading, setLoading] = useState(false)
   const [copied, setCopied] = useState(false)
-  const [variations, setVariations] = useState<string[]>([])
 
-  const platformConfig = PLATFORMS.find((p) => p.id === selectedPlatform)
+  useEffect(() => {
+    async function fetchModels() {
+      try {
+        const res = await fetch(`${API_URL}/ai/models`)
+        if (res.ok) {
+          const data = await res.json()
+          setAvailableModels(data.models || {})
+          const providers = Object.keys(data.models || {})
+          if (providers.length > 0) setSelectedProvider(providers[0])
+        }
+      } catch { /* use defaults */ }
+    }
+    fetchModels()
+  }, [])
 
-  const generateContent = async () => {
+  const generate = async () => {
     if (!topic.trim()) return
     setLoading(true)
     try {
-      const res = await fetch("/api/ai/generate?workspace_id=default", {
+      const res = await fetch(`${API_URL}/ai/generate-content`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          platform: selectedPlatform,
           content_type: contentType,
           topic,
+          platform,
+          provider: selectedProvider,
+          model: selectedModel || undefined,
+          custom_prompt: customPrompt,
           tone,
+          keywords: keywords.split(",").map((k) => k.trim()).filter(Boolean),
           length,
-          keywords,
-          additional_context: additionalContext,
         }),
       })
       const data = await res.json()
-      setGeneratedContent(data.content || "")
-      setGeneratedHashtags(data.hashtags || [])
-      setSuggestions(data.suggestions || [])
-      setVariations(data.variations || [])
+      setResult(data)
     } catch {
-      setGeneratedContent(generatePlaceholder())
-      setGeneratedHashtags([
-        `#${topic.split(" ")[0] || "Content"}`,
-        "#SocialMedia",
-        "#Marketing",
-      ])
-      setSuggestions([
-        "Add a compelling call-to-action",
-        "Include relevant emojis for engagement",
-        "Post during peak hours for maximum reach",
-      ])
+      setResult(null)
     } finally {
       setLoading(false)
     }
   }
 
-  const generatePlaceholder = (): string => {
-    const platformSpecific = {
-      linkedin: `🚀 ${topic}\n\nHere's what most people miss about ${topic}:\n\n1. It's not about perfection — it's about consistency\n2. Start with your audience's pain points\n3. Share real results, not theory\n\nThe key insight? ${keywords[0] || topic} works when you focus on providing value first.\n\nWhat's your experience with ${topic}? Drop a comment below 👇\n\n#${(topic.split(" ")[0] || "Topic").replace(/\s/g, "")} #ContentCreation #Growth`,
-      x: `Hot take: ${topic}\n\nMost people get this wrong 👇\n\n🧵 Thread on what actually works:`,
-      instagram: `✨ ${topic} ✨\n\nSave this for later! 📌\n\nHere's everything you need to know:\n\n💬 Comment your thoughts below!\n\n#${(topic.split(" ")[0] || "Topic").replace(/\s/g, "")} #InstaTips #ContentCreator`,
-      facebook: `Hey everyone! 👋\n\nLet's talk about ${topic}.\n\nI've been thinking about this a lot lately, and here's my take:\n\nThe biggest mistake people make is overcomplicating it. Keep it simple, focus on value, and the results will follow.\n\nWhat do you think? Agree or disagree?`,
-      youtube: `🎬 ${topic} - Complete Guide\n\n📝 Description:\nIn this video, we break down everything you need to know about ${topic}. Whether you're a beginner or experienced, this guide covers it all.\n\n⏱️ Chapters:\n0:00 - Introduction\n1:00 - What is ${topic}?\n3:00 - Why it matters\n5:00 - How to get started\n8:00 - Pro tips\n10:00 - Common mistakes\n12:00 - Final thoughts`,
+  const copyContent = () => {
+    if (result?.content) {
+      navigator.clipboard.writeText(result.content)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
     }
-    return platformSpecific[selectedPlatform] || `Content about ${topic}`
   }
 
-  const copyContent = () => {
-    navigator.clipboard.writeText(generatedContent)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+  const providers = Object.keys(availableModels)
+  const currentModels = availableModels[selectedProvider]?.models || []
 
   return (
     <div className="space-y-6">
@@ -171,243 +105,151 @@ export function ContentGenerator() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <PenTool className="h-5 w-5 text-primary" />
-            AI Content Generator
+            Content Engine
           </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            Generate platform-optimized content with AI. Pick your platform, content type, and topic.
-          </p>
+          <p className="text-sm text-muted-foreground">Generate content with AI. Choose content type, model, and topic.</p>
         </CardHeader>
-        <CardContent className="space-y-5">
-          {/* Platform Selector */}
+        <CardContent className="space-y-4">
+          {/* Content Type Selector */}
           <div>
-            <label className="text-sm font-medium mb-2 block">Platform</label>
-            <div className="flex gap-2 flex-wrap">
-              {PLATFORMS.map((p) => (
-                <button
-                  key={p.id}
-                  onClick={() => {
-                    setSelectedPlatform(p.id)
-                    setContentType(p.contentTypes[0].id)
-                  }}
-                  className={`inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all ${
-                    selectedPlatform === p.id
-                      ? "bg-primary text-primary-foreground shadow-sm"
-                      : "bg-muted text-muted-foreground hover:bg-muted/80"
-                  }`}
-                >
-                  <span className={`w-3 h-3 rounded-full ${p.color}`} />
-                  {p.name}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Content Type */}
-          {platformConfig && (
-            <div>
-              <label className="text-sm font-medium mb-2 block">Content Type</label>
-              <div className="flex gap-2 flex-wrap">
-                {platformConfig.contentTypes.map((ct) => (
+            <label className="mb-2 block text-sm font-medium">Content Type *</label>
+            <div className="grid grid-cols-4 gap-2">
+              {CONTENT_TYPES.map((ct) => {
+                const Icon = ct.icon
+                return (
                   <button
                     key={ct.id}
                     onClick={() => setContentType(ct.id)}
-                    className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
+                    className={`flex flex-col items-center gap-1 rounded-lg border p-3 text-xs font-medium transition-all ${
                       contentType === ct.id
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted text-muted-foreground hover:bg-muted/80"
+                        ? "border-primary bg-primary/10 text-primary ring-2 ring-primary/20"
+                        : "bg-background hover:bg-muted"
                     }`}
                   >
+                    <Icon className="h-5 w-5" />
                     {ct.label}
                   </button>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Platform + Tone + Length */}
+          <div className="grid grid-cols-3 gap-4">
+            <div>
+              <label className="mb-1 block text-sm font-medium">Platform</label>
+              <select className="w-full rounded-lg border bg-background p-2 text-sm" value={platform} onChange={(e) => setPlatform(e.target.value)}>
+                {PLATFORMS.map((p) => <option key={p} value={p}>{p.charAt(0).toUpperCase() + p.slice(1)}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="mb-1 block text-sm font-medium">Tone</label>
+              <select className="w-full rounded-lg border bg-background p-2 text-sm" value={tone} onChange={(e) => setTone(e.target.value)}>
+                {TONES.map((t) => <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>)}
+              </select>
+            </div>
+            <div>
+              <label className="mb-1 block text-sm font-medium">Length</label>
+              <div className="flex gap-1">
+                {LENGTHS.map((l) => (
+                  <button key={l} onClick={() => setLength(l)}
+                    className={`flex-1 rounded-lg border px-2 py-1.5 text-xs font-medium ${
+                      length === l ? "border-primary bg-primary/10 text-primary" : "bg-background"
+                    }`}
+                  >{l}</button>
                 ))}
               </div>
             </div>
-          )}
+          </div>
 
           {/* Topic */}
           <div>
-            <label className="text-sm font-medium mb-1.5 block">Topic *</label>
-            <Input
-              placeholder="e.g., 10 Productivity Tips for Remote Teams"
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
-            />
-          </div>
-
-          {/* Tone + Length */}
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="text-sm font-medium mb-2 block">Tone</label>
-              <div className="flex flex-wrap gap-1.5">
-                {TONES.map((t) => (
-                  <button
-                    key={t}
-                    onClick={() => setTone(t)}
-                    className={`rounded-md px-2.5 py-1 text-xs font-medium transition-all ${
-                      tone === t
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted text-muted-foreground hover:bg-muted/80"
-                    }`}
-                  >
-                    {t}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div>
-              <label className="text-sm font-medium mb-2 block">Length</label>
-              <div className="flex gap-2">
-                {LENGTHS.map((l) => (
-                  <button
-                    key={l.value}
-                    onClick={() => setLength(l.value as "short" | "medium" | "long")}
-                    className={`flex-1 rounded-lg px-3 py-2 text-xs font-medium transition-all text-center ${
-                      length === l.value
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted text-muted-foreground hover:bg-muted/80"
-                    }`}
-                  >
-                    <div>{l.label}</div>
-                    <div className="text-[10px] opacity-75">{l.desc}</div>
-                  </button>
-                ))}
-              </div>
-            </div>
+            <label className="mb-1 block text-sm font-medium">Topic *</label>
+            <Input placeholder="What should the content be about?" value={topic} onChange={(e) => setTopic(e.target.value)} />
           </div>
 
           {/* Keywords */}
           <div>
-            <label className="text-sm font-medium mb-1.5 block">Keywords</label>
-            <div className="flex gap-2">
-              <Input
-                placeholder="Add keyword and press Enter"
-                value={keywordInput}
-                onChange={(e) => setKeywordInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && keywordInput.trim()) {
-                    e.preventDefault()
-                    if (!keywords.includes(keywordInput.trim())) {
-                      setKeywords([...keywords, keywordInput.trim()])
-                    }
-                    setKeywordInput("")
-                  }
-                }}
-              />
-              <Button
-                type="button"
-                variant="outline"
-                size="icon"
-                onClick={() => {
-                  if (keywordInput.trim() && !keywords.includes(keywordInput.trim())) {
-                    setKeywords([...keywords, keywordInput.trim()])
-                    setKeywordInput("")
-                  }
-                }}
-              >
-                <Plus className="h-4 w-4" />
-              </Button>
-            </div>
-            {keywords.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mt-2">
-                {keywords.map((kw, i) => (
-                  <span
-                    key={i}
-                    className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary"
-                  >
-                    {kw}
-                    <button onClick={() => setKeywords(keywords.filter((_, idx) => idx !== i))}>
-                      <X className="h-3 w-3" />
-                    </button>
-                  </span>
-                ))}
-              </div>
-            )}
+            <label className="mb-1 block text-sm font-medium">Keywords (comma-separated)</label>
+            <Input placeholder="growth, marketing, strategy" value={keywords} onChange={(e) => setKeywords(e.target.value)} />
           </div>
 
-          {/* Additional Context */}
+          {/* Custom Prompt */}
           <div>
-            <label className="text-sm font-medium mb-1.5 block">Additional Context</label>
+            <label className="mb-1 block text-sm font-medium">Custom Instructions (optional)</label>
             <textarea
-              className="flex min-h-[80px] w-full rounded-lg border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-              placeholder="Any additional context, specific angle, or requirements..."
-              value={additionalContext}
-              onChange={(e) => setAdditionalContext(e.target.value)}
+              className="w-full rounded-lg border bg-background p-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+              rows={3}
+              placeholder="Extra context: include a specific example, reference a competitor, target a sub-audience..."
+              value={customPrompt}
+              onChange={(e) => setCustomPrompt(e.target.value)}
             />
           </div>
 
-          <Button
-            onClick={generateContent}
-            disabled={!topic.trim() || loading}
-            className="w-full gap-2"
-            size="lg"
-          >
-            {loading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <Sparkles className="h-4 w-4" />
-            )}
-            {loading ? "Generating..." : "Generate Content"}
+          {/* Model Selection */}
+          <div className="rounded-lg border p-4 space-y-3">
+            <label className="text-sm font-medium flex items-center gap-2">
+              <Cpu className="h-4 w-4" /> AI Model
+            </label>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="mb-1 block text-xs text-muted-foreground">Provider</label>
+                <select className="w-full rounded-lg border bg-background p-2 text-sm" value={selectedProvider} onChange={(e) => { setSelectedProvider(e.target.value); setSelectedModel(""); }}>
+                  {providers.map((p) => <option key={p} value={p}>{availableModels[p]?.name || p}</option>)}
+                  {providers.length === 0 && <option value="openai">OpenAI (configure API key)</option>}
+                </select>
+              </div>
+              <div>
+                <label className="mb-1 block text-xs text-muted-foreground">Model</label>
+                <select className="w-full rounded-lg border bg-background p-2 text-sm" value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)}>
+                  <option value="">Auto (default)</option>
+                  {currentModels.map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}
+                </select>
+              </div>
+            </div>
+          </div>
+
+          {/* Generate */}
+          <Button onClick={generate} disabled={loading || !topic.trim()} className="w-full gap-2">
+            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+            Generate Content
           </Button>
         </CardContent>
       </Card>
 
-      {/* Generated Content */}
-      {generatedContent && (
+      {/* Result */}
+      {result && (
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle className="text-base">Generated Content</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-primary" />
+                Generated Content
+              </CardTitle>
               <div className="flex gap-2">
-                <Button variant="ghost" size="sm" onClick={generateContent}>
-                  <RefreshCw className="h-4 w-4 mr-1.5" />
-                  Regenerate
+                <Button variant="outline" size="sm" onClick={copyContent} className="gap-1">
+                  {copied ? <Check className="h-3 w-3 text-green-500" /> : <Copy className="h-3 w-3" />}
+                  {copied ? "Copied" : "Copy"}
                 </Button>
-                <Button variant="ghost" size="sm" onClick={copyContent}>
-                  {copied ? (
-                    <Check className="h-4 w-4 mr-1.5 text-green-500" />
-                  ) : (
-                    <Copy className="h-4 w-4 mr-1.5" />
-                  )}
-                  {copied ? "Copied!" : "Copy"}
-                </Button>
+                {result.drive_url && (
+                  <a href={result.drive_url} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" size="sm" className="gap-1">
+                      <Save className="h-3 w-3" /> View on Drive
+                    </Button>
+                  </a>
+                )}
               </div>
             </div>
           </CardHeader>
-          <CardContent>
-            {/* Content Preview */}
-            <div className="rounded-lg border bg-muted/50 p-4 whitespace-pre-wrap text-sm leading-relaxed">
-              {generatedContent}
+          <CardContent className="space-y-4">
+            <div className="rounded-lg border p-4 bg-muted/30">
+              <pre className="whitespace-pre-wrap text-sm font-mono">{result.content}</pre>
             </div>
-
-            {/* Hashtags */}
-            {generatedHashtags.length > 0 && (
-              <div className="mt-4">
-                <h4 className="text-xs font-medium text-muted-foreground mb-2">Hashtags</h4>
-                <div className="flex flex-wrap gap-1.5">
-                  {generatedHashtags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Suggestions */}
-            {suggestions.length > 0 && (
-              <div className="mt-4">
-                <h4 className="text-xs font-medium text-muted-foreground mb-2">Suggestions</h4>
-                <ul className="space-y-1">
-                  {suggestions.map((s, i) => (
-                    <li key={i} className="text-xs text-muted-foreground flex items-start gap-2">
-                      <span className="text-primary mt-0.5">•</span>
-                      {s}
-                    </li>
-                  ))}
-                </ul>
+            {result.hashtags && result.hashtags.length > 0 && (
+              <div className="flex flex-wrap gap-1">
+                {result.hashtags.map((tag, i) => (
+                  <span key={i} className="rounded-full bg-primary/10 px-2 py-0.5 text-xs text-primary">{tag}</span>
+                ))}
               </div>
             )}
           </CardContent>
