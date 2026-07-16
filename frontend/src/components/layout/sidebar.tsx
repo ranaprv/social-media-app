@@ -23,6 +23,8 @@ import {
   Wand2,
   CreditCard,
   Shield,
+  Mail,
+  MessageSquare,
 } from "lucide-react"
 import { useAppStore } from "@/stores/app-store"
 import { Button } from "@/components/ui/button"
@@ -34,6 +36,7 @@ const navigation = [
   { name: "Calendar", href: "/dashboard/calendar", icon: Calendar },
   { name: "Repurpose", href: "/dashboard/repurpose", icon: Repeat },
   { name: "Media", href: "/dashboard/media", icon: Image },
+  { name: "Inbox", href: "/dashboard/inbox", icon: Mail },
   { name: "AI Assistant", href: "/dashboard/ai-assistant", icon: Wand2 },
   { name: "Recommendations", href: "/dashboard/recommendations", icon: Lightbulb },
   { name: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
