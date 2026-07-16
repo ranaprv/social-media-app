@@ -1,5 +1,14 @@
 import { create } from "zustand"
-import type { User, Workspace, Post, Platform, PostStatus } from "@/types"
+import type {
+  User,
+  Workspace,
+  Post,
+  Platform,
+  PostStatus,
+  GeneratedIdea,
+  WritingTool,
+  BrandVoiceConfig,
+} from "@/types"
 
 interface AppState {
   // Auth
@@ -29,6 +38,20 @@ interface AppState {
   sidebarOpen: boolean
   toggleSidebar: () => void
   setSidebarOpen: (open: boolean) => void
+
+  // Content Studio
+  activeStudioTab: "ideas" | "generate" | "tools" | "brand-voice"
+  setActiveStudioTab: (tab: "ideas" | "generate" | "tools" | "brand-voice") => void
+  generatedIdeas: GeneratedIdea[]
+  setGeneratedIdeas: (ideas: GeneratedIdea[]) => void
+  selectedIdeaCategories: string[]
+  setSelectedIdeaCategories: (cats: string[]) => void
+  activeWritingTool: WritingTool
+  setActiveWritingTool: (tool: WritingTool) => void
+  brandVoice: BrandVoiceConfig | null
+  setBrandVoice: (bv: BrandVoiceConfig | null) => void
+  contentStudioLoading: boolean
+  setContentStudioLoading: (loading: boolean) => void
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -65,4 +88,18 @@ export const useAppStore = create<AppState>((set) => ({
   sidebarOpen: true,
   toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
   setSidebarOpen: (open) => set({ sidebarOpen: open }),
+
+  // Content Studio
+  activeStudioTab: "ideas",
+  setActiveStudioTab: (tab) => set({ activeStudioTab: tab }),
+  generatedIdeas: [],
+  setGeneratedIdeas: (ideas) => set({ generatedIdeas: ideas }),
+  selectedIdeaCategories: [],
+  setSelectedIdeaCategories: (cats) => set({ selectedIdeaCategories: cats }),
+  activeWritingTool: "rewrite",
+  setActiveWritingTool: (tool) => set({ activeWritingTool: tool }),
+  brandVoice: null,
+  setBrandVoice: (bv) => set({ brandVoice: bv }),
+  contentStudioLoading: false,
+  setContentStudioLoading: (loading) => set({ contentStudioLoading: loading }),
 }))

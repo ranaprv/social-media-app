@@ -1,5 +1,9 @@
 version: "3.8"
 
+# ContentPilot AI — Docker Compose
+# Usage: docker compose up --build
+# Production: docker compose -f docker-compose.yml up -d
+
 services:
   # PostgreSQL
   postgres:
@@ -17,6 +21,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 512M
 
   # Redis
   redis:
@@ -30,6 +39,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 256M
 
   # Backend API
   backend:
@@ -41,6 +55,11 @@ services:
     environment:
       DATABASE_URL: postgresql+asyncpg://contentpilot:contentpilot_dev@postgres:5432/contentpilot
       REDIS_URL: redis://redis:6379/0
+      SECRET_KEY: ${SECRET_KEY:-change-this-in-production}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
     depends_on:
       postgres:
         condition: service_healthy
@@ -49,6 +68,11 @@ services:
     volumes:
       - ./backend:/app
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
 
   # Frontend
   frontend:
@@ -64,7 +88,13 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+      - /app/.next
     command: npm run dev
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 1G
 
 volumes:
   postgres_data:

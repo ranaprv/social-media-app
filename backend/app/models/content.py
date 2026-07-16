@@ -108,7 +108,10 @@ class BrandVoice(Base):
     emoji_usage = Column(String)
     formatting = Column(String)
     vocabulary = Column(String)
+    technical_depth = Column(String)
     sample_posts = Column(ARRAY(String), default=[])
+    training_sources = Column(JSON, default=[])
+    approval_history = Column(JSON, default=[])
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     

@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { DashboardLayout } from "@/components/layout/dashboard-layout"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -160,19 +161,21 @@ export default function DashboardPage() {
 
         {/* Quick Actions */}
         <div className="grid gap-4 md:grid-cols-3">
-          <Card className="cursor-pointer transition-all hover:shadow-lg">
-            <CardContent className="flex items-center gap-4 p-6">
-              <div className="rounded-lg bg-primary/10 p-3">
-                <PenTool className="h-6 w-6 text-primary" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Create Content</h3>
-                <p className="text-sm text-muted-foreground">
-                  Generate AI-powered posts
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+          <Link href="/dashboard/content-studio">
+            <Card className="cursor-pointer transition-all hover:shadow-lg">
+              <CardContent className="flex items-center gap-4 p-6">
+                <div className="rounded-lg bg-primary/10 p-3">
+                  <PenTool className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">Create Content</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Generate AI-powered posts
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
 
           <Card className="cursor-pointer transition-all hover:shadow-lg">
             <CardContent className="flex items-center gap-4 p-6">

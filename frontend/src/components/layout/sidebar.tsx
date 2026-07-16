@@ -18,23 +18,31 @@ import {
   Bell,
   ChevronLeft,
   ChevronRight,
+  Sparkles,
+  Lightbulb,
+  Wand2,
+  CreditCard,
+  Shield,
 } from "lucide-react"
 import { useAppStore } from "@/stores/app-store"
 import { Button } from "@/components/ui/button"
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Content Studio", href: "/dashboard/content-studio", icon: Sparkles },
   { name: "Research", href: "/dashboard/research", icon: Search },
-  { name: "Content", href: "/dashboard/content", icon: PenTool },
   { name: "Calendar", href: "/dashboard/calendar", icon: Calendar },
   { name: "Repurpose", href: "/dashboard/repurpose", icon: Repeat },
-  { name: "Images", href: "/dashboard/images", icon: Image },
-  { name: "Video", href: "/dashboard/video", icon: Video },
+  { name: "Media", href: "/dashboard/media", icon: Image },
+  { name: "AI Assistant", href: "/dashboard/ai-assistant", icon: Wand2 },
+  { name: "Recommendations", href: "/dashboard/recommendations", icon: Lightbulb },
   { name: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
   { name: "Team", href: "/dashboard/team", icon: Users },
 ]
 
 const bottomNavigation = [
+  { name: "Billing", href: "/dashboard/billing", icon: CreditCard },
+  { name: "Security", href: "/dashboard/security", icon: Shield },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ]
 
