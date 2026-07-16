@@ -9,6 +9,8 @@ from app.api import (
     repurpose, calendar, scheduler_api, team, media,
     analytics, billing, security_api, recommendations, ai_media,
     webhooks, research, bulk_scheduler, inbox, listening,
+    automation, tasks, competitors, reports, ads, web_analytics,
+    approvals, advocacy, ai_workflow,
 )
 
 settings = get_settings()
@@ -78,6 +80,15 @@ app.include_router(research.router, prefix="/api")
 app.include_router(bulk_scheduler.router, prefix="/api")
 app.include_router(inbox.router, prefix="/api")
 app.include_router(listening.router, prefix="/api")
+app.include_router(automation.router, prefix="/api")
+app.include_router(tasks.router, prefix="/api")
+app.include_router(competitors.router, prefix="/api")
+app.include_router(reports.router, prefix="/api")
+app.include_router(ads.router, prefix="/api")
+app.include_router(web_analytics.router, prefix="/api")
+app.include_router(approvals.router, prefix="/api")
+app.include_router(advocacy.router, prefix="/api")
+app.include_router(ai_workflow.router, prefix="/api")
 
 
 @app.get("/api/health")

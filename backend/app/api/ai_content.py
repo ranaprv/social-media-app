@@ -9,7 +9,8 @@ from app.core.database import get_db
 from app.core.security import get_current_user
 from app.core.config import get_settings
 from app.models.user import User
-from app.models.workspace import WorkspaceMember, BrandVoice
+from app.models.workspace import WorkspaceMember
+from app.models.content import BrandVoice
 from app.services.llm import call_llm, call_llm_json, get_available_models
 from app.services.google_drive import drive_service
 
@@ -105,7 +106,7 @@ async def generate_content(
     if tone:
         prompt_parts.append(f"Tone: {tone}")
     if keywords:
-        prompt_parts.append(f"Keywords to include: {', ',  .join(keywords)}")
+        prompt_parts.append(f"Keywords to include: {', '.join(keywords)}")
     if custom_prompt:
         prompt_parts.append(f"Additional instructions: {custom_prompt}")
     if brand_voice:

@@ -10,6 +10,7 @@ from app.models.content import (
     Asset,
     Activity,
 )
+from app.models.ai_workflow import ContentItem, PlatformPost, PlatformAnalytics, PlatformProviderConfig
 
 __all__ = [
     "User",
@@ -25,4 +26,8 @@ __all__ = [
     "BrandVoice",
     "Asset",
     "Activity",
+    "ContentItem",
+    "PlatformPost",
+    "PlatformAnalytics",
+    "PlatformProviderConfig",
 ]
