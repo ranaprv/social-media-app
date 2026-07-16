@@ -3,7 +3,10 @@ import Google from "next-auth/providers/google"
 import GitHub from "next-auth/providers/github"
 import Credentials from "next-auth/providers/credentials"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
+// Server-side: use Docker service name (AUTH_API_URL) if available, fallback to NEXT_PUBLIC
+const SERVER_API_URL = process.env.AUTH_API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+// Client-side: use NEXT_PUBLIC_API_URL
+const CLIENT_API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -25,7 +28,7 @@ export const authOptions: AuthOptions = {
         if (!credentials?.email || !credentials?.password) return null
 
         try {
-          const res = await fetch(`${API_URL}/auth/login`, {
+          const res = await fetch(`${SERVER_API_URL}/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -47,7 +50,7 @@ export const authOptions: AuthOptions = {
             accessToken: data.access_token,
           }
         } catch (error) {
-          console.error("[Auth] Backend unreachable:", API_URL, error)
+          console.error("[Auth] Backend unreachable:", SERVER_API_URL, error)
           return null
         }
       },
