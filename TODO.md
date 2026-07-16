@@ -497,6 +497,32 @@
 
 ---
 
+## Bug Fixes
+
+### TASK-030: Fix "Research" Page 404
+**Problem:** Sidebar links to `/dashboard/research` but the page and backend API endpoint don't exist. Clicking "Research" in sidebar shows 404.
+**Root cause:** Navigation entry exists in `sidebar.tsx` line 33 (`href: "/dashboard/research"`), but no `research/page.tsx` file was created and no backend `/api/research` router exists.
+**Subtasks:**
+- [ ] **030a** Create `frontend/src/app/dashboard/research/page.tsx` — research page with industry/keyword input, trend search, competitor analysis, content ideas
+- [ ] **030b** Create `backend/app/api/research.py` — endpoints: `POST /api/research/trends` (search trending topics), `POST /api/research/competitors` (analyze competitor content), `POST /api/research/keywords` (keyword research with volume/difficulty)
+- [ ] **030c** Register research router in `backend/app/main.py`
+- [ ] **030d** Add research backend to `backend/app/api/__init__.py` imports
+- [ ] **030e** Wire frontend page to backend API — fetch trends, competitors, keywords
+- [ ] **030f** Add fallback mock data when AI API key not configured
+- [ ] **030g** Verify build passes: `npm run build` and sidebar link works
+
+**Files to create:** `frontend/src/app/dashboard/research/page.tsx`, `backend/app/api/research.py`
+**Files to modify:** `backend/app/main.py`, `backend/app/api/__init__.py`
+
+**Acceptance criteria:**
+- Clicking "Research" in sidebar loads the research page (no 404)
+- Research page has input for industry/keywords
+- Trend search returns results (AI-powered or mock)
+- Competitor analysis returns content suggestions
+- Keyword research shows volume and difficulty scores
+
+---
+
 ## Task Dependency Graph
 
 ```
@@ -534,7 +560,7 @@ TASK-012 (Analytics) — depends on TASK-006 (publishing), TASK-002 (schema)
 | Missing Features (Analytics) | 3 | 19 | ~2 weeks |
 | Missing Features (Team) | 2 | 14 | ~1.5 weeks |
 | **Feature Audit Total** | **14** | **109** | **~10.5 weeks** |
-| **Grand Total** | **29** | **227** | **~18.5 weeks** |
+| **Grand Total** | **30** | **234** | **~19 weeks** |
 
 ---
 
