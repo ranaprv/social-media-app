@@ -8,7 +8,7 @@ from app.api import (
     ai_content, ai_ideas, ai_writing_tools, ai_brand_voice,
     repurpose, calendar, scheduler_api, team, media,
     analytics, billing, security_api, recommendations, ai_media,
-    webhooks, research, bulk_scheduler, inbox,
+    webhooks, research, bulk_scheduler, inbox, listening,
 )
 
 settings = get_settings()
@@ -77,6 +77,7 @@ app.include_router(webhooks.router, prefix="/api")
 app.include_router(research.router, prefix="/api")
 app.include_router(bulk_scheduler.router, prefix="/api")
 app.include_router(inbox.router, prefix="/api")
+app.include_router(listening.router, prefix="/api")
 
 
 @app.get("/api/health")

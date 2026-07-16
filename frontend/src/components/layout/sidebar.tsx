@@ -37,6 +37,7 @@ const navigation = [
   { name: "Repurpose", href: "/dashboard/repurpose", icon: Repeat },
   { name: "Media", href: "/dashboard/media", icon: Image },
   { name: "Inbox", href: "/dashboard/inbox", icon: Mail },
+  { name: "Listening", href: "/dashboard/listening", icon: Search },
   { name: "AI Assistant", href: "/dashboard/ai-assistant", icon: Wand2 },
   { name: "Recommendations", href: "/dashboard/recommendations", icon: Lightbulb },
   { name: "Analytics", href: "/dashboard/analytics", icon: BarChart3 },
