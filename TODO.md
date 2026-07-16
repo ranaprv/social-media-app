@@ -366,4 +366,6 @@ TASK-012 (Analytics) — depends on TASK-006 (publishing), TASK-002 (schema)
 
 **2026-07-16 — P2 Medium:**
 - [x] TASK-009: Frontend UX — ErrorBoundary, Skeleton, Toast system (10 subtasks)
+- [x] TASK-010: Backend quality — logging middleware, sanitizer, pagination (10 subtasks)
 - [x] TASK-011: CI/CD — GitHub Actions CI pipeline, Docker build (8 subtasks)
+- [x] TASK-012: Analytics real data — DB queries, period comparison, Celery collector (10 subtasks)
