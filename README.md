@@ -624,6 +624,30 @@ For detailed architecture documentation, see:
 
 ---
 
+## Documentation
+
+### Tutorials
+- [Getting Started](docs/tutorials/getting-started.md) — From clone to first published post in 20 minutes
+
+### How-to Guides
+- [Connect Social Platforms](docs/how-to/connect-social-platforms.md) — OAuth setup for LinkedIn, X, Instagram, Facebook, YouTube
+- [Generate AI Content](docs/how-to/generate-ai-content.md) — Content generation, writing tools, repurposing
+- [Configure Brand Voice](docs/how-to/configure-brand-voice.md) — Train the AI on your brand's style
+- [Use Analytics Dashboard](docs/how-to/use-analytics-dashboard.md) — Track performance across platforms
+
+### Reference
+- [Architecture](docs/ARCHITECTURE.md) — System architecture and module map
+- [High-Level Design](docs/HLD.md) — System design and data flow
+- [Low-Level Design](docs/LLD.md) — API endpoints, database schema, service interfaces
+- [Specification](docs/SPEC.md) — Technology stack and constraints
+- [Deployment Guide](docs/DEPLOYMENT.md) — Production deployment with Docker
+
+### Product
+- [PRD](docs/PRD.md) — Product requirements
+- [Feature Specs](docs/feature-specs-phase1.md) — Strategy-driven scheduling engine
+
+---
+
 ## License
 
 MIT
