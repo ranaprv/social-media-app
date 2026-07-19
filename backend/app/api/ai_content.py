@@ -73,8 +73,6 @@ async def list_content_models():
 @router.post("/generate-content")
 async def generate_content(
     request: dict,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db),
 ):
     """Generate content using selected model and content type."""
     content_type = request.get("content_type", "linkedin_post")

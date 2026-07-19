@@ -1,0 +1,86 @@
+# AI-Aware Robots.txt for Social Media Manager
+# Controls which AI crawlers can access what content
+
+# ─── Default: Block all crawlers on private paths ───────────────────────────
+User-agent: *
+Disallow: /api/internal/
+Disallow: /api/auth/
+Disallow: /.env
+Disallow: /.git/
+Disallow: /node_modules/
+Allow: /api/docs
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# ─── OpenAI GPTBot ──────────────────────────────────────────────────────────
+User-agent: GPTBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /api/docs
+Allow: /docs/
+Disallow: /api/internal/
+Disallow: /dashboard/private/
+Crawl-delay: 2
+
+# ─── Anthropic ClaudeBot ────────────────────────────────────────────────────
+User-agent: ClaudeBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /api/docs
+Allow: /docs/
+Disallow: /api/internal/
+Crawl-delay: 2
+
+# ─── Perplexity ─────────────────────────────────────────────────────────────
+User-agent: PerplexityBot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /api/docs
+Disallow: /api/internal/
+Crawl-delay: 2
+
+# ─── Google Extended (AI Overviews) ─────────────────────────────────────────
+User-agent: Google-Extended
+Allow: /
+Allow: /llms.txt
+Allow: /docs/
+Disallow: /api/internal/
+Disallow: /dashboard/private/
+
+# ─── Bing (Copilot) ────────────────────────────────────────────────────────
+User-agent: Bingbot
+Allow: /
+Allow: /llms.txt
+Allow: /docs/
+Disallow: /api/internal/
+
+# ─── Common Crawl (used by many AI systems) ─────────────────────────────────
+User-agent: CCBot
+Allow: /
+Allow: /llms.txt
+Disallow: /api/internal/
+Disallow: /dashboard/private/
+Crawl-delay: 5
+
+# ─── Applebot (Siri/Apple Intelligence) ─────────────────────────────────────
+User-agent: Applebot
+Allow: /
+Allow: /llms.txt
+Disallow: /api/internal/
+
+# ─── Blocking harmful bots ──────────────────────────────────────────────────
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# ─── Sitemaps ───────────────────────────────────────────────────────────────
+Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://your-domain.com/sitemap-llms.txt

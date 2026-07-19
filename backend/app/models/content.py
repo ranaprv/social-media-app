@@ -27,6 +27,7 @@ class Post(Base):
     calendar = relationship("ContentCalendar", back_populates="post", uselist=False)
     analytics = relationship("AnalyticsMetric", back_populates="post", cascade="all, delete-orphan")
     versions = relationship("PostVersion", back_populates="post", cascade="all, delete-orphan")
+    platform_targets = relationship("PostPlatform", back_populates="post", cascade="all, delete-orphan")
 
 
 class PostVersion(Base):

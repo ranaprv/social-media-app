@@ -1,0 +1,102 @@
+{
+  "schema_version": "v1",
+  "name": "Social Media Manager",
+  "description": "AI-powered social media scheduling platform. Schedule posts to LinkedIn, X/Twitter, Facebook, Instagram, and YouTube. Generate content with AI, A/B test, track analytics.",
+  "version": "1.0.0",
+  "logo_url": "/globe.svg",
+  "contact_email": "support@socialmediamanager.ai",
+  "legal_url": "/legal",
+  "api": {
+    "type": "openapi",
+    "url": "/api/docs/openapi.json",
+    "is_user_authenticated": true
+  },
+  "auth": {
+    "type": "bearer",
+    "description": "JWT token from POST /api/auth/login",
+    "instructions": "Login with email/password to get access_token, then use Authorization: Bearer <token>"
+  },
+  "capabilities": [
+    {
+      "name": "content-scheduling",
+      "description": "Schedule social media posts across 5 platforms with per-platform customization",
+      "endpoints": ["/api/scheduler/schedule", "/api/scheduler/queue"]
+    },
+    {
+      "name": "multi-platform-publishing",
+      "description": "Publish to LinkedIn, X/Twitter, Facebook, Instagram, YouTube with real API integration",
+      "endpoints": ["/api/scheduler/health", "/api/scheduler/rate-limits"]
+    },
+    {
+      "name": "ai-content-generation",
+      "description": "Generate captions, hashtags, calendars, and adapt content per platform using AI",
+      "endpoints": ["/api/scheduler/captions/generate", "/api/scheduler/hashtags/generate", "/api/scheduler/calendar/generate"]
+    },
+    {
+      "name": "analytics",
+      "description": "Track cross-platform engagement, forecast performance, analyze cohorts",
+      "endpoints": ["/api/analytics/dashboard", "/api/scheduler/analytics/cross-platform", "/api/scheduler/forecast"]
+    },
+    {
+      "name": "a-b-testing",
+      "description": "Create content variants, auto-select winners by engagement metrics",
+      "endpoints": ["/api/scheduler/ab-test/create", "/api/scheduler/ab-test/{id}/results"]
+    },
+    {
+      "name": "content-recycling",
+      "description": "Automatically reschedule top-performing posts",
+      "endpoints": ["/api/scheduler/recycle/top-performers", "/api/scheduler/recycle/auto"]
+    },
+    {
+      "name": "approval-workflows",
+      "description": "Multi-stage approval before publishing",
+      "endpoints": ["/api/scheduler/approval/request", "/api/scheduler/approval/pending"]
+    },
+    {
+      "name": "social-listening",
+      "description": "Monitor brand mentions and sentiment across platforms",
+      "endpoints": ["/api/scheduler/listening/scan"]
+    },
+    {
+      "name": "content-repurposing",
+      "description": "Transform content across formats (blog → thread → carousel → reel)",
+      "endpoints": ["/api/scheduler/repurpose"]
+    },
+    {
+      "name": "bulk-operations",
+      "description": "Schedule, cancel, or update multiple posts at once",
+      "endpoints": ["/api/scheduler/bulk/schedule", "/api/scheduler/bulk/cancel"]
+    }
+  ],
+  "platforms": ["linkedin", "x", "instagram", "facebook", "youtube"],
+  "openapi_spec_url": "/api/docs/openapi.json",
+  "examples": [
+    {
+      "description": "Schedule a post to LinkedIn and X",
+      "request": {
+        "method": "POST",
+        "url": "/api/scheduler/schedule",
+        "body": {
+          "post_id": "post-123",
+          "platforms": [
+            {"platform": "linkedin", "caption": "Custom LinkedIn text"},
+            {"platform": "x", "caption": "Short X version"}
+          ],
+          "default_scheduled_at": "2026-07-20T10:00:00Z"
+        }
+      }
+    },
+    {
+      "description": "Generate AI captions for multiple platforms",
+      "request": {
+        "method": "POST",
+        "url": "/api/scheduler/captions/generate-multi",
+        "body": {
+          "topic": "5 tips for content marketing",
+          "platforms": ["linkedin", "x", "instagram"],
+          "tone": "professional"
+        }
+      }
+    }
+  ]
+}

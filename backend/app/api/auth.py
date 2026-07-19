@@ -29,7 +29,7 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 
 # In-memory rate limiting for auth endpoints
 _auth_attempts: dict[str, list[float]] = {}
-AUTH_RATE_LIMIT = 5  # max attempts
+AUTH_RATE_LIMIT = 20  # max attempts
 AUTH_RATE_WINDOW = 900  # 15 minutes in seconds
 
 

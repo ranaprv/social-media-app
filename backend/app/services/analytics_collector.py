@@ -210,10 +210,11 @@ async def _fetch_facebook(token: str) -> list[dict]:
 
 
 async def _fetch_youtube(token: str) -> list[dict]:
-    """Fetch YouTube video statistics via Data API v3."""
+    """Fetch YouTube video statistics via Data API v3 — uses OAuth bearer token."""
     metrics = []
     try:
         async with httpx.AsyncClient() as client:
+            # Use Authorization header (OAuth), not key parameter
             resp = await client.get(
                 "https://www.googleapis.com/youtube/v3/search",
                 params={
@@ -221,7 +222,9 @@ async def _fetch_youtube(token: str) -> list[dict]:
                     "forMine": "true",
                     "type": "video",
                     "maxResults": "50",
-                    "key": token,  # YouTube uses API key
+                },
+                headers={
+                    "Authorization": f"Bearer {token}",
                 },
             )
             if resp.status_code == 200:
@@ -230,9 +233,11 @@ async def _fetch_youtube(token: str) -> list[dict]:
                     stats_resp = await client.get(
                         "https://www.googleapis.com/youtube/v3/videos",
                         params={
-                            "part": "statistics",
+                            "part": "statistics,contentDetails",
                             "id": ",".join(video_ids[:50]),
-                            "key": token,
+                        },
+                        headers={
+                            "Authorization": f"Bearer {token}",
                         },
                     )
                     if stats_resp.status_code == 200:
@@ -248,6 +253,10 @@ async def _fetch_youtube(token: str) -> list[dict]:
                                 "shares": 0,
                                 "clicks": int(stats.get("favoriteCount", 0)),
                             })
+            elif resp.status_code == 401:
+                logger.warning("YouTube analytics: OAuth token expired or invalid")
+            else:
+                logger.warning("YouTube analytics search failed: %s %s", resp.status_code, resp.text[:200])
     except Exception as e:
         logger.error(f"YouTube API error: {e}")
     return metrics

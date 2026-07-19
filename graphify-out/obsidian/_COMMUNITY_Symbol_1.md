@@ -1,0 +1,370 @@
+---
+type: community
+cohesion: 0.01
+members: 307
+---
+
+# [Symbol
+
+**Cohesion:** 0.01 - loosely connected
+**Members:** 307 nodes
+
+## Members
+- [[IMPORTANT We use the null vs Map distinction to track whether_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[LoadingBoundaryProvider()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[NOTE An exception is rewritesredirects in middleware or proxy, which can_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[NOTE It's possible for one of the requests to fail with SoftRetry_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[NOTE We don't care about Suspense above body here,_3]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[NOTE We don't currently propagate the reason the prefetch was canceled_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[NOTE We don't need to worry about eviction in this case because we_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[NOTE We receive the FlightRouterState patch in the same request as the_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[NOTE this happens outside of render, so we don't need `trackMissingSampleErrorA_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[RenderFromTemplateContext()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[SegmentStateProvider()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[SegmentViewStateNode()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Add `forbidden` docs_2]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Add `unauthorized` docs_2]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Also check if there's an in-progress navigation. We should never_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO An alternative could be to trigger a soft refresh but to _not__5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO As an extra precaution against soft retry loops, consider_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Cheating the type system here a bit because TypeScript can't tell_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Consider encoding this directly into the router tree instead of_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Consider reserving some amount of bandwidth for static prefetches._5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Consider treating the case where fetch is rewritten to a different_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Create a scoped dynamic request tree that omits anything that_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Eventually, FlightRouterState will evolve to being a transport format_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Eventually, the param values will not be included in the response_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Explicitly import from client.browser_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO For LoadingBoundary, and the other built-in boundary types, don't_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO For now, since this is an edge case, we reject the prefetch, but_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO For simplicity, we should combine this provider with LoadingBoundary_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Get rid of this extra traversal by computing this during the_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO I chose the max size somewhat arbitrarily. Consider setting this based_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Ideally this check would happen right before we schedule the React_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO If PPR is enabled on some routes but not others, then it's possible_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO If this is a gesture navigation, instead of performing a_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO In output export mode, the headers do nothing. Omit them (and the_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Instead of a refetch marker, we could just omit this subtree's_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Instead of speculatively revalidating, consider including_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Investigate re-enabling this._5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Investigate why the loader produces these fake page segments._5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Log a deprecation error when this object is accessed_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO None of the rest of these values are consistent with the incoming_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Once we implement Fallback behavior for params, where an entry is_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Once we start tracking backforward history at each route level,_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Rather than create a new list object just to access the cache, the_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Refactor or remove this helper function to accept a string rather_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Remove this check once the old PPR flag is removed_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Rename dynamic - runtime throughout this module_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO The `closed` promise was originally used to track when a streaming_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO The canonical URL is the href without the origin. I think_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO The eventual plan is to get rid of our custom request headers and_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO The loading module data for a segment is stored on the_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO The only thing this is used for is to create a cache key for_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO There are multiple reasons a prefetch might be rejected; we should_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO There are multiple strategies in the Link API for prefetching_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO There are too many intermediate stream transformations in the_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO There is an existing case where the global not found boundary_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO There's nothing inherently special about the empty search string;_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO This breaks if sourcemaps with ignore lists are enabled._2]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO This is a leftover branch from before Client Segment Cache was_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO This is a temporary solution; the plan is to replace this by adding_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO This is not modeled clearly. We use the same type,_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO This needs to happen in the Flight Client._5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO This should never happen. Bail out with null._5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO This should only be reachable if legacy PPR is enabled (i.e. PPR_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO This similar to what apply-router-state-patch-to-tree does. It_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Throw error if trying to set a cookie after the response_2]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Treat this as an upsert — should check if an entry already_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Unify these two segment path helpers. We are inconsistently pushing an emp_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO Unlike path params, we don't vary track each search param_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We can consolidate this branch with previous one by modeling_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We can optimize Next.js's built-in middleware APIs by returning a_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We can probably optimize the format of this data structure to only_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We could store interception behavior in the known route tree itself_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We currently observeunobserve a form every time its href changes._5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We don't need to store the head on the page segment's CacheNode; we_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We need to restore previousNextUrl, too, which represents the_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We should be able to read this from the rewrite header, not the_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We should cache the fact that this is an MPA navigation._5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We should hoist the search params out of the FlightRouterState_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We should just pass the array directly, rather than concatenate_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We should move search params out of FlightRouterState and handle_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We should not upsert an entry if its key was invalidated in the time_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We should probably also manually abort the fetch task, to reclaim_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We should probably model this by changing the key of the root_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We should probably refresh the entire route when this case occurs,_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We should store this field on the CacheNode itself. I think we can_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We will unify the responses eventually. I'm keeping the types_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We're intentionally not adding the search param to page_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO We're not consistent about how we do this check. Some places_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO When optimistic routing is enabled, don't block on waiting for_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO When performing a lookup during a navigation, as opposed to a_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[TODO maybe we can give a more precise error message based on callingExpression_2]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[Symbol.for(edge-runtime.inspect.custom)()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[Symbol.iterator()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_OverloadYield()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_arrayLikeToArray()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_arrayWithHoles()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_assertThisInitialized()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_classCallCheck()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_construct()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_export()_9]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_getPrototypeOf()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_inherits()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_interopRequireDefault()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_isNativeFunction()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_iterableToArrayLimit()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_nonIterableRest()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_regenerator()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_regeneratorAsyncGen()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_regeneratorDefine()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_regeneratorRuntime()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_setPrototypeOf()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_slicedToArray()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[_unsupportedIterableToArray()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[accessedDynamicData()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[accumulateRootVaryParam()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[accumulateVaryParam()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[addErrorContext()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[addSearchParamsIfPageSegment()_8]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[addSegmentPathToUrlInOutputExportMode()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[annotateDynamicAccess()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[appendLayoutVaryPath()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[areCookiesMutableInCurrentPhase()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[assertRootParamInSamples()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[atLeastOneTask()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[callServer()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[canonicalizeURLPart()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[cleanup()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[clonePageVaryPathWithNewSearchParams()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[collectInlinedEntries()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[collectInlinedEntriesImpl()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[compareAppPaths()_8]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[completeTraverseNavigation()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[computeClientCacheBustingSearchParam()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[computeDynamicStaleAt()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[computeSelectedLayoutSegment()_8]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[consumeDynamicAccess()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[convertRouteTreeToFlightRouterState()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createCacheKey()_6]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createCacheMap()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createCookiesWithMutableAccessCheck()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createDraftModeForValidation()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createDynamicTrackingState()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createDynamicValidationState()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createExhaustiveURLSearchParamsProxy()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createHrefFromUrl()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createInitialRSCPayloadFromFallbackPrerender()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createInstantValidationState()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createMissingCookieSampleError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createMissingSearchParamSampleError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createParamsAccessError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createPrerenderSearchParamsForClientPage()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createPromiseWithResolvers()_6]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createRenderInBrowserAbortSignal()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createResponseVaryParamsAccumulator()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createRouterCacheKey()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createSearchAccessError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createSegmentVaryParamsAccumulator()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createValidationSampleTracking()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createVaryParamsAccumulator()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createVaryingParams()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[createVaryingSearchParams()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[deleteFromLru()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[describeHasCheckingStringProperty()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[describeStringPropertyAccess()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[disableSmoothScrollDuringRouteTransition()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[dispatchAppRouterAction()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[dispatchGestureState()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[doesStaticSegmentAppearInURL()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[ensureCleanupIsScheduled()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[ensureCookiesAreStillMutable()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[ensureLeadingSlash()_8]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[extractSourcePageFromFlightRouterState()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[extractSourcePageSegmentsFromFlightRouterState()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[fillInFallbackFlightRouterState()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[fillInFallbackFlightRouterStateImpl()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[finalizeLayoutVaryPath()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[finalizeMetadataVaryPath()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[finalizePageVaryPath()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[finishAccumulatingVaryParams()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[finishSegmentAccumulator()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[forbidden()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[formatDynamicAPIAccesses()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[formatError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[get()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getAccessFallbackErrorTypeByStatus()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getAccessFallbackHTTPStatus()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getAssetToken()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getAssetTokenQuery()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getCacheKeyForDynamicParam()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getDeploymentId()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getDeploymentIdQuery()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getExpectedSampleTracking()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getFirstDynamicReason()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getFlightDataPartsFromPath()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getFulfilledRouteVaryPath()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getLastCommittedTree()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getLinkForCurrentNavigation()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getMetadataVaryParamsAccumulator()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getMetadataVaryParamsThenable()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getNavigationBuildId()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getNavigationDisallowedDynamicReasons()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getNextFlightSegmentPath()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getParamProperties()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getParamValueFromCacheKey()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getPartialLayoutVaryPath()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getPartialPageVaryPath()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getRedirectError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getRedirectStatusCodeFromError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getRedirectTypeFromError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getRenderedSearchFromVaryPath()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getRootParamsVaryParamsAccumulator()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getRouteVaryPath()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getSegmentParam()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getSegmentValue()_8]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getSegmentVaryPathForRequest()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getSelectedLayoutSegmentPath()_8]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getSelectedParams()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getStaticShellDisallowedDynamicReasons()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getURLFromRedirectError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[getVaryParamsThenable()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[handleHardNavError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[handleISRError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[handleIntersect()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[has()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[hasErrorProperty()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[invalidateBfCache()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[invalidateEntirePrefetchCache()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[invalidateRouteCacheEntries()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[invalidateSegmentCacheEntries()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isBailoutToCSRError()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isCatchAll()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isDynamicPostpone()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isDynamicPostponeReason()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isDynamicServerError()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isGroupSegment()_8]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isHTTPAccessFallbackError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isHangingPromiseRejectionError()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isInstantValidationError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isJavaScriptURLString()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isNavigatingToNewRootLayout()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isNextRouterError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isParallelRouteSegment()_8]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isPostpone()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isPrefetchTaskDirty()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isPrerenderInterruptedError()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isRedirectError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isRequestAPICallableInsideAfter()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isStaticGenBailoutError()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[isThenable()_6]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[logDisallowedDynamicError()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[lruPut()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[markRouteEntryAsDynamicRewrite()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[navigateReducer()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[node_modules_1_kmp5-._.js]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[normalizeAppPath()_8]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[normalizeFlightData()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[notFound()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[notifyInvalidationListener()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[onLinkVisibilityChanged()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[parseDynamicParamFromURLPart()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[parseRelativeUrl()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[permanentRedirect()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[pingInvalidationListeners()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[pingVisibleLinks()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[prepareFlightRouterStateForRequest()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[proxyLogger()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[readFromBFCache()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[readFromBFCacheDuringRegularNavigation()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[redirect()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[refreshOnInstantNavigationUnlock()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[renderAppDevOverlay()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[renderPagesDevOverlay()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[setLastCommittedTree()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[setLinkForCurrentNavigation()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[setLogger()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[setNavigationBuildId()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[setSizeInCacheMap()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[size()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[stripClientOnlyDataFromFlightRouterState()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[stripClientOnlyDataFromSegment()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[throwForSearchParamsAccessInUseCache()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[throwIfDisallowedDynamic()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[throwToInterruptStaticGeneration()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[throwWithStaticGenerationBailoutErrorWithDynamicError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[trackAllowedDynamicAccess()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[trackDynamicDataInDynamicRender()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[trackDynamicHoleInNavigation()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[trackDynamicHoleInRuntimeShell()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[trackDynamicHoleInStaticShell()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[trackMissingSampleError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[trackMissingSampleErrorAndThrow()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[trackThrownErrorInNavigation()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[unauthorized()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[unmountLinkForCurrentNavigation()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[unstable_isUnrecognizedActionError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[unstable_rethrow()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[updateBFCacheEntryStaleAt()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[updateLruSize()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[useDynamicSearchParams()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[useNavFailureHandler()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[useRouter()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[useRouterBFCache()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[useSearchParams()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[waitAtLeastOneReactRenderTask()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[waitForSegmentCacheEntry()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[writeHeadToBFCache()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+- [[writeToBFCache()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_1_kmp5-._.js
+
+## Live Query (requires Dataview plugin)
+
+```dataview
+TABLE source_file, type FROM #community/Symbol
+SORT file.name ASC
+```
+
+## Connections to other communities
+- 55 edges to [[_COMMUNITY_unnamed_11]]
+- 44 edges to [[_COMMUNITY_unnamed_21]]
+- 34 edges to [[_COMMUNITY_Acquirelock()]]
+- 34 edges to [[_COMMUNITY_Background()_2]]
+- 32 edges to [[_COMMUNITY_unnamed_28]]
+- 29 edges to [[_COMMUNITY_unnamed_43]]
+- 19 edges to [[_COMMUNITY_Abortpendingcachenode()_8]]
+- 19 edges to [[_COMMUNITY_Adaptererrorhandler()_1]]
+- 12 edges to [[_COMMUNITY_Accountnotlinkederror()_2]]
+- 10 edges to [[_COMMUNITY_Assertpostpone()_2]]
+- 10 edges to [[_COMMUNITY_Createclass()_1]]
+- 10 edges to [[_COMMUNITY_Deletefromcachemap()_3]]
+- 8 edges to [[_COMMUNITY_Attachinvalidationlistener()_7]]
+- 7 edges to [[_COMMUNITY_unnamed_69]]
+- 7 edges to [[_COMMUNITY_Errorsegmentnode()_1]]
+- 6 edges to [[_COMMUNITY_unnamed_103]]
+- 6 edges to [[_COMMUNITY_Getboundarydebugnamefromsegmen_1]]
+- 4 edges to [[_COMMUNITY_Abortandthrowonsynchronousrequ_3]]
+- 4 edges to [[_COMMUNITY_Computechangedpath()_5]]
+- 4 edges to [[_COMMUNITY_Getbottype()_1]]
+- 3 edges to [[_COMMUNITY_unnamed_91]]
+- 2 edges to [[_COMMUNITY_Asynctogenerator()]]
+- 2 edges to [[_COMMUNITY_Creatededupedbycallsiteservere]]
+- 2 edges to [[_COMMUNITY_unnamed_120]]
+- 2 edges to [[_COMMUNITY_Extractinterceptionrouteinform]]
+- 1 edge to [[_COMMUNITY_Searchparamstourlquery()]]
+- 1 edge to [[_COMMUNITY_Bailouttocsrerror_2]]
+- 1 edge to [[_COMMUNITY_Dynamicservererror_2]]
+- 1 edge to [[_COMMUNITY_Hangingpromiserejectionerror_2]]
+- 1 edge to [[_COMMUNITY_Instantvalidationerror_1]]
+- 1 edge to [[_COMMUNITY_Invarianterror_5]]
+- 1 edge to [[_COMMUNITY_unnamed_163]]
+- 1 edge to [[_COMMUNITY_unnamed_164]]
+- 1 edge to [[_COMMUNITY_Readonlyurlsearchparamserror_2]]
+- 1 edge to [[_COMMUNITY_unnamed_130]]
+- 1 edge to [[_COMMUNITY_Requestcookiesadapter_1]]
+- 1 edge to [[_COMMUNITY_Staticgenbailouterror_2]]
+- 1 edge to [[_COMMUNITY_Usesession()]]
+
+## Top bridge nodes
+- [[node_modules_1_kmp5-._.js]] - degree 683, connects to 37 communities
+- [[extractSourcePageSegmentsFromFlightRouterState()_5]] - degree 3, connects to 1 community

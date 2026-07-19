@@ -22,6 +22,7 @@ class Workspace(Base):
     calendar_entries = relationship("ContentCalendar", back_populates="workspace", cascade="all, delete-orphan")
     assets = relationship("Asset", back_populates="workspace", cascade="all, delete-orphan")
     brand_voice = relationship("BrandVoice", back_populates="workspace", uselist=False, cascade="all, delete-orphan")
+    strategies = relationship("ContentStrategy", back_populates="workspace", cascade="all, delete-orphan")
 
 
 class WorkspaceMember(Base):

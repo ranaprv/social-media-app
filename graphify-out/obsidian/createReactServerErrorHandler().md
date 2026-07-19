@@ -1,0 +1,22 @@
+---
+source_file: "frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js"
+type: "code"
+community: ""
+location: "L14969"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/
+---
+
+# createReactServerErrorHandler()
+
+## Connections
+- [[.getActiveScopeSpan()_1]] - `calls` [EXTRACTED]
+- [[.has()_14]] - `calls` [EXTRACTED]
+- [[.toString()_1]] - `calls` [EXTRACTED]
+- [[error()_1]] - `calls` [EXTRACTED]
+- [[getDigestForWellKnownError()]] - `calls` [EXTRACTED]
+- [[node_modules_next_dist_esm_1_kobm0._.js]] - `contains` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/

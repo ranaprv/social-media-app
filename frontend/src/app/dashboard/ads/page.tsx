@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { DashboardLayout } from "@/components/layout/dashboard-layout"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { DollarSign, Eye, MousePointerClick, TrendingUp, Loader2 } from "lucide-react"
+import { DollarSign, Eye, MousePointerClick, Loader2 } from "lucide-react"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
 
@@ -79,7 +79,7 @@ function PaidVsOrganic() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="rounded-lg border p-3"><p className="text-xs text-muted-foreground">Organic Reach</p><p className="text-lg font-bold">{(organic.reach || 0).toLocaleString()}</p></div>
           <div className="rounded-lg border p-3"><p className="text-xs text-muted-foreground">Paid Reach</p><p className="text-lg font-bold">{(paid.reach || 0).toLocaleString()}</p></div>
-          <div className="rounded-lg border p-3"><p className="text-xs text-muted-00">Organic Cost</p><p className="text-lg font-bold text-green-600">$0</p></div>
+          <div className="rounded-lg border p-3"><p className="text-xs text-muted-foreground">Organic Cost</p><p className="text-lg font-bold text-green-600">$0</p></div>
           <div className="rounded-lg border p-3"><p className="text-xs text-muted-foreground">Paid Cost</p><p className="text-lg font-bold">${(paid.cost || 0).toLocaleString()}</p></div>
         </div>
         {Boolean(data.insights) && (

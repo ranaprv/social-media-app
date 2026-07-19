@@ -1,0 +1,31 @@
+# CODEOWNERS - Social Media Manager
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owners (fallback)
+* @praveen
+
+# Frontend
+/frontend/src/components/ @praveen
+/frontend/src/app/ @praveen
+/frontend/src/stores/ @praveen
+*.tsx @praveen
+*.css @praveen
+
+# Backend
+/backend/app/ @praveen
+/backend/tests/ @praveen
+*.py @praveen
+
+# Infrastructure
+/.github/ @praveen
+/docker-compose.yml @praveen
+/Dockerfile @praveen
+*.yml @praveen
+
+# Documentation
+*.md @praveen
+/docs/ @praveen
+
+# Database
+/backend/alembic/ @praveen
+/prisma/ @praveen

@@ -1,0 +1,243 @@
+---
+type: community
+cohesion: 0.01
+members: 192
+---
+
+# Node Modules 01A67C0
+
+**Cohesion:** 0.01 - loosely connected
+**Members:** 192 nodes
+
+## Members
+- [[DecodeError]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[IMPORTANT We use the null vs Map distinction to track whether]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[LucideProvider()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[NOTE An exception is rewritesredirects in middleware or proxy, which can]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[NOTE In theory, we could skip the wrapping if only one of the refs is non-null.]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[NOTE It's possible for one of the requests to fail with SoftRetry]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[NOTE We don't currently propagate the reason the prefetch was canceled]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[NOTE We receive the FlightRouterState patch in the same request as the]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[NormalizeError]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[RFC-3986_4]] - concept - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Also check if there's an in-progress navigation. We should never]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO An alternative could be to trigger a soft refresh but to _not_]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO As an extra precaution against soft retry loops, consider]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Cheating the type system here a bit because TypeScript can't tell]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Consider encoding this directly into the router tree instead of]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Consider reserving some amount of bandwidth for static prefetches.]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Consider treating the case where fetch is rewritten to a different]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Create a scoped dynamic request tree that omits anything that]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Eventually, FlightRouterState will evolve to being a transport format]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Eventually, the param values will not be included in the response]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO For now, since this is an edge case, we reject the prefetch, but]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Get rid of this extra traversal by computing this during the]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO I chose the max size somewhat arbitrarily. Consider setting this based]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Ideally this check would happen right before we schedule the React]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO If PPR is enabled on some routes but not others, then it's possible]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO If this is a gesture navigation, instead of performing a]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO In output export mode, the headers do nothing. Omit them (and the]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Instead of a refetch marker, we could just omit this subtree's]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Instead of speculatively revalidating, consider including]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Investigate re-enabling this.]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Investigate why the loader produces these fake page segments.]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO None of the rest of these values are consistent with the incoming]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Once we implement Fallback behavior for params, where an entry is]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Rather than create a new list object just to access the cache, the]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Refactor or remove this helper function to accept a string rather]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Remove this check once the old PPR flag is removed]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Rename dynamic - runtime throughout this module]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO The `closed` promise was originally used to track when a streaming]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO The canonical URL is the href without the origin. I think]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO The eventual plan is to get rid of our custom request headers and]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO The only thing this is used for is to create a cache key for]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO There are multiple reasons a prefetch might be rejected; we should]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO There are multiple strategies in the Link API for prefetching]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO There are too many intermediate stream transformations in the]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO There is an existing case where the global not found boundary]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO There's nothing inherently special about the empty search string;]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO This is a leftover branch from before Client Segment Cache was]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO This is a temporary solution; the plan is to replace this by adding]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO This is not modeled clearly. We use the same type,]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO This needs to happen in the Flight Client.]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO This should never happen. Bail out with null.]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO This should only be reachable if legacy PPR is enabled (i.e. PPR]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO This similar to what apply-router-state-patch-to-tree does. It]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Treat this as an upsert — should check if an entry already]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO Unify these two segment path helpers. We are inconsistently pushing an emp]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We can consolidate this branch with previous one by modeling]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We can optimize Next.js's built-in middleware APIs by returning a]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We can probably optimize the format of this data structure to only]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We could store interception behavior in the known route tree itself]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We currently observeunobserve a form every time its href changes.]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We don't need to store the head on the page segment's CacheNode; we]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We need to restore previousNextUrl, too, which represents the]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We should be able to read this from the rewrite header, not the]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We should cache the fact that this is an MPA navigation.]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We should hoist the search params out of the FlightRouterState]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We should just pass the array directly, rather than concatenate]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We should move search params out of FlightRouterState and handle]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We should not upsert an entry if its key was invalidated in the time]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We should probably also manually abort the fetch task, to reclaim]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We should probably model this by changing the key of the root]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We should probably refresh the entire route when this case occurs,]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We should store this field on the CacheNode itself. I think we can]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We will unify the responses eventually. I'm keeping the types]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We're intentionally not adding the search param to page]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO We're not consistent about how we do this check. Some places]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO When optimistic routing is enabled, don't block on waiting for]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[TODO When performing a lookup during a navigation, as opposed to a]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[_export()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[_getRequireWildcardCache()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[_interop_require_wildcard()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[addPathPrefix()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[addSearchParamsIfPageSegment()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[addSegmentPathToUrlInOutputExportMode()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[appendLayoutVaryPath()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[appendSegmentRequestKeyPart()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[applyRef()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[callServer()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[canonicalizeURLPart()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[cleanup()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[clonePageVaryPathWithNewSearchParams()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[collectInlinedEntries()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[collectInlinedEntriesImpl()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[compareAppPaths()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[completeTraverseNavigation()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[computeClientCacheBustingSearchParam()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[computeDynamicStaleAt()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[computeSelectedLayoutSegment()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[convertRouteTreeToFlightRouterState()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[convertSegmentPathToStaticExportFilename()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[createCacheKey()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[createCacheMap()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[createHrefFromUrl()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[createInitialRSCPayloadFromFallbackPrerender()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[createPromiseWithResolvers()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[createSegmentRequestKeyPart()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[deleteFromLru()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[dispatchAppRouterAction()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[dispatchGestureState()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[djb2Hash()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[doesStaticSegmentAppearInURL()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[encodeToFilesystemAndURLSafeString()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[ensureLeadingSlash()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[execOnce()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[extractSourcePageFromFlightRouterState()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[extractSourcePageSegmentsFromFlightRouterState()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[fillInFallbackFlightRouterState()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[fillInFallbackFlightRouterStateImpl()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[finalizeLayoutVaryPath()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[finalizeMetadataVaryPath()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[finalizePageVaryPath()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getAssetToken()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getAssetTokenQuery()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getCacheKeyForDynamicParam()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getDeploymentId()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getDeploymentIdQuery()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getFlightDataPartsFromPath()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getFulfilledRouteVaryPath()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getFulfilledSegmentVaryPath()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getLastCommittedTree()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getLinkForCurrentNavigation()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getLocationOrigin()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getNavigationBuildId()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getNextFlightSegmentPath()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getParamValueFromCacheKey()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getPartialLayoutVaryPath()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getPartialPageVaryPath()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getRenderedSearchFromVaryPath()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getRouteVaryPath()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getSegmentValue()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getSegmentVaryPathForRequest()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getSelectedLayoutSegmentPath()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getSelectedParams()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[getURL()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[handleIntersect()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[hexHash()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[invalidateBfCache()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[isGroupSegment()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[isJavaScriptURLString()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[isLocalURL()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[isModifiedEvent()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[isNavigatingToNewRootLayout()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[isParallelRouteSegment()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[isPrefetchTaskDirty()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[isThenable()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[linkClicked()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[markRouteEntryAsDynamicRewrite()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[matchKnownRoute()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[matchKnownRoutePart()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[navigateReducer()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[node_modules_01a67c0._.js]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[normalizeAppPath()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[normalizeFlightData()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[normalizeRepeatedSlashes()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[normalizeRscURL()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[onLinkVisibilityChanged()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[onNavigationIntent()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[parseDynamicParamFromURLPart()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[parsePath()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[pathHasPrefix()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[pingVisibleLinks()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[prepareFlightRouterStateForRequest()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[readFromBFCache()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[readFromBFCacheDuringRegularNavigation()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[readVaryParams()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[refreshOnInstantNavigationUnlock()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[reifyRouteTree()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[removeTrailingSlash()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[rescheduleLinkPrefetch()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[setLastCommittedTree()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[setLinkForCurrentNavigation()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[setNavigationBuildId()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[setSizeInCacheMap()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[stringifyError()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[stripClientOnlyDataFromFlightRouterState()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[stripClientOnlyDataFromSegment()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[unmountLinkForCurrentNavigation()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[updateBFCacheEntryStaleAt()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[useActionQueue()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[useMergedRef()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[waitForSegmentCacheEntry()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[writeHeadToBFCache()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+- [[writeToBFCache()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_01a67c0._.js
+
+## Live Query (requires Dataview plugin)
+
+```dataview
+TABLE source_file, type FROM #community/Node_Modules_01A67C0
+SORT file.name ASC
+```
+
+## Connections to other communities
+- 39 edges to [[_COMMUNITY_Addinstantprefetchheaderiflock_3]]
+- 26 edges to [[_COMMUNITY_Abortpendingcachenode()]]
+- 17 edges to [[_COMMUNITY_Background()_7]]
+- 17 edges to [[_COMMUNITY_Cancelprefetchtask()]]
+- 16 edges to [[_COMMUNITY_Acquirelock()_9]]
+- 14 edges to [[_COMMUNITY_Createdebugchannel()]]
+- 11 edges to [[_COMMUNITY_Attachinvalidationlistener()]]
+- 10 edges to [[_COMMUNITY_Deletefromcachemap()]]
+- 6 edges to [[_COMMUNITY_Computecachebustingsearchparam]]
+- 5 edges to [[_COMMUNITY_Coerceprefetchableurl()_3]]
+- 5 edges to [[_COMMUNITY_Createemptypart()]]
+- 5 edges to [[_COMMUNITY_Invalidateentireprefetchcache(]]
+- 4 edges to [[_COMMUNITY_Searchparamstourlquery()]]
+- 4 edges to [[_COMMUNITY_Computechangedpath()]]
+- 4 edges to [[_COMMUNITY_Formaturl()]]
+- 3 edges to [[_COMMUNITY_Convertflightrouterstatetorout]]
+- 3 edges to [[_COMMUNITY_Ensurecleanupisscheduled()]]
+- 3 edges to [[_COMMUNITY_Formatstringorurl()]]
+- 3 edges to [[_COMMUNITY_Getdisplayname()]]
+- 3 edges to [[_COMMUNITY_Getrenderedpathname()]]
+- 2 edges to [[_COMMUNITY_Addbasepath()]]
+- 2 edges to [[_COMMUNITY_Extractinterceptionrouteinform]]
+- 1 edge to [[_COMMUNITY_Invarianterror]]
+- 1 edge to [[_COMMUNITY_Middlewarenotfounderror]]
+- 1 edge to [[_COMMUNITY_Missingstaticpage]]
+- 1 edge to [[_COMMUNITY_Pagenotfounderror]]
+
+## Top bridge nodes
+- [[node_modules_01a67c0._.js]] - degree 396, connects to 26 communities
+- [[extractSourcePageSegmentsFromFlightRouterState()]] - degree 3, connects to 1 community

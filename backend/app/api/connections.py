@@ -1,135 +1,123 @@
+"""Platform connections — connect social media accounts."""
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 import uuid
+from datetime import datetime
 
 from app.core.database import get_db
 from app.core.security import get_current_user
+from app.core.workspace import ensure_system_workspace
 from app.models.user import User
-from app.models.workspace import Workspace, WorkspaceMember
 from app.models.content import PlatformConnection
-from app.schemas import PlatformConnectionCreate, PlatformConnectionResponse
 
 router = APIRouter(prefix="/connections", tags=["connections"])
 
 
-@router.post("/{workspace_id}", response_model=PlatformConnectionResponse, status_code=201)
-async def connect_platform(
-    workspace_id: str,
-    connection_data: PlatformConnectionCreate,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db),
-):
-    # Verify workspace access
-    result = await db.execute(
-        select(WorkspaceMember)
-        .where(
-            WorkspaceMember.workspace_id == workspace_id,
-            WorkspaceMember.user_id == current_user.id,
-        )
-    )
-    if not result.scalar_one_or_none():
-        raise HTTPException(status_code=404, detail="Workspace not found")
-    
-    # Check if already connected
-    result = await db.execute(
-        select(PlatformConnection)
-        .where(
-            PlatformConnection.workspace_id == workspace_id,
-            PlatformConnection.platform == connection_data.platform,
-            PlatformConnection.platform_user_id == connection_data.platform_user_id,
-        )
-    )
-    if result.scalar_one_or_none():
-        raise HTTPException(status_code=400, detail="Platform already connected")
-    
-    connection = PlatformConnection(
-        id=str(uuid.uuid4()),
-        workspace_id=workspace_id,
-        platform=connection_data.platform,
-        platform_user_id=connection_data.platform_user_id,
-        platform_username=connection_data.platform_username,
-        access_token=connection_data.access_token,
-        refresh_token=connection_data.refresh_token,
-    )
-    db.add(connection)
-    await db.flush()
-    
-    return PlatformConnectionResponse(
-        id=connection.id,
-        workspace_id=connection.workspace_id,
-        platform=connection.platform,
-        platform_user_id=connection.platform_user_id,
-        platform_username=connection.platform_username,
-        created_at=connection.created_at,
-    )
-
-
-@router.get("/{workspace_id}", response_model=list[PlatformConnectionResponse])
+@router.get("/")
 async def list_connections(
-    workspace_id: str,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    # Verify workspace access
+    """List all connected accounts for the current user."""
+    workspace_id = await ensure_system_workspace(db)
     result = await db.execute(
-        select(WorkspaceMember)
-        .where(
-            WorkspaceMember.workspace_id == workspace_id,
-            WorkspaceMember.user_id == current_user.id,
+        select(PlatformConnection).where(
+            PlatformConnection.workspace_id == workspace_id
         )
-    )
-    if not result.scalar_one_or_none():
-        raise HTTPException(status_code=404, detail="Workspace not found")
-    
-    result = await db.execute(
-        select(PlatformConnection)
-        .where(PlatformConnection.workspace_id == workspace_id)
     )
     connections = result.scalars().all()
-    
     return [
-        PlatformConnectionResponse(
-            id=c.id,
-            workspace_id=c.workspace_id,
-            platform=c.platform,
-            platform_user_id=c.platform_user_id,
-            platform_username=c.platform_username,
-            created_at=c.created_at,
-        )
+        {
+            "id": c.id,
+            "platform": c.platform,
+            "username": c.platform_username,
+            "has_client_id": bool((c.meta or {}).get("client_id")),
+            "has_client_secret": bool((c.meta or {}).get("client_secret")),
+            "connected_at": (
+                c.created_at.isoformat()
+                if c.created_at
+                else datetime.utcnow().isoformat()
+            ),
+        }
         for c in connections
     ]
 
 
-@router.delete("/{workspace_id}/{connection_id}", status_code=204)
+@router.post("/")
+async def connect_platform(
+    request: dict,
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Connect a social media account."""
+    workspace_id = await ensure_system_workspace(db)
+    platform = request.get("platform", "")
+    client_id = request.get("client_id", "")
+    client_secret = request.get("client_secret", "")
+    username = request.get("username", "")
+
+    if not platform:
+        raise HTTPException(status_code=400, detail="Platform is required")
+
+    # Check if already connected for this platform
+    existing = await db.execute(
+        select(PlatformConnection).where(
+            PlatformConnection.workspace_id == workspace_id,
+            PlatformConnection.platform == platform,
+        )
+    )
+    if existing.scalar_one_or_none():
+        raise HTTPException(
+            status_code=400,
+            detail=f"{platform} is already connected. Disconnect first.",
+        )
+
+    connection = PlatformConnection(
+        id=str(uuid.uuid4()),
+        workspace_id=workspace_id,
+        platform=platform,
+        platform_user_id=client_id or f"demo-{platform}",
+        platform_username=username or f"user-{platform}",
+        access_token=client_secret or "demo-token",
+        meta={
+            "client_id": client_id,
+            "client_secret": client_secret,
+            "username": username,
+        },
+        created_at=datetime.utcnow(),
+    )
+    db.add(connection)
+    await db.flush()
+
+    return {
+        "id": connection.id,
+        "platform": platform,
+        "username": username or f"user-{platform}",
+        "has_client_id": bool(client_id),
+        "has_client_secret": bool(client_secret),
+        "connected_at": connection.created_at.isoformat(),
+    }
+
+
+@router.delete("/{connection_id}")
 async def disconnect_platform(
-    workspace_id: str,
     connection_id: str,
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    # Verify workspace access
+    """Disconnect a social media account."""
+    workspace_id = await ensure_system_workspace(db)
     result = await db.execute(
-        select(WorkspaceMember)
-        .where(
-            WorkspaceMember.workspace_id == workspace_id,
-            WorkspaceMember.user_id == current_user.id,
-        )
-    )
-    if not result.scalar_one_or_none():
-        raise HTTPException(status_code=404, detail="Workspace not found")
-    
-    result = await db.execute(
-        select(PlatformConnection)
-        .where(
+        select(PlatformConnection).where(
             PlatformConnection.id == connection_id,
             PlatformConnection.workspace_id == workspace_id,
         )
     )
     connection = result.scalar_one_or_none()
-    
     if not connection:
         raise HTTPException(status_code=404, detail="Connection not found")
-    
+
     await db.delete(connection)
     await db.flush()
+    return {"status": "disconnected", "id": connection_id}

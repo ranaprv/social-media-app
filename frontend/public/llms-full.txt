@@ -1,0 +1,296 @@
+# Social Media Manager — Extended AI Documentation
+
+> Comprehensive reference for AI crawlers, coding assistants, and browsing agents.
+> Last updated: July 2026 | Version: 1.0.0
+
+## Table of Contents
+
+1. Platform Overview
+2. API Authentication
+3. Core Endpoints Reference
+4. Scheduling System
+5. Publishing System
+6. AI Content Generation
+7. Analytics System
+8. Platform Integration
+9. Error Handling
+10. Rate Limits
+
+---
+
+## 1. Platform Overview
+
+Social Media Manager is an AI-powered social media scheduling and publishing platform. Users can create content, schedule posts across 5 platforms (LinkedIn, X/Twitter, Facebook, Instagram, YouTube), track analytics, A/B test variations, and manage their entire social media presence from a single dashboard.
+
+**Key differentiators:**
+- Real API integrations (not mock data) for all 5 platforms
+- AI-powered content generation and adaptation per platform
+- Data-driven scheduling recommendations from actual analytics
+- A/B testing with automatic winner selection
+- Content lifecycle management (draft → approve → schedule → publish → track)
+
+---
+
+## 2. API Authentication
+
+### Login
+```
+POST /api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password"
+}
+
+Response:
+{
+  "access_token": "eyJhbGciOi...",
+  "token_type": "bearer"
+}
+```
+
+### Register
+```
+POST /api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password",
+  "name": "John Doe"
+}
+```
+
+### Using the Token
+```
+Authorization: Bearer <access_token>
+```
+
+All endpoints (except auth) require a valid JWT token.
+
+---
+
+## 3. Core Endpoints Reference
+
+### Posts
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/posts/{workspace_id}` | GET | List posts (paginated) |
+| `/api/posts/{workspace_id}` | POST | Create post |
+| `/api/posts/{workspace_id}/{post_id}` | GET | Get single post |
+| `/api/posts/{workspace_id}/{post_id}` | PUT | Update post |
+| `/api/posts/{workspace_id}/{post_id}` | DELETE | Delete post |
+| `/api/posts/{workspace_id}/schedule` | POST | Create + schedule to multiple platforms |
+
+### Scheduling
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/scheduler/schedule` | POST | Schedule post to platforms |
+| `/api/scheduler/queue` | GET | Get publishing queue |
+| `/api/scheduler/queue/{id}/retry` | POST | Retry failed item |
+| `/api/scheduler/queue/{id}` | DELETE | Cancel scheduled item |
+| `/api/scheduler/best-times` | GET | Best posting times per platform |
+| `/api/scheduler/calendar/events` | GET | Calendar events |
+| `/api/scheduler/calendar/reschedule/{id}` | POST | Drag-and-drop reschedule |
+
+### AI Content
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/scheduler/captions/generate` | POST | AI caption for one platform |
+| `/api/scheduler/captions/generate-multi` | POST | AI captions for multiple platforms |
+| `/api/scheduler/captions/improve` | POST | Improve existing caption |
+| `/api/scheduler/hashtags/generate` | POST | AI hashtag generation |
+| `/api/scheduler/hashtags/analyze` | POST | Analyze existing hashtags |
+| `/api/scheduler/calendar/generate` | POST | AI-generate full month calendar |
+| `/api/scheduler/repurpose` | POST | Repurpose content to multiple formats |
+| `/api/scheduler/adapt-content` | POST | AI-adapt content for a platform |
+| `/api/scheduler/translate` | POST | Translate caption to another language |
+
+### Analytics
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/analytics/dashboard` | GET | Analytics dashboard overview |
+| `/api/scheduler/analytics/cross-platform` | GET | Cross-platform unified metrics |
+| `/api/scheduler/analytics/cohorts` | GET | Cohort analysis |
+| `/api/scheduler/analytics/audience-growth` | GET | Audience growth trends |
+| `/api/scheduler/analytics/content-gaps` | POST | Content gap analysis |
+| `/api/scheduler/forecast` | POST | Predict content engagement |
+
+### Publishing
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/scheduler/health` | GET | Check all platform API health |
+| `/api/scheduler/health/{platform}` | GET | Check one platform |
+| `/api/scheduler/rate-limits` | GET | Rate limit status |
+| `/api/scheduler/dead-letter` | GET | Failed publishes |
+| `/api/scheduler/dead-letter/{id}/retry` | POST | Retry failed item |
+
+---
+
+## 4. Scheduling System
+
+### Multi-Platform Scheduling
+```
+POST /api/scheduler/schedule
+{
+  "post_id": "post-123",
+  "platforms": [
+    {"platform": "linkedin", "caption": "Custom LinkedIn caption"},
+    {"platform": "x", "caption": "Short X version"},
+    {"platform": "instagram", "scheduled_at": "2026-07-20T11:00:00Z"}
+  ],
+  "default_scheduled_at": "2026-07-20T10:00:00Z"
+}
+```
+
+### Recurring Series
+```
+POST /api/scheduler/recurring/create
+{
+  "template": "weekly_thread",
+  "content_items": [
+    {"topic": "Growth Strategy", "content": "This week we learned..."},
+    {"topic": "Product Update", "content": "New features shipped..."}
+  ],
+  "start_date": "2026-07-21T09:00:00Z",
+  "platforms": ["x", "linkedin"]
+}
+```
+
+### Content Dependencies
+```
+POST /api/scheduler/dependencies/add
+{
+  "post_id": "post-announcement",
+  "depends_on_post_id": "post-teaser"
+}
+```
+
+---
+
+## 5. Publishing System
+
+### Platform Publishers
+
+**LinkedIn** — REST API v2 UGC Posts
+- Supports: text, images (5 max), video (10min), documents
+- Auth: OAuth 2.0 with page/person tokens
+- Rate limit: 100 posts/day
+
+**X/Twitter** — API v2 + v1.1 media upload
+- Supports: text (280 chars), images (4), GIFs, video (140s free)
+- Auth: OAuth 2.0 PKCE
+- Rate limit: 50 tweets/day (free)
+
+**Facebook** — Graph API v19
+- Supports: text, images, video (4hrs), links
+- Auth: Page access token
+- Rate limit: 25 posts/page/day
+
+**Instagram** — Content Publishing API
+- Supports: images, carousels (10), Reels (90s)
+- Auth: Facebook Page token + IG user ID
+- Rate limit: 25 posts/day, 200 API calls/hour
+
+**YouTube** — Data API v3 with native `publishAt`
+- Supports: video upload with scheduling
+- Auth: OAuth 2.0 with youtube.upload scope
+- Rate limit: 6 videos/day, 10,000 quota units/day
+
+---
+
+## 6. AI Content Generation
+
+### Providers
+- **OpenAI** — GPT-4o, GPT-4o Mini
+- **Anthropic** — Claude Sonnet 4, Claude 3.5 Haiku
+- **Google Gemini** — Gemini 2.0 Flash, Gemini 2.5 Flash
+- **OpenRouter** — 200+ models via unified API
+- **DeepSeek** — DeepSeek V3, DeepSeek R1
+
+### Content Repurposing Routes
+| Route | Source → Target | Platform |
+|-------|----------------|----------|
+| `blog_to_thread` | Blog → X Thread | X |
+| `blog_to_linkedin` | Blog → LinkedIn Post | LinkedIn |
+| `blog_to_carousel` | Blog → Instagram Carousel | Instagram |
+| `blog_to_reel` | Blog → Reel Script | Instagram |
+| `video_to_shorts` | Video → YouTube Shorts | YouTube |
+| `thread_to_post` | Thread → LinkedIn Post | LinkedIn |
+| `post_to_story` | Post → Instagram Story | Instagram |
+
+---
+
+## 7. Analytics System
+
+### Metrics Tracked
+- Impressions, Reach, Engagement, Clicks
+- Likes, Comments, Shares (per platform)
+- Follower/Subscriber growth
+- Best posting times (data-driven)
+- Content performance by type
+
+### Analytics Endpoints
+- `/api/analytics/dashboard` — Overview with trends
+- `/api/scheduler/analytics/cross-platform` — Unified view
+- `/api/scheduler/analytics/cohorts` — Group by platform/time/type
+- `/api/scheduler/analytics/audience-growth` — Growth trends
+- `/api/scheduler/forecast` — Predict engagement
+- `/api/scheduler/reports/analytics` — Generate HTML/JSON report
+
+---
+
+## 8. Error Handling
+
+### Error Response Format
+```json
+{
+  "detail": "Error message",
+  "status_code": 400
+}
+```
+
+### Common Error Codes
+| Code | Meaning |
+|------|---------|
+| 400 | Bad request / validation error |
+| 401 | Unauthorized (invalid/missing token) |
+| 403 | Forbidden (insufficient permissions) |
+| 404 | Resource not found |
+| 409 | Conflict (duplicate entry) |
+| 422 | Validation error (content too long, etc.) |
+| 429 | Rate limited |
+| 500 | Internal server error |
+
+---
+
+## 9. Rate Limits
+
+| Platform | Daily Limit | Hourly API Calls |
+|----------|------------|-----------------|
+| LinkedIn | 100 posts/day | — |
+| X/Twitter | 50 tweets/day | 200/15min |
+| Facebook | 25 posts/page/day | 200/hour |
+| Instagram | 25 posts/day | 200/hour |
+| YouTube | 6 videos/day | 10,000 quota units/day |
+
+System rate limit: 100 requests per 60-second window per user.
+
+---
+
+## 10. Webhooks
+
+### Supported Platforms
+- **Facebook** — Feed updates, comments
+- **Instagram** — Media updates, comments
+- **YouTube** — Video upload notifications (PubSubHubbub)
+
+### Webhook Endpoint
+```
+POST /api/scheduler/webhooks/{platform}
+```
+
+### Signature Verification
+Facebook: HMAC-SHA256 with app secret
+YouTube: HMAC-SHA1 with hub secret

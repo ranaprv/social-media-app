@@ -11,6 +11,8 @@ from app.models.content import (
     Activity,
 )
 from app.models.ai_workflow import ContentItem, PlatformPost, PlatformAnalytics, PlatformProviderConfig
+from app.models.post_platform import PostPlatform
+from app.models.strategy import ContentStrategy, ContentPlan, ContentSlot, StrategyAuditLog
 
 __all__ = [
     "User",
@@ -30,4 +32,9 @@ __all__ = [
     "PlatformPost",
     "PlatformAnalytics",
     "PlatformProviderConfig",
+    "PostPlatform",
+    "ContentStrategy",
+    "ContentPlan",
+    "ContentSlot",
+    "StrategyAuditLog",
 ]

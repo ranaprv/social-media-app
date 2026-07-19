@@ -27,15 +27,18 @@ import {
   MessageSquare,
   AlertCircle,
   CheckCircle,
+  Link2,
+  Target,
 } from "lucide-react"
 import { useAppStore } from "@/stores/app-store"
 import { Button } from "@/components/ui/button"
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Strategy", href: "/dashboard/strategy", icon: Target },
   { name: "Content Studio", href: "/dashboard/content-studio", icon: Sparkles },
   { name: "Research", href: "/dashboard/research", icon: Search },
-  { name: "Calendar", href: "/dashboard/calendar", icon: Calendar },
+  { name: "Scheduling", href: "/dashboard/calendar", icon: Calendar },
   { name: "Repurpose", href: "/dashboard/repurpose", icon: Repeat },
   { name: "Media", href: "/dashboard/media", icon: Image },
   { name: "Inbox", href: "/dashboard/inbox", icon: Mail },
@@ -47,6 +50,7 @@ const navigation = [
   { name: "Reports", href: "/dashboard/reports", icon: BarChart3 },
   { name: "Competitors", href: "/dashboard/competitors", icon: Users },
   { name: "Team", href: "/dashboard/team", icon: Users },
+  { name: "Accounts", href: "/dashboard/connections", icon: Link2 },
 ]
 
 const bottomNavigation = [

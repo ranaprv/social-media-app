@@ -1,0 +1,216 @@
+---
+type: community
+cohesion: 0.02
+members: 177
+---
+
+# Node Modules Next Dist Compile
+
+**Cohesion:** 0.02 - loosely connected
+**Members:** 177 nodes
+
+## Members
+- [[.unstable_scheduleHydration()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[FiberNode()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[ReactDOMHydrationRoot()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[ReactDOMRoot()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[accumulateEnterLeaveListenersForEvent()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[accumulateTwoPhaseListeners()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[actionStateActionEffect()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[addFiberToLanesMap()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[assertIsMounted()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[attachPingListener()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[attachSuspenseRetryListeners()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[attemptExplicitHydrationTarget()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[attemptReplayContinuousQueuedEvent()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[attemptReplayContinuousQueuedEventInMap()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[checkDCE()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[checkDepsAreArrayDev()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[checkIfFullyUnsuspended()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[checkIfSnapshotChanged()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[checkIfUseWrappedInAsyncCatch()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[clz32Fallback()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[coerceRef()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[commitHydratedActivityInstance()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[commitHydratedContainer()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[commitHydratedSuspenseInstance()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[constructSelectEvent()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[copyWithDeleteImpl()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[copyWithRename()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[copyWithRenameImpl()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[copyWithSetImpl()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[createAndAccumulateChangeEvent()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[createCursor()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[createDispatchListener()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[createFiberFromElement()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[createPortal$1()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[createPortal()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[createSyntheticEvent()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[createThenableState()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[defaultOnCaughtError()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[defaultOnRecoverableError()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[defaultOnUncaughtError()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[describeBuiltInComponentFrame()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[describeFiber()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[describeFunctionComponentFrameWithoutLineNumber()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[describeNativeComponentFrame()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[disableLogs()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[disabledLog()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[dispatchEventForPluginEventSystem()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[estimateBandwidth()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[executeDispatch()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[findCurrentFiberUsingSlowPath()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[findCurrentHostFiberImpl()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[findHook()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[findInstanceBlockingEvent()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[findInstanceBlockingTarget()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[flushSync()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[forceStoreRerender()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[formatOwnerStack()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[functionThatReturnsFalse()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[functionThatReturnsTrue()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getActivityInstanceFromFiber()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getClosestInstanceFromNode()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getCrossOriginStringAs()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getCurrentDebugTask()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getCurrentFiberForDevTools()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getCurrentFiberStackInDev()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getData()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getDataFromCustomEvent()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getEventCharCode()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getEventModifierState()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getEventPriority()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getEventTarget()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getFallbackBeforeInputChars()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getInstIfValueChanged()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getLeafNode()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getListener()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getLowestCommonAncestor()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getNativeBeforeInputChars()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getNearestMountedFiber()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getNodeForCharacterOffset()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getNodeFromInstance()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getParent()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getParentHydrationBoundary()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getRetryCache()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getStackByFiberInDevAndProd()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getSuspenseInstanceFromFiber()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getTargetInstForChangeEvent()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getTargetInstForClickEvent()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getTargetInstForInputEventPolyfill()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getTargetInstForInputOrChangeEvent()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getValueDescriptorExpectingEnumForWarning()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getValueDescriptorExpectingObjectForWarning()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[getVendorPrefixedEventName()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[handleErrorInNextTick()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[handleEventsForInputEventPolyfill()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[handlePropertyChange()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[hasSelectionCapabilities()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[hideDehydratedBoundary()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[hideInstance()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[hideOrUnhideAllChildren()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[hideOrUnhideAllChildrenOnFiber()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[hideOrUnhideDehydratedBoundary()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[hideOrUnhideNearestPortals()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[hideTextInstance()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[imperativeHandleEffect()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[injectInternals()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[insertStylesheetIntoRoot()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[insertSuspendedStylesheets()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[is()_1]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[isCompatibleFamilyForHotReloading()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[isEventSupported()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[isFallbackCompositionEnd()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[isLikelyStaticResource()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[isTextInputElement()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[makePrefixMap()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[maySuspendCommit()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[modifierStateGetter()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[node_modules_next_dist_compiled_react-dom_096_9a-._.js]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[noop$1()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[noop()_1]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[onUnsuspend()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[onUnsuspendImg()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[preconnect()_1]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[prefetchDNS()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[preinit()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[preinitModule()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[preload()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[preloadInstanceAndSuspendIfNeeded()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[preloadModule()_1]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[preloadResource()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[preloadResourceAndSuspendIfNeeded()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[processDispatchQueue()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[pushDebugInfo()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[readContext()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[readContextDuringReconciliation()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[readContextForConsumer()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[reenableLogs()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[registerDirectEvent()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[registerSimpleEvent()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[registerTwoPhaseEvent()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[replayUnblockedEvents()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[requestFormReset()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[resolveDispatcher()_1]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[resolveUpdatePriority()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[restorePendingUpdaters()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[retryIfBlockedOn()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[runEventInBatch()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[runWithPriority()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[scheduleCallbackIfUnblocked()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[scheduleReplayQueueIfNeeded()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[setRefreshHandler()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[shouldRemainOnPreviousScreen()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[stopWatchingForValueChange()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[subscribeToStore()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[throwInvalidHookError()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[throwOnInvalidObjectType()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[throwOnInvalidObjectTypeImpl()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[trackUsedThenable()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[unhideDehydratedBoundary()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[unhideInstance()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[unhideTextInstance()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[unstable_batchedUpdates()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[unwrapThenable()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[updateStoreInstance()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[use()_2]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[useFormState()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[useFormStatus()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[useHostTransitionStatus()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[validateFragmentProps()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[waitForCommitToBeReady()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[warnForMissingKey()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[warnInvalidContextAccess()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[warnInvalidHookAccess()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[warnOnFunctionType()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[warnOnFunctionTypeImpl()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[warnOnInvalidCallback()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[warnOnSymbolType()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+- [[warnOnSymbolTypeImpl()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_compiled_react-dom_096_9a-._.js
+
+## Live Query (requires Dataview plugin)
+
+```dataview
+TABLE source_file, type FROM #community/Node_Modules_Next_Dist_Compile
+SORT file.name ASC
+```
+
+## Connections to other communities
+- 162 edges to [[_COMMUNITY_Accumulateorcreatecontinuousqu]]
+- 94 edges to [[_COMMUNITY_Bubblenestedeffectdurations()]]
+- 88 edges to [[_COMMUNITY_Batchedupdates$1()]]
+- 83 edges to [[_COMMUNITY_Acquiresingletoninstance()]]
+- 64 edges to [[_COMMUNITY_Callcomponentwillreceiveprops(]]
+- 52 edges to [[_COMMUNITY_Actionstatereducer()]]
+- 46 edges to [[_COMMUNITY_unnamed_15]]
+- 43 edges to [[_COMMUNITY_Bubbleproperties()]]
+- 39 edges to [[_COMMUNITY_unnamed_30]]
+- 20 edges to [[_COMMUNITY_Accumulatesuspenseycommitonfib]]
+- 15 edges to [[_COMMUNITY_Added()]]
+
+## Top bridge nodes
+- [[node_modules_next_dist_compiled_react-dom_096_9a-._.js]] - degree 816, connects to 11 communities
+- [[dispatchEventForPluginEventSystem()]] - degree 27, connects to 3 communities
+- [[attemptReplayContinuousQueuedEvent()]] - degree 7, connects to 3 communities
+- [[constructSelectEvent()]] - degree 7, connects to 2 communities
+- [[restorePendingUpdaters()]] - degree 7, connects to 2 communities

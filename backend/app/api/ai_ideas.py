@@ -30,8 +30,6 @@ async def list_models():
 @router.post("/generate")
 async def generate_ideas(
     request: dict,
-    current_user: User = Depends(get_current_user),
-    db: AsyncSession = Depends(get_db),
 ):
     """Generate content ideas using selected LLM model(s) with optional voting."""
     niche = request.get("niche", "")

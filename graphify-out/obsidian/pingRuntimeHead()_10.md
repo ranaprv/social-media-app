@@ -1,0 +1,19 @@
+---
+source_file: "frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js"
+type: "code"
+community: "Background()"
+location: "L3838"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Background
+---
+
+# pingRuntimeHead()
+
+## Connections
+- [[node_modules_next_dist_client_0r5nbpw._.js]] - `contains` [EXTRACTED]
+- [[pingRootRouteTree()_10]] - `calls` [EXTRACTED]
+- [[pingRouteTreeAndIncludeDynamicData()_10]] - `calls` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Background

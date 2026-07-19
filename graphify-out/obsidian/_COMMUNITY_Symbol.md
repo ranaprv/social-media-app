@@ -1,0 +1,373 @@
+---
+type: community
+cohesion: 0.01
+members: 309
+---
+
+# [Symbol
+
+**Cohesion:** 0.01 - loosely connected
+**Members:** 309 nodes
+
+## Members
+- [[IMPORTANT We use the null vs Map distinction to track whether_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[LoadingBoundaryProvider()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[LucideProvider()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[NOTE An exception is rewritesredirects in middleware or proxy, which can_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[NOTE It's possible for one of the requests to fail with SoftRetry_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[NOTE We don't care about Suspense above body here,_2]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[NOTE We don't currently propagate the reason the prefetch was canceled_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[NOTE We don't need to worry about eviction in this case because we]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[NOTE We receive the FlightRouterState patch in the same request as the_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[NOTE this happens outside of render, so we don't need `trackMissingSampleErrorA]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[RenderFromTemplateContext()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[SegmentStateProvider()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[SegmentViewStateNode()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Add `forbidden` docs_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Add `unauthorized` docs_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Also check if there's an in-progress navigation. We should never_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO An alternative could be to trigger a soft refresh but to _not__4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO As an extra precaution against soft retry loops, consider_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Cheating the type system here a bit because TypeScript can't tell_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Consider encoding this directly into the router tree instead of_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Consider reserving some amount of bandwidth for static prefetches._4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Consider treating the case where fetch is rewritten to a different_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Create a scoped dynamic request tree that omits anything that_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Eventually, FlightRouterState will evolve to being a transport format_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Eventually, the param values will not be included in the response_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Explicitly import from client.browser]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO For LoadingBoundary, and the other built-in boundary types, don't]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO For now, since this is an edge case, we reject the prefetch, but_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO For simplicity, we should combine this provider with LoadingBoundary]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Get rid of this extra traversal by computing this during the_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO I chose the max size somewhat arbitrarily. Consider setting this based_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Ideally this check would happen right before we schedule the React_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO If PPR is enabled on some routes but not others, then it's possible_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO If this is a gesture navigation, instead of performing a_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO In output export mode, the headers do nothing. Omit them (and the_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Instead of a refetch marker, we could just omit this subtree's_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Instead of speculatively revalidating, consider including_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Investigate re-enabling this._4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Investigate why the loader produces these fake page segments._4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Log a deprecation error when this object is accessed]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO None of the rest of these values are consistent with the incoming_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Once we implement Fallback behavior for params, where an entry is_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Once we start tracking backforward history at each route level,]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Rather than create a new list object just to access the cache, the_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Refactor or remove this helper function to accept a string rather_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Remove this check once the old PPR flag is removed_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Rename dynamic - runtime throughout this module_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO The `closed` promise was originally used to track when a streaming_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO The canonical URL is the href without the origin. I think_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO The eventual plan is to get rid of our custom request headers and_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO The loading module data for a segment is stored on the]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO The only thing this is used for is to create a cache key for_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO There are multiple reasons a prefetch might be rejected; we should_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO There are multiple strategies in the Link API for prefetching_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO There are too many intermediate stream transformations in the_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO There is an existing case where the global not found boundary_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO There's nothing inherently special about the empty search string;_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO This breaks if sourcemaps with ignore lists are enabled._1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO This is a leftover branch from before Client Segment Cache was_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO This is a temporary solution; the plan is to replace this by adding_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO This is not modeled clearly. We use the same type,_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO This needs to happen in the Flight Client._4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO This should never happen. Bail out with null._4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO This should only be reachable if legacy PPR is enabled (i.e. PPR_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO This similar to what apply-router-state-patch-to-tree does. It_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Throw error if trying to set a cookie after the response_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Treat this as an upsert — should check if an entry already_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Unify these two segment path helpers. We are inconsistently pushing an emp_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO Unlike path params, we don't vary track each search param]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We can consolidate this branch with previous one by modeling_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We can optimize Next.js's built-in middleware APIs by returning a_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We can probably optimize the format of this data structure to only_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We could store interception behavior in the known route tree itself_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We currently observeunobserve a form every time its href changes._4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We don't need to store the head on the page segment's CacheNode; we_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We need to restore previousNextUrl, too, which represents the_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We should be able to read this from the rewrite header, not the_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We should cache the fact that this is an MPA navigation._4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We should hoist the search params out of the FlightRouterState_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We should just pass the array directly, rather than concatenate_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We should move search params out of FlightRouterState and handle_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We should not upsert an entry if its key was invalidated in the time_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We should probably also manually abort the fetch task, to reclaim_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We should probably model this by changing the key of the root_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We should probably refresh the entire route when this case occurs,_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We should store this field on the CacheNode itself. I think we can_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We will unify the responses eventually. I'm keeping the types_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We're intentionally not adding the search param to page_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO We're not consistent about how we do this check. Some places_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO When optimistic routing is enabled, don't block on waiting for_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO When performing a lookup during a navigation, as opposed to a_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[TODO maybe we can give a more precise error message based on callingExpression_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[Symbol.for(edge-runtime.inspect.custom)()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[Symbol.iterator()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_OverloadYield()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_arrayLikeToArray()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_arrayWithHoles()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_assertThisInitialized()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_classCallCheck()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_construct()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_export()_8]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_getPrototypeOf()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_inherits()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_interopRequireDefault()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_isNativeFunction()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_iterableToArrayLimit()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_nonIterableRest()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_regenerator()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_regeneratorAsyncGen()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_regeneratorDefine()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_regeneratorRuntime()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_setPrototypeOf()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_slicedToArray()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[_unsupportedIterableToArray()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[accessedDynamicData()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[accumulateRootVaryParam()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[accumulateVaryParam()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[addErrorContext()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[addSearchParamsIfPageSegment()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[addSegmentPathToUrlInOutputExportMode()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[annotateDynamicAccess()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[appendLayoutVaryPath()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[areCookiesMutableInCurrentPhase()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[assertRootParamInSamples()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[atLeastOneTask()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[callServer()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[canonicalizeURLPart()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[cleanup()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[clonePageVaryPathWithNewSearchParams()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[collectInlinedEntries()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[collectInlinedEntriesImpl()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[compareAppPaths()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[completeTraverseNavigation()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[computeClientCacheBustingSearchParam()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[computeDynamicStaleAt()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[computeSelectedLayoutSegment()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[consumeDynamicAccess()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[convertRouteTreeToFlightRouterState()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createCacheKey()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createCacheMap()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createCookiesWithMutableAccessCheck()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createDraftModeForValidation()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createDynamicTrackingState()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createDynamicValidationState()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createExhaustiveURLSearchParamsProxy()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createHrefFromUrl()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createInitialRSCPayloadFromFallbackPrerender()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createInstantValidationState()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createMissingCookieSampleError()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createMissingSearchParamSampleError()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createParamsAccessError()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createPrerenderSearchParamsForClientPage()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createPromiseWithResolvers()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createRenderInBrowserAbortSignal()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createResponseVaryParamsAccumulator()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createRouterCacheKey()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createSearchAccessError()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createSegmentVaryParamsAccumulator()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createValidationSampleTracking()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createVaryParamsAccumulator()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createVaryingParams()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[createVaryingSearchParams()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[deleteFromLru()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[describeHasCheckingStringProperty()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[describeStringPropertyAccess()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[disableSmoothScrollDuringRouteTransition()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[dispatchAppRouterAction()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[dispatchGestureState()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[doesStaticSegmentAppearInURL()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[ensureCleanupIsScheduled()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[ensureCookiesAreStillMutable()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[ensureLeadingSlash()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[extractSourcePageFromFlightRouterState()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[extractSourcePageSegmentsFromFlightRouterState()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[fillInFallbackFlightRouterState()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[fillInFallbackFlightRouterStateImpl()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[finalizeLayoutVaryPath()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[finalizeMetadataVaryPath()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[finalizePageVaryPath()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[finishAccumulatingVaryParams()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[finishSegmentAccumulator()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[forbidden()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[formatDynamicAPIAccesses()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[formatError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[get()_6]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getAccessFallbackErrorTypeByStatus()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getAccessFallbackHTTPStatus()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getAssetToken()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getAssetTokenQuery()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getCacheKeyForDynamicParam()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getDeploymentId()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getDeploymentIdQuery()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getExpectedSampleTracking()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getFirstDynamicReason()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getFlightDataPartsFromPath()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getFulfilledRouteVaryPath()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getLastCommittedTree()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getLinkForCurrentNavigation()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getMetadataVaryParamsAccumulator()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getMetadataVaryParamsThenable()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getNavigationBuildId()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getNavigationDisallowedDynamicReasons()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getNextFlightSegmentPath()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getParamProperties()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getParamValueFromCacheKey()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getPartialLayoutVaryPath()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getPartialPageVaryPath()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getRedirectError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getRedirectStatusCodeFromError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getRedirectTypeFromError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getRenderedSearchFromVaryPath()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getRootParamsVaryParamsAccumulator()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getRouteVaryPath()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getSegmentParam()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getSegmentValue()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getSegmentVaryPathForRequest()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getSelectedLayoutSegmentPath()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getSelectedParams()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getStaticShellDisallowedDynamicReasons()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getURLFromRedirectError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[getVaryParamsThenable()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[handleHardNavError()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[handleISRError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[handleIntersect()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[has()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[hasErrorProperty()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[invalidateBfCache()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[invalidateEntirePrefetchCache()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[invalidateRouteCacheEntries()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[invalidateSegmentCacheEntries()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isBailoutToCSRError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isCatchAll()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isDynamicPostpone()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isDynamicPostponeReason()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isDynamicServerError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isGroupSegment()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isHTTPAccessFallbackError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isHangingPromiseRejectionError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isInstantValidationError()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isJavaScriptURLString()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isNavigatingToNewRootLayout()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isNextRouterError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isParallelRouteSegment()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isPostpone()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isPrefetchTaskDirty()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isPrerenderInterruptedError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isRedirectError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isRequestAPICallableInsideAfter()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isStaticGenBailoutError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[isThenable()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[logDisallowedDynamicError()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[lruPut()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[markRouteEntryAsDynamicRewrite()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[navigateReducer()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[node_modules_0zw45em._.js]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[normalizeAppPath()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[normalizeFlightData()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[notFound()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[notifyInvalidationListener()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[onLinkVisibilityChanged()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[parseDynamicParamFromURLPart()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[parseRelativeUrl()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[permanentRedirect()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[pingInvalidationListeners()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[pingVisibleLinks()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[prepareFlightRouterStateForRequest()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[proxyLogger()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[readFromBFCache()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[readFromBFCacheDuringRegularNavigation()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[redirect()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[refreshOnInstantNavigationUnlock()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[renderAppDevOverlay()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[renderPagesDevOverlay()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[setLastCommittedTree()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[setLinkForCurrentNavigation()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[setLogger()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[setNavigationBuildId()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[setSizeInCacheMap()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[size()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[stripClientOnlyDataFromFlightRouterState()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[stripClientOnlyDataFromSegment()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[throwForSearchParamsAccessInUseCache()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[throwIfDisallowedDynamic()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[throwToInterruptStaticGeneration()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[throwWithStaticGenerationBailoutErrorWithDynamicError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[trackAllowedDynamicAccess()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[trackDynamicDataInDynamicRender()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[trackDynamicHoleInNavigation()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[trackDynamicHoleInRuntimeShell()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[trackDynamicHoleInStaticShell()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[trackMissingSampleError()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[trackMissingSampleErrorAndThrow()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[trackThrownErrorInNavigation()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[unauthorized()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[unmountLinkForCurrentNavigation()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[unstable_isUnrecognizedActionError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[unstable_rethrow()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[updateBFCacheEntryStaleAt()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[updateLruSize()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[useDynamicSearchParams()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[useNavFailureHandler()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[useRouter()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[useRouterBFCache()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[useSearchParams()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[useStore()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[waitAtLeastOneReactRenderTask()_2]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[waitForSegmentCacheEntry()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[writeHeadToBFCache()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+- [[writeToBFCache()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js
+
+## Live Query (requires Dataview plugin)
+
+```dataview
+TABLE source_file, type FROM #community/Symbol
+SORT file.name ASC
+```
+
+## Connections to other communities
+- 55 edges to [[_COMMUNITY_unnamed_10]]
+- 49 edges to [[_COMMUNITY_unnamed_14]]
+- 37 edges to [[_COMMUNITY_unnamed_19]]
+- 34 edges to [[_COMMUNITY_Background()_1]]
+- 32 edges to [[_COMMUNITY_Acquirelock()_1]]
+- 21 edges to [[_COMMUNITY_Authorizationparams()]]
+- 19 edges to [[_COMMUNITY_Abortpendingcachenode()_7]]
+- 13 edges to [[_COMMUNITY_Clientpageroot()]]
+- 12 edges to [[_COMMUNITY_Accountnotlinkederror()_1]]
+- 10 edges to [[_COMMUNITY_Assertpostpone()_1]]
+- 10 edges to [[_COMMUNITY_Createclass()]]
+- 10 edges to [[_COMMUNITY_Deletefromcachemap()_2]]
+- 8 edges to [[_COMMUNITY_Attachinvalidationlistener()_6]]
+- 7 edges to [[_COMMUNITY_unnamed_68]]
+- 7 edges to [[_COMMUNITY_Errorsegmentnode()]]
+- 6 edges to [[_COMMUNITY_Computecachebustingsearchparam_4]]
+- 6 edges to [[_COMMUNITY_unnamed_102]]
+- 6 edges to [[_COMMUNITY_Getboundarydebugnamefromsegmen]]
+- 4 edges to [[_COMMUNITY_Abortandthrowonsynchronousrequ_2]]
+- 4 edges to [[_COMMUNITY_Computechangedpath()_4]]
+- 4 edges to [[_COMMUNITY_Getbottype()]]
+- 3 edges to [[_COMMUNITY_unnamed_90]]
+- 2 edges to [[_COMMUNITY_Asynctogenerator()]]
+- 2 edges to [[_COMMUNITY_Creatededupedbycallsiteservere]]
+- 2 edges to [[_COMMUNITY_unnamed_119]]
+- 2 edges to [[_COMMUNITY_Extractinterceptionrouteinform]]
+- 1 edge to [[_COMMUNITY_Searchparamstourlquery()]]
+- 1 edge to [[_COMMUNITY_Bailouttocsrerror_1]]
+- 1 edge to [[_COMMUNITY_Dynamicservererror_1]]
+- 1 edge to [[_COMMUNITY_Hangingpromiserejectionerror_1]]
+- 1 edge to [[_COMMUNITY_Instantvalidationerror]]
+- 1 edge to [[_COMMUNITY_Invarianterror_4]]
+- 1 edge to [[_COMMUNITY_unnamed_161]]
+- 1 edge to [[_COMMUNITY_unnamed_162]]
+- 1 edge to [[_COMMUNITY_Readonlyurlsearchparamserror_1]]
+- 1 edge to [[_COMMUNITY_unnamed_129]]
+- 1 edge to [[_COMMUNITY_Requestcookiesadapter]]
+- 1 edge to [[_COMMUNITY_Staticgenbailouterror_1]]
+- 1 edge to [[_COMMUNITY_Usesession()]]
+
+## Top bridge nodes
+- [[node_modules_0zw45em._.js]] - degree 685, connects to 38 communities
+- [[extractSourcePageSegmentsFromFlightRouterState()_4]] - degree 3, connects to 1 community

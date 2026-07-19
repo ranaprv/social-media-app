@@ -1,67 +1,35 @@
-"""Base publisher interface and factory."""
-from abc import ABC, abstractmethod
-from typing import Any
+"""Publisher factory — resolves platform string to publisher instance.
+
+All 5 core platforms now have real API implementations:
+  LinkedIn, X/Twitter, Instagram, Facebook, YouTube.
+"""
+from app.services.publishers.base import PlatformPublisher
+from app.services.publishers.linkedin import LinkedInPublisher
+from app.services.publishers.twitter import TwitterPublisher
+from app.services.publishers.facebook import FacebookPublisher
+from app.services.publishers.instagram import InstagramPublisher
+from app.services.publishers.youtube import YouTubePublisher
+
+_PUBLISHER_REGISTRY: dict[str, type[PlatformPublisher]] = {
+    "linkedin": LinkedInPublisher,
+    "x": TwitterPublisher,
+    "facebook": FacebookPublisher,
+    "instagram": InstagramPublisher,
+    "youtube": YouTubePublisher,
+}
 
 
-class BasePublisher(ABC):
-    """Abstract base for platform publishers."""
-
-    @abstractmethod
-    async def publish(
-        self,
-        post_id: str,
-        workspace_id: str,
-        media_assets: list[dict[str, Any]] | None = None,
-    ) -> dict:
-        """Publish a post. Returns result dict with platform_post_id.
-
-        Args:
-            post_id: The post ID to publish.
-            workspace_id: The workspace owning the post.
-            media_assets: Resolved media from platform directory (optional).
-        """
-        ...
-
-
-def get_publisher(platform: str) -> BasePublisher | None:
-    """Get publisher instance for a platform."""
-    publishers = {
-        "linkedin": LinkedInPublisher,
-        "x": TwitterPublisher,
-        "instagram": InstagramPublisher,
-        "facebook": FacebookPublisher,
-        "youtube": YouTubePublisher,
-    }
-    cls = publishers.get(platform)
+def get_publisher(platform: str) -> PlatformPublisher | None:
+    """Get a publisher instance for the given platform."""
+    cls = _PUBLISHER_REGISTRY.get(platform)
     return cls() if cls else None
 
 
-class LinkedInPublisher(BasePublisher):
-    async def publish(self, post_id: str, workspace_id: str, media_assets: list[dict[str, Any]] | None = None) -> dict:
-        # TODO: Implement LinkedIn API post creation
-        # If media_assets provided, upload images/documents as part of the post
-        return {"platform_post_id": "mock-linkedin-id", "status": "published"}
+def get_all_publishers() -> dict[str, PlatformPublisher]:
+    """Get instances of all registered publishers."""
+    return {name: cls() for name, cls in _PUBLISHER_REGISTRY.items()}
 
 
-class TwitterPublisher(BasePublisher):
-    async def publish(self, post_id: str, workspace_id: str, media_assets: list[dict[str, Any]] | None = None) -> dict:
-        # TODO: Implement X/Twitter API tweet posting
-        return {"platform_post_id": "mock-twitter-id", "status": "published"}
-
-
-class InstagramPublisher(BasePublisher):
-    async def publish(self, post_id: str, workspace_id: str, media_assets: list[dict[str, Any]] | None = None) -> dict:
-        # TODO: Implement Instagram Graph API publishing
-        return {"platform_post_id": "mock-instagram-id", "status": "published"}
-
-
-class FacebookPublisher(BasePublisher):
-    async def publish(self, post_id: str, workspace_id: str, media_assets: list[dict[str, Any]] | None = None) -> dict:
-        # TODO: Implement Facebook Graph API publishing
-        return {"platform_post_id": "mock-facebook-id", "status": "published"}
-
-
-class YouTubePublisher(BasePublisher):
-    async def publish(self, post_id: str, workspace_id: str, media_assets: list[dict[str, Any]] | None = None) -> dict:
-        # TODO: Implement YouTube Data API v3 upload
-        return {"platform_post_id": "mock-youtube-id", "status": "published"}
+def register_publisher(platform: str, publisher_cls: type[PlatformPublisher]):
+    """Register a new platform publisher."""
+    _PUBLISHER_REGISTRY[platform] = publisher_cls

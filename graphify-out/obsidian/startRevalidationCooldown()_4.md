@@ -1,0 +1,18 @@
+---
+source_file: "frontend/.next-old/dev/server/chunks/ssr/node_modules_0zw45em._.js"
+type: "code"
+community: "Background()"
+location: "L7331"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Background
+---
+
+# startRevalidationCooldown()
+
+## Connections
+- [[node_modules_0zw45em._.js]] - `contains` [EXTRACTED]
+- [[pingPrefetchScheduler()_4]] - `calls` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Background

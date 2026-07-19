@@ -1,0 +1,117 @@
+# Social Media Manager — AI-Optimized Platform Guide
+
+> Last updated: July 2026 | Version: 1.0.0
+
+## What This Platform Does
+
+AI-powered social media scheduling platform. Schedule posts to LinkedIn, X/Twitter, Facebook, Instagram, and YouTube from one dashboard. Generate content with AI, A/B test variations, track analytics, and manage your entire social presence.
+
+## Core Features
+
+### Publishing
+- **Multi-platform scheduling** — One post → 5 platforms with per-platform caption, media, and timing customization
+- **5 real platform publishers** — LinkedIn (REST API v2), X/Twitter (API v2), Facebook (Graph API v19), Instagram (Content Publishing API), YouTube (Data API v3 with native `publishAt`)
+- **Recurring series** — Automated weekly threads, daily tips, monthly newsletters
+- **Content dependencies** — Schedule post A before post B with dependency chains
+
+### AI-Powered Content
+- **AI caption generator** — Platform-specific captions with tone, hashtags, and CTAs
+- **AI content adaptation** — Rewrite content per platform using LLM (OpenAI, Anthropic, Gemini, OpenRouter)
+- **AI calendar generator** — Auto-generate full month content plans
+- **Content repurposing** — Transform blog → thread → carousel → reel → shorts → story (7 routes)
+- **Multi-language translator** — Translate captions to 20 languages
+- **Hashtag strategist** — AI-powered hashtag research per platform
+- **Content scoring** — Predict engagement 0-100 before publishing
+
+### Intelligence
+- **Data-driven best times** — Analytics-based scheduling recommendations (not static)
+- **Content recycling** — Auto-reshare top performers weekly
+- **Analytics feedback loop** — 6 types of improvement suggestions from your data
+- **Cross-posting templates** — Auto-adapt content for each platform format
+- **Content forecasting** — Predict engagement for proposed posts
+- **Cohort analysis** — Compare performance by platform, time, content type
+
+### Operations
+- **Approval workflow** — Request → approve/reject → publish with multi-stage chains
+- **A/B testing** — Create variants, stagger publish, auto-select winner by metrics
+- **Bulk operations** — Schedule, cancel, caption update, reschedule in batch
+- **Dead-letter queue** — Failed publishes with error categorization and retry
+- **Content versioning** — Snapshot + rollback to any previous version
+- **Content dependencies** — Post A before post B with cycle detection
+
+### Monitoring
+- **Platform health** — Real-time API status, token validity, latency
+- **Rate limit tracking** — Per-platform quotas and throttling
+- **Error dashboard** — Failure analytics, platform breakdown, bulk retry
+- **Audit log** — 17 action types tracking who did what when
+- **Calendar reminders** — Upcoming posts, overdue detection
+
+### Integration
+- **Webhook receivers** — Facebook, Instagram, YouTube callbacks
+- **RSS ingestion** — Auto-create posts from feeds
+- **SSE real-time updates** — Live queue status streaming
+- **CSV/JSON export** — Scheduling and analytics reports
+- **Content templates** — 5 built-in + custom save/reuse
+- **UTM builder** — Auto-tag links per platform for analytics
+- **Link shortener** — Bitly/TinyURL integration
+
+### Quality
+- **10-dimension quality rubric** — Clarity, engagement, CTA, compliance scoring
+- **Compliance checker** — Platform ToS validation, banned patterns, disclosure requirements
+- **Smart scheduling rules** — 6 configurable rules (optimal time, conflicts, hours, balance)
+- **Brand voice checker** — Consistency scoring against voice guidelines
+- **Content gap analyzer** — Identify missing topics via LLM analysis
+- **Social listening** — Brand mention monitoring, sentiment analysis
+- **Competitor tracking** — Posting pattern analysis
+
+### Enterprise
+- **API key management** — Generate, rotate, revoke with 10 permission scopes
+- **Bulk import/export** — CSV import with validation
+- **Report generator** — HTML/JSON analytics reports with insights
+- **Automation rules** — If-then scheduling automation (5 built-in rules)
+- **Team workload balancer** — Distribute posts across team members
+- **Postmortem** — Auto-analyze failed publishes with root cause
+
+## API Overview
+
+- **Base URL:** `https://your-domain.com/api`
+- **Auth:** Bearer JWT token from `/api/auth/login`
+- **Docs:** `https://your-domain.com/api/docs` (Swagger UI)
+- **152 endpoints** across scheduling, analytics, publishing, and management
+
+## Platform Support
+
+| Platform | Publishing | Scheduling | Analytics | Best Times | Hashtags |
+|----------|-----------|-----------|-----------|------------|----------|
+| LinkedIn | ✅ Real API | ✅ | ✅ | ✅ Data-driven | ✅ AI |
+| X/Twitter | ✅ Real API | ✅ | ✅ | ✅ Data-driven | ✅ AI |
+| Facebook | ✅ Real API | ✅ | ✅ | ✅ Data-driven | ✅ AI |
+| Instagram | ✅ Real API | ✅ | ✅ | ✅ Data-driven | ✅ AI |
+| YouTube | ✅ Native scheduling | ✅ | ✅ | ✅ Data-driven | ✅ AI |
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Next.js 16, React 19, TypeScript, Tailwind CSS |
+| Backend | FastAPI (Python 3.12), SQLAlchemy async |
+| Database | PostgreSQL 16 |
+| Queue | Redis 7, Celery 5.4 |
+| AI | OpenAI, Anthropic, Gemini, OpenRouter, DeepSeek |
+| Storage | AWS S3 |
+| Auth | OAuth 2.0, JWT |
+
+## Quick Start
+
+1. Register at `/auth/register`
+2. Connect platforms via OAuth at `/connections`
+3. Create content in Content Studio
+4. Schedule via Calendar or Queue
+5. Track performance in Analytics
+
+## Links
+
+- **Repository:** https://github.com/ranaprv/social-media-app
+- **API Docs:** `/api/docs`
+- **Architecture:** `/docs/ARCHITECTURE.md`
+- **Full Documentation:** See `llms-full.txt`

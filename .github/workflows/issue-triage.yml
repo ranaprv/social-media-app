@@ -1,0 +1,72 @@
+name: Issue Triage
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Analyze and label issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const title = issue.title.toLowerCase();
+            const body = (issue.body || '').toLowerCase();
+
+            const labels = [];
+
+            // Detect type
+            if (title.includes('bug') || title.includes('error') || title.includes('fix') || body.includes('steps to reproduce')) {
+              labels.push('bug');
+            } else if (title.includes('feature') || title.includes('request') || title.includes('add')) {
+              labels.push('enhancement');
+            } else if (title.includes('question') || title.includes('how') || title.includes('?')) {
+              labels.push('question');
+            } else if (title.includes('docs') || title.includes('documentation')) {
+              labels.push('documentation');
+            }
+
+            // Detect area
+            if (title.includes('frontend') || title.includes('ui') || title.includes('css') || title.includes('component')) {
+              labels.push('area: frontend');
+            } else if (title.includes('backend') || title.includes('api') || title.includes('database')) {
+              labels.push('area: backend');
+            } else if (title.includes('auth') || title.includes('login')) {
+              labels.push('area: auth');
+            } else if (title.includes('deploy') || title.includes('ci') || title.includes('docker')) {
+              labels.push('area: devops');
+            }
+
+            // Apply labels
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labels
+              });
+            }
+
+            // Request repro steps for bugs
+            if (labels.includes('bug') && !body.includes('steps to reproduce')) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: `Thanks for reporting this bug!
+
+To help us fix it faster, could you add:
+- **Steps to reproduce** the issue
+- **Expected behavior** vs **actual behavior**
+- **Environment** (OS, browser, version)
+
+This helps us reproduce and fix the issue quickly. 🙏`
+              });
+            }

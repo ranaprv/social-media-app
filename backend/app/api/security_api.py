@@ -157,7 +157,7 @@ async def get_oauth_connections(
             {"provider": "github", "connected": True, "username": "socialmediamanager", "scopes": ["repo", "user"]},
             {"provider": "linkedin", "connected": True, "username": "Social Media Manager", "scopes": ["w_member_social", "r_liteprofile"]},
             {"provider": "twitter", "connected": False, "username": None, "scopes": []},
-            {"provider": "facebook", "connected": True, "username": "Social Media Manager Page", "scopes": ["pages_manage_posts", "pages_read_engagement"]},
+            {"provider": "facebook", "connected": True, "username": "Social Media Manager Page", "scopes": ["public_profile", "email"]},
             {"provider": "youtube", "connected": False, "username": None, "scopes": []},
         ]
     }

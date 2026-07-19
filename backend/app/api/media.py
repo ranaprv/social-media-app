@@ -8,18 +8,49 @@ from typing import Optional
 
 from app.core.database import get_db
 from app.core.security import get_current_user
+from app.core.workspace import ensure_system_workspace
 from app.models.user import User
 from app.models.content import Asset
 
 router = APIRouter(prefix="/media", tags=["media"])
 
 
+def _seed_dummy_assets() -> list:
+    """Create dummy media assets with real playable URLs for testing."""
+    now = datetime.utcnow()
+    system_ws = "system-workspace"
+    SAMPLE_VIDEOS = "https://storage.googleapis.com/gtv-videos-bucket/sample"
+    SAMPLE_IMAGES = "https://picsum.photos"
+    dummies = [
+        # YouTube
+        Asset(id=str(uuid.uuid4()), workspace_id=system_ws, name="Product Demo Video.mp4", type="video", url=f"{SAMPLE_VIDEOS}/ForBiggerBlazes.mp4", platform="youtube", content_type="video", meta={"size": 15_000_000, "mime_type": "video/mp4", "tags": ["demo", "product"]}, created_at=now),
+        Asset(id=str(uuid.uuid4()), workspace_id=system_ws, name="Tutorial - Getting Started.mp4", type="video", url=f"{SAMPLE_VIDEOS}/ForBiggerEscapes.mp4", platform="youtube", content_type="video", meta={"size": 25_000_000, "mime_type": "video/mp4", "tags": ["tutorial", "beginner"]}, created_at=now),
+        Asset(id=str(uuid.uuid4()), workspace_id=system_ws, name="5 Tips in 60 Seconds.mp4", type="video", url=f"{SAMPLE_VIDEOS}/ForBiggerFun.mp4", platform="youtube", content_type="short", meta={"size": 8_000_000, "mime_type": "video/mp4", "tags": ["shorts", "tips"]}, created_at=now),
+        Asset(id=str(uuid.uuid4()), workspace_id=system_ws, name="Behind the Scenes.mp4", type="video", url=f"{SAMPLE_VIDEOS}/ForBiggerJoyrides.mp4", platform="youtube", content_type="short", meta={"size": 5_000_000, "mime_type": "video/mp4", "tags": ["bts", "behind-the-scenes"]}, created_at=now),
+        Asset(id=str(uuid.uuid4()), workspace_id=system_ws, name="Thumbnail - Summer Campaign.png", type="image", url=f"{SAMPLE_IMAGES}/seed/400/300", platform="youtube", content_type="image", meta={"size": 500_000, "mime_type": "image/png", "tags": ["thumbnail", "summer"]}, created_at=now),
+        # Instagram
+        Asset(id=str(uuid.uuid4()), workspace_id=system_ws, name="Trending Reel - Product Launch.mp4", type="video", url=f"{SAMPLE_VIDEOS}/ForBiggerMeltdowns.mp4", platform="instagram", content_type="reel", meta={"size": 12_000_000, "mime_type": "video/mp4", "tags": ["reel", "launch"]}, created_at=now),
+        Asset(id=str(uuid.uuid4()), workspace_id=system_ws, name="Tips Carousel - 10 Slides.pdf", type="pdf", url="/carousels/tips-carousel.pdf", platform="instagram", content_type="carousel", meta={"size": 2_000_000, "mime_type": "application/pdf", "tags": ["carousel", "tips"]}, created_at=now),
+        Asset(id=str(uuid.uuid4()), workspace_id=system_ws, name="Team Photo - Office Day.jpg", type="image", url=f"{SAMPLE_IMAGES}/seed/401/301", platform="instagram", content_type="image", meta={"size": 3_000_000, "mime_type": "image/jpeg", "tags": ["team", "office"]}, created_at=now),
+        Asset(id=str(uuid.uuid4()), workspace_id=system_ws, name="Product Showcase Reel.mp4", type="video", url=f"{SAMPLE_VIDEOS}/BigBuckBunny.mp4", platform="instagram", content_type="reel", meta={"size": 10_000_000, "mime_type": "video/mp4", "tags": ["product", "showcase"]}, created_at=now),
+        # LinkedIn
+        Asset(id=str(uuid.uuid4()), workspace_id=system_ws, name="Thought Leadership Post.txt", type="document", url="/docs/thought-leadership.txt", platform="linkedin", content_type="post", meta={"size": 5_000, "mime_type": "text/plain", "tags": ["thought-leadership", "article"]}, created_at=now),
+        Asset(id=str(uuid.uuid4()), workspace_id=system_ws, name="Industry Report Carousel.pdf", type="pdf", url="/carousels/industry-report.pdf", platform="linkedin", content_type="carousel", meta={"size": 4_000_000, "mime_type": "application/pdf", "tags": ["report", "industry"]}, created_at=now),
+        Asset(id=str(uuid.uuid4()), workspace_id=system_ws, name="CEO Message Video.mp4", type="video", url=f"{SAMPLE_VIDEOS}/ForBiggerBlazes.mp4", platform="linkedin", content_type="video", meta={"size": 20_000_000, "mime_type": "video/mp4", "tags": ["ceo", "message"]}, created_at=now),
+        # Facebook
+        Asset(id=str(uuid.uuid4()), workspace_id=system_ws, name="Community Event Photo.jpg", type="image", url=f"{SAMPLE_IMAGES}/seed/402/302", platform="facebook", content_type="image", meta={"size": 4_000_000, "mime_type": "image/jpeg", "tags": ["community", "event"]}, created_at=now),
+        Asset(id=str(uuid.uuid4()), workspace_id=system_ws, name="Product Walkthrough.mp4", type="video", url=f"{SAMPLE_VIDEOS}/ElephantsDream.mp4", platform="facebook", content_type="video", meta={"size": 18_000_000, "mime_type": "video/mp4", "tags": ["product", "walkthrough"]}, created_at=now),
+    ]
+    return dummies
+
+
 # ── Platform directory structure ────────────────────────────────────────────
 
 PLATFORM_DIRECTORIES: dict[str, dict[str, str]] = {
     "youtube": {
-        "image": "YouTube Thumbnails & Images",
         "video": "YouTube Videos",
+        "short": "YouTube Shorts",
+        "image": "YouTube Thumbnails & Images",
     },
     "instagram": {
         "reel": "Instagram Reels",
@@ -79,18 +110,30 @@ async def get_media_assets(
     folder: Optional[str] = Query(None, description="Filter by folder"),
     sort_by: str = "date",
     sort_order: str = "desc",
-    current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
     """Get media assets with filtering. Supports platform and content_type filters."""
-    # Query real assets from database
-    query = select(Asset).where(Asset.workspace_id == current_user.id)
-    result = await db.execute(query)
-    assets = result.scalars().all()
+    # Seed dummy assets if table is empty (idempotent — only seeds once)
+    count_result = await db.execute(select(Asset))
+    existing = count_result.scalars().all()
+    if not existing:
+        workspace_id = await ensure_system_workspace(db)
+        dummy_assets = _seed_dummy_assets()
+        for a in dummy_assets:
+            db.add(a)
+        try:
+            await db.flush()
+        except Exception:
+            # Race: another request seeded — re-query
+            await db.rollback()
+            count_result = await db.execute(select(Asset))
+            existing = count_result.scalars().all()
+        else:
+            existing = dummy_assets
 
     # Build response
     assets_list = []
-    for a in assets:
+    for a in existing:
         assets_list.append({
             "id": a.id,
             "name": a.name,
@@ -102,8 +145,9 @@ async def get_media_assets(
             "mime_type": (a.meta or {}).get("mime_type", ""),
             "tags": (a.meta or {}).get("tags", []),
             "folder": (a.meta or {}).get("folder", ""),
-            "uploaded_by": current_user.id,
-            "uploaded_by_name": current_user.name or "User",
+            "content": (a.meta or {}).get("content", ""),
+            "uploaded_by": "system",
+            "uploaded_by_name": "System",
             "created_at": a.created_at.isoformat() if a.created_at else datetime.utcnow().isoformat(),
             "metadata": a.meta or {},
         })
@@ -147,12 +191,15 @@ async def upload_asset(
                        f"Valid types: {list(valid_types.keys())}",
             )
 
+    workspace_id = await ensure_system_workspace(db)
+
     asset_id = str(uuid.uuid4())
     now = datetime.utcnow()
+    text_content = request.get("content", "")
 
     asset = Asset(
         id=asset_id,
-        workspace_id=current_user.id,
+        workspace_id="system-workspace",
         name=request.get("name", "uploaded-file"),
         type=request.get("type", "image"),
         url=request.get("url", ""),
@@ -163,6 +210,7 @@ async def upload_asset(
             "mime_type": request.get("mime_type", ""),
             "tags": request.get("tags", []),
             "folder": request.get("folder"),
+            "content": text_content,
         },
         created_at=now,
     )

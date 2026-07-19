@@ -1,0 +1,299 @@
+---
+type: community
+cohesion: 0.01
+members: 243
+---
+
+# Node Modules Next Dist Client 
+
+**Cohesion:** 0.01 - loosely connected
+**Members:** 243 nodes
+
+## Members
+- [[AppRouterAnnouncer()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[DefaultGlobalError()_1]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[DevRootHTTPAccessFallbackBoundary()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[HACK Turbopack tends to generate a lot of irrelevant BUILDING actions,]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[HotReload()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[IMPORTANT We use the null vs Map distinction to track whether_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[NOTE An exception is rewritesredirects in middleware or proxy, which can_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[NOTE It's possible for one of the requests to fail with SoftRetry_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[NOTE The metadataVaryPath isn't used for anything currently because the]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[NOTE This is intentionally using `throw` instead of `use` because we're]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[NOTE We don't currently propagate the reason the prefetch was canceled_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[NOTE We intentionally don't check if any data needs to be fetched from the]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[NOTE We receive the FlightRouterState patch in the same request as the_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[NotAllowedRootHTTPFallbackError()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[RootErrorBoundary()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Add `forbidden` docs_6]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Add `unauthorized` docs_6]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Add an adendum to the overlay telling people about custom error boundaries]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Also check if there's an in-progress navigation. We should never_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO An alternative could be to trigger a soft refresh but to _not__10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO As an extra precaution against soft retry loops, consider_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Cheating the type system here a bit because TypeScript can't tell_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Consider encoding this directly into the router tree instead of_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Consider removing the throw from the inner function, or change it]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Consider reserving some amount of bandwidth for static prefetches._10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Consider treating the case where fetch is rewritten to a different_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Create a scoped dynamic request tree that omits anything that_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Currently the server always renders from the root in]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Dispatch error event]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Does this need to throw or can we just console.error instead Does]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Eventually we will store this type directly on the state object]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Eventually, FlightRouterState will evolve to being a transport format_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Eventually, the param values will not be included in the response_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Evict only segments with matching tags andor paths.]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO For now, since this is an edge case, we reject the prefetch, but_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO For statically-generated-at-build-time HTML pages, the]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Get rid of this extra traversal by computing this during the_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO I chose the max size somewhat arbitrarily. Consider setting this based_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Ideally this check would happen right before we schedule the React_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO If PPR is enabled on some routes but not others, then it's possible_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO If this is a gesture navigation, instead of performing a_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO In output export mode, the headers do nothing. Omit them (and the_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Instead of a refetch marker, we could just omit this subtree's_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Instead of speculatively revalidating, consider including_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Investigate re-enabling this._10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Investigate why the loader produces these fake page segments._10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO None of the rest of these values are consistent with the incoming_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Once we implement Fallback behavior for params, where an entry is_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Rather than create a new list object just to access the cache, the_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Refactor or remove this helper function to accept a string rather_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Remove this check once the old PPR flag is removed_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Rename dynamic - runtime throughout this module_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Revisit this cleanup logic when we integrate the return channel]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Store the dynamic stale time on the top-level state so it's]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Store the dynamic stale time on the top-level state so it's known]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO The `closed` promise was originally used to track when a streaming_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO The canonical URL is the href without the origin. I think_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO The eventual plan is to get rid of our custom request headers and_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO The only thing this is used for is to create a cache key for_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO There are multiple reasons a prefetch might be rejected; we should_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO There are multiple strategies in the Link API for prefetching_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO There are too many intermediate stream transformations in the_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO There is an existing case where the global not found boundary_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO There's nothing inherently special about the empty search string;_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO These fields will be removed from both BFCacheEntry and]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO This is a leftover branch from before Client Segment Cache was_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO This is a temporary solution; the plan is to replace this by adding_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO This is just a heuristic. Getting the actual size of the segment]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO This is not modeled clearly. We use the same type,_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO This needs to happen in the Flight Client._10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO This should access the router methods directly, rather than]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO This should never happen. Bail out with null._10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO This should only be reachable if legacy PPR is enabled (i.e. PPR_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO This similar to what apply-router-state-patch-to-tree does. It_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO This stuff could just go into the reducer. Leaving as-is for now]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Treat this as an upsert — should check if an entry already_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Unify these two segment path helpers. We are inconsistently pushing an emp_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Use Navigation API if available]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO Warn when Navigation API is available (navigation.navigate() should be use]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We can consolidate this branch with previous one by modeling_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We can optimize Next.js's built-in middleware APIs by returning a_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We can probably optimize the format of this data structure to only_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We could store interception behavior in the known route tree itself_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We currently observeunobserve a form every time its href changes._10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We don't need to store the head on the page segment's CacheNode; we_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We need to restore previousNextUrl, too, which represents the_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We should be able to read this from the rewrite header, not the_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We should cache the fact that this is an MPA navigation._10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We should colorize with HTML instead of turning into a string.]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We should just pass the array directly, rather than concatenate_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We should move search params out of FlightRouterState and handle_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We should not upsert an entry if its key was invalidated in the time_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We should only invalidate the route cache if cookies were]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We should probably also manually abort the fetch task, to reclaim_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We should probably model this by changing the key of the root_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We should probably refresh the entire route when this case occurs,_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We should refactor the action response type to be more explicit]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We should store this field on the CacheNode itself. I think we can_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We will unify the responses eventually. I'm keeping the types_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We're intentionally not adding the search param to page_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO We're not consistent about how we do this check. Some places_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO When optimistic routing is enabled, don't block on waiting for_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[TODO When performing a lookup during a navigation, as opposed to a_10]] - rationale - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[WarningIcon()_1]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[_export()_26]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[addBasePath()_6]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[addSegmentPathToUrlInOutputExportMode()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[appendLayoutVaryPath()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[assertByteLength()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[assignLocation()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[bailOnRootNotFound()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[callServer()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[canonicalizeURLPart()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[cleanup()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[clientReducer()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[clonePageVaryPathWithNewSearchParams()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[collectInlinedEntries()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[collectInlinedEntriesImpl()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[completeTraverseNavigation()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[computeClientCacheBustingSearchParam()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[computeDynamicStaleAt()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[convertRouteTreeToFlightRouterState()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[createCacheKey()_12]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[createCacheMap()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[createHrefFromUrl()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[createInitialRouterState()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[createRouterCacheKey()_4]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[deleteFromLru()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[dispatchAppRouterAction()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[dispatchGestureState()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[doesStaticSegmentAppearInURL()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[ensureCleanupIsScheduled()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[extractSourcePageFromFlightRouterState()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[extractSourcePageSegmentsFromFlightRouterState()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[finalizeLayoutVaryPath()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[finalizeMetadataVaryPath()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[finalizePageVaryPath()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[findHeadInCache()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[findHeadInCacheImpl()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[forbidden()_7]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[formatConsoleArgs()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[formatObject()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[gesturePush()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getAccessFallbackErrorTypeByStatus()_7]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getAccessFallbackHTTPStatus()_7]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getAnnouncerNode()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getAppRouterActionQueue()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getAssetPrefix()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getCacheKeyForDynamicParam()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getFlightDataPartsFromPath()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getFulfilledRouteVaryPath()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getFulfilledSegmentVaryPath()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getLastCommittedTree()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getLinkForCurrentNavigation()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getNavigationBuildId()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getNextFlightSegmentPath()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getParamValueFromCacheKey()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getPartialLayoutVaryPath()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getPartialPageVaryPath()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getRedirectStatusCodeFromError()_6]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getRedirectTypeFromError()_6]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getRenderedSearchFromVaryPath()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getRouteVaryPath()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getSegmentVaryPathForRequest()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getSelectedParams()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getSocketProtocol()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getSocketUrl()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[getURLFromRedirectError()_6]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[handleHardNavError()_4]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[handleISRError()_5]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[handleIntersect()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[hasBasePath()_6]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[hasFallbackRouteParams()_9]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[hasInterceptionRouteInCurrentTree()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[hmrRefreshReducer()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[invalidateBfCache()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[isBooleanScriptAttribute()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[isDynamicServerError()_8]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[isExternalURL()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[isHTTPAccessFallbackError()_7]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[isJavaScriptURLString()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[isNavigatingToNewRootLayout()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[isNextRouterError()_7]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[isPrefetchTaskDirty()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[isRecoverableError()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[isRedirectError()_7]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[isStaticGenBailoutError()_8]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[isStreamErrorOrUnfinished()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[lruPut()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[markRouteEntryAsDynamicRewrite()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[navigateReducer()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[nextServerDataCallback()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[nextServerDataRegisterWriter()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[noDefaultTransitionIndicator()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[node_modules_next_dist_client_0r5nbpw._.js]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[normalizeFlightData()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[notFound()_7]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[onCaughtError()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[onLinkVisibilityChanged()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[onUncaughtError()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[parseBinaryMessage()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[parseConsoleArgs()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[parseDynamicParamFromURLPart()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[pingVisibleLinks()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[prefetch()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[readFromBFCache()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[readFromBFCacheDuringRegularNavigation()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[refreshDynamicData()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[refreshOnInstantNavigationUnlock()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[refreshReducer()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[removeBasePath()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[reportHmrLatency()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[reportInvalidHmrMessage()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[restoreReducer()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[serverPatchReducer()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[serverReducer()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[setAttributesFromProps()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[setLastCommittedTree()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[setLinkForCurrentNavigation()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[setNavigationBuildId()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[setPendingHotUpdateWebpack()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[setSizeInCacheMap()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[start()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[unauthorized()_7]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[unmountLinkForCurrentNavigation()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[unstable_isUnrecognizedActionError()_6]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[unstable_rethrow()_6]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[updateBFCacheEntryStaleAt()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[updateLruSize()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[useActionQueue()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[useNavFailureHandler()_4]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[useParams()_6]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[usePathname()_6]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[useRouter()_6]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[useSearchParams()_6]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[useSelectedLayoutSegment()_6]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[useSelectedLayoutSegments()_6]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[useUntrackedPathname()_4]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[useWebSocketPing()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[waitForSegmentCacheEntry()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[waitForWebpackRuntimeHotUpdate()]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[writeHeadToBFCache()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+- [[writeToBFCache()_10]] - code - frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js
+
+## Live Query (requires Dataview plugin)
+
+```dataview
+TABLE source_file, type FROM #community/Node_Modules_Next_Dist_Client_
+SORT file.name ASC
+```
+
+## Connections to other communities
+- 43 edges to [[_COMMUNITY_Addinstantprefetchheaderiflock_1]]
+- 27 edges to [[_COMMUNITY_Coerceprefetchableurl()_2]]
+- 26 edges to [[_COMMUNITY_Abortpendingcachenode()_6]]
+- 18 edges to [[_COMMUNITY_Acquirelock()_8]]
+- 18 edges to [[_COMMUNITY_Background()_6]]
+- 16 edges to [[_COMMUNITY_Cancelprefetchtask()_4]]
+- 11 edges to [[_COMMUNITY_unnamed_75]]
+- 10 edges to [[_COMMUNITY_Deletefromcachemap()_6]]
+- 8 edges to [[_COMMUNITY_Approuter()]]
+- 8 edges to [[_COMMUNITY_Attachinvalidationlistener()_10]]
+- 5 edges to [[_COMMUNITY_Createemptypart()_2]]
+- 5 edges to [[_COMMUNITY_unnamed_82]]
+- 5 edges to [[_COMMUNITY_Invalidateentireprefetchcache(_7]]
+- 4 edges to [[_COMMUNITY_Afterapplyupdates()]]
+- 4 edges to [[_COMMUNITY_Computechangedpath()_10]]
+- 4 edges to [[_COMMUNITY_Createmutableactionqueue()]]
+- 3 edges to [[_COMMUNITY_Searchparamstourlquery()]]
+- 3 edges to [[_COMMUNITY_Createinitialrscpayloadfromfal_2]]
+- 3 edges to [[_COMMUNITY_Dispatchnavigateaction()]]
+- 3 edges to [[_COMMUNITY_Getcurrentapprouterstate()]]
+- 3 edges to [[_COMMUNITY_Getredirecterror()_1]]
+- 3 edges to [[_COMMUNITY_unnamed_126]]
+- 3 edges to [[_COMMUNITY_Matchknownroute()_1]]
+- 3 edges to [[_COMMUNITY_Prepareflightrouterstateforreq]]
+- 2 edges to [[_COMMUNITY_unnamed_124]]
+- 2 edges to [[_COMMUNITY_unnamed_125]]
+- 1 edge to [[_COMMUNITY_Dynamicservererror_6]]
+- 1 edge to [[_COMMUNITY_Readonlyurlsearchparamserror_6]]
+- 1 edge to [[_COMMUNITY_Staticgenbailouterror_6]]
+- 1 edge to [[_COMMUNITY_Unrecognizedactionerror_2]]
+
+## Top bridge nodes
+- [[node_modules_next_dist_client_0r5nbpw._.js]] - degree 484, connects to 30 communities
+- [[extractSourcePageSegmentsFromFlightRouterState()_10]] - degree 3, connects to 1 community
+- [[setAttributesFromProps()]] - degree 3, connects to 1 community

@@ -12,7 +12,7 @@ router = APIRouter(prefix="/advocacy", tags=["advocacy"])
 
 
 @router.get("/shareable")
-async def list_shareable(current_user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+async def list_shareable():
     """List content available for employee sharing."""
     shareable = [
         {"id": "sh-1", "title": "10 Tips for Content Creation", "platform": "linkedin", "share_text": "Great insights from our team on content creation! Here are 10 tips that actually work.", "url": "https://socialmediamanager.ai/blog/10-tips", "shares_count": 12, "image_url": None},
@@ -23,7 +23,7 @@ async def list_shareable(current_user: User = Depends(get_current_user), db: Asy
 
 
 @router.post("/share")
-async def share_content(request: dict, current_user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+async def share_content(request: dict):
     """Share content to a personal social network."""
     post_id = request.get("post_id", "")
     platform = request.get("platform", "linkedin")
@@ -33,7 +33,7 @@ async def share_content(request: dict, current_user: User = Depends(get_current_
         "id": str(uuid.uuid4()),
         "post_id": post_id,
         "platform": platform,
-        "shared_by": current_user.name or current_user.email,
+        "shared_by": "Demo User",
         "shared_at": datetime.utcnow().isoformat(),
         "text": custom_text or "Check out this content!",
         "status": "shared",
@@ -41,7 +41,7 @@ async def share_content(request: dict, current_user: User = Depends(get_current_
 
 
 @router.get("/metrics")
-async def get_advocacy_metrics(current_user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+async def get_advocacy_metrics():
     """Get advocacy program metrics."""
     return {
         "total_shares": 156,
@@ -64,7 +64,7 @@ async def get_advocacy_metrics(current_user: User = Depends(get_current_user), d
 
 
 @router.post("/invite")
-async def invite_advocate(request: dict, current_user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
+async def invite_advocate(request: dict):
     """Invite employees to join advocacy program."""
     emails = request.get("emails", [])
     return {

@@ -85,9 +85,12 @@ export default function ResearchPage() {
               <div className="w-40">
                 <label className="mb-1 block text-xs text-muted-foreground">Model</label>
                 <select className="w-full rounded-lg border bg-background p-2 text-sm" value={provider} onChange={(e) => setProvider(e.target.value)}>
+                  <option value="openrouter">OpenRouter (200+ models)</option>
+                  <option value="omniroute">OmniRoute (Smart Routing)</option>
                   <option value="openai">OpenAI</option>
                   <option value="anthropic">Anthropic</option>
                   <option value="gemini">Gemini</option>
+                  <option value="deepseek">DeepSeek</option>
                 </select>
               </div>
               <Button onClick={search} disabled={loading} className="gap-2">

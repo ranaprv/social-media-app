@@ -1,0 +1,21 @@
+---
+source_file: "frontend/.next-old/dev/static/chunks/node_modules_next_dist_client_0r5nbpw._.js"
+type: "code"
+community: "Acquirelock()"
+location: "L10117"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Acquirelock
+---
+
+# navigateToKnownRoute()
+
+## Connections
+- [[completeHardNavigation()_10]] - `calls` [EXTRACTED]
+- [[completeSoftNavigation()_10]] - `calls` [EXTRACTED]
+- [[navigateToUnknownRoute()_10]] - `calls` [EXTRACTED]
+- [[navigateUsingPrefetchedRouteTree()_10]] - `calls` [EXTRACTED]
+- [[node_modules_next_dist_client_0r5nbpw._.js]] - `contains` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Acquirelock

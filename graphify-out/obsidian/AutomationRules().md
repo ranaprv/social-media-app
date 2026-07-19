@@ -1,0 +1,19 @@
+---
+source_file: "frontend/src/components/scheduler/automation-rules.tsx"
+type: "code"
+community: "Platform Colors"
+location: "L35"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Platform_Colors
+---
+
+# AutomationRules()
+
+## Connections
+- [[automation-rules.tsx]] - `contains` [EXTRACTED]
+- [[headers()]] - `indirect_call` [INFERRED]
+- [[index.ts]] - `re_exports` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Platform_Colors

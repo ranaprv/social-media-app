@@ -90,6 +90,29 @@ async def repurpose_content(
     input_url = request.get("input_url")
     output_types = request.get("output_types", [])
     tone = request.get("tone", "professional")
+    # New mode-based repurposing
+    mode = request.get("mode")
+    input_text = request.get("input", "")
+    platform = request.get("platform", "linkedin")
+
+    if mode:
+        # Mode-based repurposing (new frontend)
+        outputs = request.get("outputs", [])
+        content = input_text or input_content or ""
+        if not content:
+            raise HTTPException(status_code=400, detail="Input content is required")
+
+        results = []
+        for output_name in outputs:
+            ai_result = await _call_ai(
+                f"Repurpose this into a {output_name} with {tone} tone for {platform}:\n\n{content[:2000]}",
+                f"You are an expert content repurposer. Create platform-optimized content for {output_name}."
+            )
+            final_content = ai_result if ai_result else _generate_placeholder(content[:300], output_name.lower().replace(" ", "-"), tone)
+            results.append({"title": output_name, "content": final_content, "platform": platform})
+
+        return {"results": results}
+
 
     if not input_content and not input_url:
         raise HTTPException(status_code=400, detail="Input content or URL is required")

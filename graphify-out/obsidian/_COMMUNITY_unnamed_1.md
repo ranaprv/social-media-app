@@ -1,0 +1,249 @@
+---
+type: community
+cohesion: 0.01
+members: 198
+---
+
+# 
+
+**Cohesion:** 0.01 - loosely connected
+**Members:** 198 nodes
+
+## Members
+- [[.add()_1]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.add()_2]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_68]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_52]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_46]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_53]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_41]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_47]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_51]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_49]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_55]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_59]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_60]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_61]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_63]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_56]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.constructor()_48]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.getTracer()_1]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.record()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[.seal()_1]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[ApiError]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[BailoutToCSRError]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[BubbledError]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[DetachedPromise]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[DiagConsoleLogger]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[DynamicServerError]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[FIXME (wyattjoh) this is a temporary solution to allow us to pass data between]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[HangingPromiseRejectionError]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[InvariantError]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[LRUNode]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[NOTE We don't care about Suspense above body here,]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[NOTE streaming flush]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[NoopCounterMetric]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[NoopHistogramMetric]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[NoopMetric]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[NoopObservableCounterMetric]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[NoopObservableGaugeMetric]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[NoopObservableUpDownCounterMetric]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[NoopTracerProvider]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[NoopUpDownCounterMetric]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[PageSignatureError]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[Postpone()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[RFC-6265_1]] - concept - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[RFC-9110]] - concept - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[RemovedPageError]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[RemovedUAError]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[RequestCookiesAdapter]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[ResponseAborted]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[SentinelNode]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[StaticGenBailoutError]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[TODO (wyattjoh) replace with native response iteration when we can upgrade undi]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[TODO Maybe we need to add a `debugBundlerConfig` option to React]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[TODO Stop accumulating tags in client prerender. (fallthrough)]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[TODO This breaks if sourcemaps with ignore lists are enabled.]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[TODO Throw error if trying to set a cookie after the response]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[TODO activeSpan code path is for when wrapped by]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[TODO fix turbopack providing differing value from webpack]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[TODO it seems like we also hit this after revalidates in dev]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[TODO maybe we can give a more precise error message based on callingExpression]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[TODO should route-module itself handle rendering the 404]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[TODO should we consider this case an invariant]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[TODO this is not spec-compliant behavior and we should not restrict]] - rationale - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[Symbol.for(edge-runtime.inspect.custom)()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[Symbol.iterator()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[__nccwpck_require__()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[_export()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[_interop_require_default()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[accessedDynamicData()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[addLocale()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[addPathPrefix()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[addPathSuffix()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[addRequestMeta()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[addSearchParamsIfPageSegment()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[areCookiesMutableInCurrentPhase()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[assertPostpone()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[atLeastOneTask()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[bootstrap()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[cloneResponse()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[compareAppPaths()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[computeCacheBustingSearchParam()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[computeCacheBustingSearchParamFromInput()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[computeLegacyCacheBustingSearchParam()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[computeSelectedLayoutSegment()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[concatUint8Arrays()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[cookies()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createAbortController()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createBaggage()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createCacheBustingSearchParamInput()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createContextKey()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createCookiesAccessError()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createCookiesWithMutableAccessCheck()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createDocumentClosingStream()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createDraftModeAccessError()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createDynamicTrackingState()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createDynamicValidationState()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createEmptyCookies()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createHeadersAccessError()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createInstantTestScriptInsertionTransformStream()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createInstantValidationState()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createLogLevelDiagLogger()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createNoopMeter()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createPostponeReason()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createPromiseWithResolvers()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createProxiedClientReferenceManifest()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createRenderInBrowserAbortSignal()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createRuntimePrefetchTransformStream()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createServerModuleMap()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[createTraceState()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[deleteBaggage()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[deleteSpan()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[denormalizeWorkerPageName()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[encodeCacheBustingSearchParam()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[ensureCookiesAreStillMutable()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[ensureLeadingSlash()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[formatDynamicAPIAccesses()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[formatNextPathnameInfo()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[get()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[getCacheControlHeader()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[getClientComponentLoaderMetrics()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[getClientReferenceManifest()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[getCookieParser()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[getFirstDynamicReason()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[getGlobal()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[getManifestsSingleton()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[getNavigationDisallowedDynamicReasons()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[getRequestMeta()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[getRevalidateReason()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[getServerActionsManifest()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[getServerModuleMap()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[getStaticShellDisallowedDynamicReasons()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[has()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[indexOfUint8Array()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[instrumentCookiesPromiseWithDevWarnings()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[instrumentHeadersPromiseWithDevWarnings()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isBailoutToCSRError()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isBubbledError()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isDynamicPostpone()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isDynamicPostponeReason()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isDynamicServerError()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isEquivalentUint8Arrays()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isGroupSegment()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isHangingPromiseRejectionError()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isParallelRouteSegment()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isPrerenderInterruptedError()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isRequestAPICallableInsideAfter()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isSpanContextValid()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isStaticGenBailoutError()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isThenable()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isValidSpanId()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[isValidTraceId()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[keys()_1]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[makeHangingCookies()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[makeHangingHeaders()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[makeUntrackedCookies()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[makeUntrackedCookiesWithDevWarnings()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[makeUntrackedHeaders()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[makeUntrackedHeadersWithDevWarnings()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[markCurrentScopeAsDynamic()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[node_modules_next_14ah9l1._.js]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[normalizeAppPath()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[normalizeCacheBustingInput()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[normalizeNextQueryParam()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[normalizeWorkerPageName()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[parse()_1]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[parsePath()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[parsePositiveInt()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[pathHasPrefix()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[postponeWithTracking()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[removeFromUint8Array()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[removePathPrefix()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[removeRequestMeta()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[replaceableWarningDescriptor()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[replaceableWarningDescriptorForSymbolIterator()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[routeKindToIncrementalCacheKind()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[selectWorkerForForwarding()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[sendStatusCode()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[setBaggage()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[setManifestsSingleton()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[setRequestMeta()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[signalFromNodeResponse()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[size()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[streamFromBuffer()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[streamFromString()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[streamToBuffer()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[streamToChunks()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[streamToUint8Array()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[throwForSearchParamsAccessInUseCache()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[throwToInterruptStaticGeneration()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[throwWithStaticGenerationBailoutErrorWithDynamicError()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[trackDynamicDataInDynamicRender()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[tryDecode()_1]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[useDynamicRouteParams()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[useDynamicSearchParams()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[validateKey()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[validateValue()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[waitAtLeastOneReactRenderTask()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[wrapClientComponentLoader()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+- [[wrapSpanContext()]] - code - frontend/.next-old/dev/server/chunks/node_modules_next_14ah9l1._.js
+
+## Live Query (requires Dataview plugin)
+
+```dataview
+TABLE source_file, type FROM #community/
+SORT file.name ASC
+```
+
+## Connections to other communities
+- 31 edges to [[_COMMUNITY_unnamed_27]]
+- 25 edges to [[_COMMUNITY_unnamed_16]]
+- 23 edges to [[_COMMUNITY_unnamed_39]]
+- 16 edges to [[_COMMUNITY_unnamed_20]]
+- 16 edges to [[_COMMUNITY_Chaintransformers()]]
+- 15 edges to [[_COMMUNITY_unnamed_24]]
+- 8 edges to [[_COMMUNITY_unnamed_23]]
+- 7 edges to [[_COMMUNITY_unnamed_67]]
+- 5 edges to [[_COMMUNITY_Appendmutablecookies()_1]]
+- 5 edges to [[_COMMUNITY_Platform Colors]]
+- 4 edges to [[_COMMUNITY_unnamed_88]]
+- 4 edges to [[_COMMUNITY_unnamed_114]]
+- 4 edges to [[_COMMUNITY_unnamed_49]]
+- 4 edges to [[_COMMUNITY_unnamed_98]]
+- 2 edges to [[_COMMUNITY_Streamtostring()]]
+- 1 edge to [[_COMMUNITY_unnamed_157]]
+- 1 edge to [[_COMMUNITY_Creatededupedbycallsiteservere]]
+- 1 edge to [[_COMMUNITY_unnamed_85]]
+- 1 edge to [[_COMMUNITY_unnamed_99]]
+- 1 edge to [[_COMMUNITY_unnamed_158]]
+- 1 edge to [[_COMMUNITY_unnamed_159]]
+- 1 edge to [[_COMMUNITY_unnamed_160]]
+- 1 edge to [[_COMMUNITY_Searchparamstourlquery()]]
+
+## Top bridge nodes
+- [[node_modules_next_14ah9l1._.js]] - degree 345, connects to 23 communities
+- [[postponeWithTracking()]] - degree 7, connects to 1 community
+- [[getRequestMeta()]] - degree 4, connects to 1 community
+- [[streamToChunks()]] - degree 4, connects to 1 community
+- [[concatUint8Arrays()]] - degree 3, connects to 1 community

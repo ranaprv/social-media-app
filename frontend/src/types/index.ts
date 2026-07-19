@@ -478,3 +478,48 @@ export interface MediaSearchParams {
   sortBy?: "name" | "date" | "size"
   sortOrder?: "asc" | "desc"
 }
+
+// ── PostPlatform (Multi-Platform Scheduling) ──────────────────────────
+
+export interface PostPlatform {
+  id: string
+  postId: string
+  workspaceId: string
+  platform: Platform
+  caption: string | null
+  mediaAssetIds: string[]
+  title: string | null
+  status: PostStatus
+  scheduledAt: string | null
+  publishedAt: string | null
+  platformPostId: string | null
+  errorMessage: string | null
+  retryCount: number
+  maxRetries: number
+  createdAt: string
+  updatedAt: string
+}
+
+export interface SchedulePostRequest {
+  postId: string
+  platforms: {
+    platform: Platform
+    caption?: string
+    scheduledAt?: string
+    mediaAssetIds?: string[]
+  }[]
+  defaultScheduledAt?: string
+}
+
+export interface BulkScheduleItem {
+  postId: string
+  platforms: Platform[]
+  scheduledAt?: string
+}
+
+export interface QueueFilters {
+  status?: PostStatus | "all"
+  platform?: Platform | "all"
+  offset?: number
+  limit?: number
+}

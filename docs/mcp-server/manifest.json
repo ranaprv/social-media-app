@@ -1,0 +1,145 @@
+{
+  "name": "social-media-manager",
+  "version": "1.0.0",
+  "description": "MCP server for Social Media Manager — AI-powered scheduling platform",
+  "repository": "https://github.com/ranaprv/social-media-app",
+  "tools": [
+    {
+      "name": "schedule_post",
+      "description": "Schedule a social media post to one or more platforms",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "post_id": {"type": "string", "description": "Post ID to schedule"},
+          "platforms": {"type": "array", "items": {"type": "string"}, "description": "Target platforms: linkedin, x, instagram, facebook, youtube"},
+          "scheduled_at": {"type": "string", "description": "ISO 8601 datetime for scheduling"}
+        },
+        "required": ["post_id", "platforms"]
+      }
+    },
+    {
+      "name": "generate_caption",
+      "description": "Generate an AI caption for a social media platform",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "topic": {"type": "string", "description": "Topic for the caption"},
+          "platform": {"type": "string", "enum": ["linkedin", "x", "instagram", "facebook", "youtube"]},
+          "tone": {"type": "string", "enum": ["professional", "casual", "humorous", "inspirational"]}
+        },
+        "required": ["topic", "platform"]
+      }
+    },
+    {
+      "name": "get_queue",
+      "description": "Get the current publishing queue",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "description": "Filter by status: scheduled, publishing, published, failed"},
+          "platform": {"type": "string", "description": "Filter by platform"},
+          "limit": {"type": "integer", "description": "Max results (default 20)"}
+        }
+      }
+    },
+    {
+      "name": "get_analytics",
+      "description": "Get cross-platform analytics",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "days": {"type": "integer", "description": "Lookback period in days (default 30)"}
+        }
+      }
+    },
+    {
+      "name": "check_health",
+      "description": "Check platform API health and connectivity",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "platform": {"type": "string", "description": "Specific platform to check (optional)"}
+        }
+      }
+    },
+    {
+      "name": "generate_hashtags",
+      "description": "Generate AI hashtags for a platform",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "topic": {"type": "string", "description": "Topic for hashtags"},
+          "platform": {"type": "string", "enum": ["linkedin", "x", "instagram", "facebook", "youtube"]},
+          "count": {"type": "integer", "description": "Number of hashtags (default 5)"}
+        },
+        "required": ["topic", "platform"]
+      }
+    },
+    {
+      "name": "repurpose_content",
+      "description": "Repurpose content into multiple platform formats",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "content": {"type": "string", "description": "Source content to repurpose"},
+          "target_formats": {"type": "array", "items": {"type": "string"}, "description": "Target formats: thread, post, carousel, reel_script, short, story"}
+        },
+        "required": ["content", "target_formats"]
+      }
+    },
+    {
+      "name": "translate_caption",
+      "description": "Translate a caption to another language",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "caption": {"type": "string", "description": "Caption to translate"},
+          "target_language": {"type": "string", "description": "Target language code (es, fr, de, etc.)"}
+        },
+        "required": ["caption", "target_language"]
+      }
+    },
+    {
+      "name": "forecast_engagement",
+      "description": "Predict engagement for a proposed post",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "platform": {"type": "string", "enum": ["linkedin", "x", "instagram", "facebook", "youtube"]},
+          "content_length": {"type": "integer", "description": "Character count of proposed content"},
+          "has_media": {"type": "boolean", "description": "Whether media will be attached"}
+        },
+        "required": ["platform"]
+      }
+    },
+    {
+      "name": "score_content",
+      "description": "Score content quality on 10 dimensions",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "content": {"type": "string", "description": "Content to score"},
+          "platform": {"type": "string", "enum": ["linkedin", "x", "instagram", "facebook", "youtube"]}
+        },
+        "required": ["content", "platform"]
+      }
+    }
+  ],
+  "resources": [
+    {
+      "uri": "llms://platform-overview",
+      "name": "Platform Overview",
+      "description": "Complete overview of Social Media Manager capabilities and features"
+    },
+    {
+      "uri": "llms://api-reference",
+      "name": "API Reference",
+      "description": "Full API endpoint reference with examples"
+    },
+    {
+      "uri": "llms://platform-limits",
+      "name": "Platform Limits",
+      "description": "Character limits, media specs, and rate limits for each platform"
+    }
+  ]
+}

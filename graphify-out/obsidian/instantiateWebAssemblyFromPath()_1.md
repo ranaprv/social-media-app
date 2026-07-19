@@ -1,0 +1,19 @@
+---
+source_file: "frontend/.next-old/dev/server/chunks/ssr/[turbopack]_runtime.js"
+type: "code"
+community: "Compilewebassemblyfrompath()"
+location: "L672"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Compilewebassemblyfrompath
+---
+
+# instantiateWebAssemblyFromPath()
+
+## Connections
+- [[turbopack_runtime.js_1]] - `contains` [EXTRACTED]
+- [[loadWebAssembly()_1]] - `calls` [EXTRACTED]
+- [[readWebAssemblyAsResponse()_1]] - `calls` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Compilewebassemblyfrompath

@@ -1,4 +1,4 @@
-"""Multi-LLM service — unified interface for OpenAI, Anthropic, Gemini."""
+"""Multi-LLM service — unified interface for OpenAI, Anthropic, Gemini, OpenRouter, DeepSeek."""
 import json
 import logging
 from typing import Optional
@@ -30,6 +30,28 @@ AVAILABLE_MODELS = {
             {"id": "gemini-2.5-flash-preview-05-20", "name": "Gemini 2.5 Flash", "max_tokens": 8192, "cost_tier": "medium"},
         ],
     },
+    "openrouter": {
+        "name": "OpenRouter (200+ models)",
+        "models": [
+            {"id": "anthropic/claude-sonnet-4", "name": "Claude Sonnet 4", "max_tokens": 8192, "cost_tier": "medium", "context_window": 200000},
+            {"id": "anthropic/claude-3.5-haiku", "name": "Claude 3.5 Haiku", "max_tokens": 8192, "cost_tier": "low", "context_window": 200000},
+            {"id": "openai/gpt-4o", "name": "GPT-4o", "max_tokens": 4096, "cost_tier": "high", "context_window": 128000},
+            {"id": "openai/gpt-4o-mini", "name": "GPT-4o Mini", "max_tokens": 4096, "cost_tier": "low", "context_window": 128000},
+            {"id": "google/gemini-2.5-flash", "name": "Gemini 2.5 Flash", "max_tokens": 8192, "cost_tier": "low", "context_window": 1000000},
+            {"id": "google/gemini-2.5-pro", "name": "Gemini 2.5 Pro", "max_tokens": 8192, "cost_tier": "medium", "context_window": 1000000},
+            {"id": "meta-llama/llama-4-maverick", "name": "Llama 4 Maverick", "max_tokens": 4096, "cost_tier": "low", "context_window": 1000000},
+            {"id": "mistralai/mistral-large", "name": "Mistral Large", "max_tokens": 4096, "cost_tier": "medium", "context_window": 128000},
+            {"id": "deepseek/deepseek-r1", "name": "DeepSeek R1", "max_tokens": 4096, "cost_tier": "low", "context_window": 128000},
+            {"id": "qwen/qwen-2.5-72b-instruct", "name": "Qwen 2.5 72B", "max_tokens": 4096, "cost_tier": "low", "context_window": 128000},
+        ],
+    },
+    "deepseek": {
+        "name": "DeepSeek",
+        "models": [
+            {"id": "deepseek-chat", "name": "DeepSeek V3", "max_tokens": 8192, "cost_tier": "low", "context_window": 128000},
+            {"id": "deepseek-reasoner", "name": "DeepSeek R1", "max_tokens": 8192, "cost_tier": "low", "context_window": 128000},
+        ],
+    },
 }
 
 
@@ -37,12 +59,16 @@ def get_available_models() -> dict:
     """Return all available models grouped by provider."""
     settings = get_settings()
     available = {}
+    if settings.OPENROUTER_API_KEY:
+        available["openrouter"] = AVAILABLE_MODELS["openrouter"]
     if settings.OPENAI_API_KEY:
         available["openai"] = AVAILABLE_MODELS["openai"]
     if settings.ANTHROPIC_API_KEY:
         available["anthropic"] = AVAILABLE_MODELS["anthropic"]
     if settings.GOOGLE_AI_API_KEY:
         available["gemini"] = AVAILABLE_MODELS["gemini"]
+    if settings.DEEPSEEK_API_KEY:
+        available["deepseek"] = AVAILABLE_MODELS["deepseek"]
     return available
 
 
@@ -57,12 +83,16 @@ async def call_llm(
     """Call an LLM provider with the given prompt. Returns raw text response."""
     settings = get_settings()
 
-    if provider == "openai" and settings.OPENAI_API_KEY:
+    if provider == "openrouter" and settings.OPENROUTER_API_KEY:
+        return await _call_openrouter(prompt, system_prompt, model or "anthropic/claude-sonnet-4", temperature, max_tokens, settings.OPENROUTER_API_KEY)
+    elif provider == "openai" and settings.OPENAI_API_KEY:
         return await _call_openai(prompt, system_prompt, model or "gpt-4o", temperature, max_tokens, settings.OPENAI_API_KEY)
     elif provider == "anthropic" and settings.ANTHROPIC_API_KEY:
         return await _call_anthropic(prompt, system_prompt, model or "claude-sonnet-4-20250514", temperature, max_tokens, settings.ANTHROPIC_API_KEY)
     elif provider == "gemini" and settings.GOOGLE_AI_API_KEY:
         return await _call_gemini(prompt, system_prompt, model or "gemini-2.0-flash", temperature, max_tokens, settings.GOOGLE_AI_API_KEY)
+    elif provider == "deepseek" and settings.DEEPSEEK_API_KEY:
+        return await _call_deepseek(prompt, system_prompt, model or "deepseek-chat", temperature, max_tokens, settings.DEEPSEEK_API_KEY)
     else:
         logger.warning(f"Provider '{provider}' not configured or API key missing")
         return ""
@@ -186,6 +216,65 @@ async def _call_gemini(prompt: str, system_prompt: str, model: str, temperature:
     except Exception as e:
         logger.error(f"Gemini error: {e}")
         return ""
+
+
+async def _call_openai_compatible(
+    prompt: str,
+    system_prompt: str,
+    model: str,
+    temperature: float,
+    max_tokens: int,
+    api_key: str,
+    base_url: str,
+    provider_name: str,
+    default_headers: dict | None = None,
+) -> str:
+    """Shared caller for OpenAI-compatible APIs (OpenRouter, DeepSeek, etc.)."""
+    try:
+        from openai import AsyncOpenAI
+
+        kwargs: dict = {
+            "api_key": api_key,
+            "base_url": base_url,
+        }
+        if default_headers:
+            kwargs["default_headers"] = default_headers
+
+        client = AsyncOpenAI(**kwargs)
+        messages = []
+        if system_prompt:
+            messages.append({"role": "system", "content": system_prompt})
+        messages.append({"role": "user", "content": prompt})
+        response = await client.chat.completions.create(
+            model=model,
+            messages=messages,
+            temperature=temperature,
+            max_tokens=max_tokens,
+        )
+        return response.choices[0].message.content or ""
+    except Exception as e:
+        logger.error(f"{provider_name} error: {e}")
+        return ""
+
+
+async def _call_openrouter(prompt, system_prompt, model, temperature, max_tokens, api_key):
+    return await _call_openai_compatible(
+        prompt, system_prompt, model, temperature, max_tokens, api_key,
+        base_url="https://openrouter.ai/api/v1",
+        provider_name="OpenRouter",
+        default_headers={
+            "HTTP-Referer": "https://socialmedia-manager.ai",
+            "X-Title": "Social Media Manager",
+        },
+    )
+
+
+async def _call_deepseek(prompt, system_prompt, model, temperature, max_tokens, api_key):
+    return await _call_openai_compatible(
+        prompt, system_prompt, model, temperature, max_tokens, api_key,
+        base_url="https://api.deepseek.com/v1",
+        provider_name="DeepSeek",
+    )
 
 
 def _parse_json_response(raw: str) -> Optional[list | dict]:

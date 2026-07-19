@@ -22,3 +22,6 @@ celery_app.conf.update(
 )
 
 celery_app.autodiscover_tasks(["app.tasks"])
+
+# Import scheduler to register beat schedule
+from app.tasks import scheduler  # noqa: F401

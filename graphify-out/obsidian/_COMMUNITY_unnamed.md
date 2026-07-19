@@ -1,0 +1,310 @@
+---
+type: community
+cohesion: 0.01
+members: 257
+---
+
+# 
+
+**Cohesion:** 0.01 - loosely connected
+**Members:** 257 nodes
+
+## Members
+- [[.constructor()_205]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[.constructor()_214]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[.constructor()_230]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[.constructor()_233]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[.constructor()_236]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[.constructor()_213]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[.constructor()_228]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[.constructor()_227]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[.constructor()_220]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[.constructor()_221]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[.constructor()_222]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[.constructor()_224]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[.constructor()_217]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[.constructor()_231]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[BubbledError_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[DecodeError_9]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[DetachedPromise_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[DynamicServerError_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[FIXME (wyattjoh) this is a temporary solution to allow us to pass data between_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[HangingPromiseRejectionError_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[InstantValidationError_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[InvariantError_14]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[MissingStaticPage_9]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[NOTE We don't care about Suspense above body here,_7]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[NOTE streaming flush_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[NOTE this happens outside of render, so we don't need `trackMissingSampleErrorA_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[NormalizeError_9]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[PageNotFoundError_9]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[PageSignatureError_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[Postpone()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[RFC-3986_13]] - concept - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[RFC-6265_2]] - concept - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[RFC-7232]] - concept - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[RemovedPageError_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[RemovedUAError_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[ResponseAborted_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[SentinelNode_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[StaticGenBailoutError_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO Aggregate]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO ESM sourcemaps are O(1) but CommonJS sourcemaps are O(Number of CJS module]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO Just re-export ` as ReactServer`]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO Maybe we need to add a `debugBundlerConfig` option to React_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO Might be more efficient to extract the relevant section from Index Maps.]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO Node.js types should reflect that `findSourceMap` can return `undefined`.]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO React needs a better way to do this. Needed for Server Actions, too.]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO Remove the __PAGE__ requirement from the build instead of]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO Share cache with patch-error-inspect]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO Stop accumulating tags in client prerender. (fallthrough)_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO This breaks if sourcemaps with ignore lists are enabled._5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO Throw error if trying to set a cookie after the response_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO Unlike path params, we don't vary track each search param_4]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO We should encode in the route tree whether a segment is missing]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO We should hoist the search params out of the FlightRouterState_10]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO We shouldn't change what we render based on whether we are streaming or no]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO isWellKnownError - isNextInternalError]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO it seems like we also hit this after revalidates in dev_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO maybe we can give a more precise error message based on callingExpression_5]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO should we consider this case an invariant_1]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[TODO should we consider what values are already present in the page]] - rationale - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[accessedDynamicData()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[accumulateRootVaryParam()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[accumulateVaryParam()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[addLocale()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[addPathPrefix()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[addPathSuffix()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[addSearchParamsIfPageSegment()_14]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[appendMutableCookies()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[appendSegmentRequestKeyPart()_10]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[areCookiesMutableInCurrentPhase()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[assertPostpone()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[atLeastOneTask()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[bootstrap()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[buildDynamicSegmentPlaceholder()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[checkIsAppPPREnabled()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[checkIsRoutePPREnabled()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[cloneResponse()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[compareAppPaths()_14]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[computeCacheBustingSearchParam()_11]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[computeCacheBustingSearchParamFromInput()_11]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[computeLegacyCacheBustingSearchParam()_11]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[computeSelectedLayoutSegment()_14]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[convertSegmentPathToStaticExportFilename()_10]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createAbortController()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createCacheBustingSearchParamInput()_11]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createCookiesWithMutableAccessCheck()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createDefaultMetadata()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createDefaultViewport()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createDocumentClosingStream()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createDraftModeForValidation()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createDynamicTrackingState()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createDynamicValidationState()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createExhaustiveURLSearchParamsProxy()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createInstantTestScriptInsertionTransformStream()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createInstantValidationState()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createLazyResult()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createLocalMetadataBase()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createMetadataComponents()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createMissingCookieSampleError()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createMissingSearchParamSampleError()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createParamsAccessError()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createPostponeReason()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createPrerenderSearchParamsForClientPage()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createPromiseWithResolvers()_11]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createRenderInBrowserAbortSignal()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createResponseVaryParamsAccumulator()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createRuntimePrefetchTransformStream()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createSearchAccessError()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createSegmentRequestKeyPart()_10]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createSegmentVaryParamsAccumulator()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createValidationSampleTracking()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createVaryParamsAccumulator()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createVaryingParams()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[createVaryingSearchParams()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[describeHasCheckingStringProperty()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[describeStringPropertyAccess()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[devirtualizeReactServerURL()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[encodeCacheBustingSearchParam()_11]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[encodeCacheTag()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[encodeParam()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[encodeToFilesystemAndURLSafeString()_10]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[ensureCookiesAreStillMutable()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[ensureLeadingSlash()_14]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[execOnce()_9]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[extractInfoFromServerReferenceId()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[fallbackModeToFallbackField()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[finishAccumulatingVaryParams()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[finishSegmentAccumulator()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[formatDynamicAPIAccesses()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[formatNextPathnameInfo()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[formatServerError()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getAccessFallbackErrorTypeByStatus()_6]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getAccessFallbackHTTPStatus()_6]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getCacheControlHeader()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getClientComponentLoaderMetrics()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getComponentTypeModule()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getCookieParser()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getFirstDynamicReason()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getLayoutOrPageModule()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getLocationOrigin()_9]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getMaxPostponedStateSize()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getMetadataVaryParamsAccumulator()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getMetadataVaryParamsThenable()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getModifiedCookieValues()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getNavigationDisallowedDynamicReasons()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getObjectClassLabel()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getOrigin()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getParamProperties()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getPlaceholderFallbackRouteParams()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getPostponedStateExceededErrorMessage()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getPreviewDeploymentUrl()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getProductionDeploymentUrl()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getRevalidateReason()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getRootParamsVaryParamsAccumulator()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getSegmentParam()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getSocialImageMetadataBaseFallback()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getStackWithoutErrorMessage()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getStaticShellDisallowedDynamicReasons()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getURL()_9]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getUseCacheFunctionInfo()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[getVaryParamsThenable()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[ignoreListAnonymousStackFramesIfSandwiched()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[indexOfUint8Array()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[interceptionPrefixFromParamType()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[interopDefault()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isAnonymousFrameLikelyJSNative()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isAppPageRouteModule()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isAppRouteRouteModule()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isBailoutToCSRError()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isBubbledError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isCatchAll()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isClientReference()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isDynamicPostpone()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isDynamicPostponeReason()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isDynamicServerError()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isEquivalentUint8Arrays()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isFilePattern()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isFullStringUrl()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isGroupSegment()_14]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isHTTPAccessFallbackError()_6]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isHangingPromiseRejectionError()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isHtmlBotRequest()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isInstantValidationError()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isInterceptionAppRoute()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isNextRouterError()_6]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isNormalizedAppRoute()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isPagesAPIRouteModule()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isPagesRouteModule()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isParallelRouteSegment()_14]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isPlainObject()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isPostpone()_6]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isPrerenderInterruptedError()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isRSCRequestHeader()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isReactLargeShellError()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isRedirectError()_6]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isRequestAPICallableInsideAfter()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isResolvedLazyResult()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isServerReference()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isStaticGenBailoutError()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isStringOrURL()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isThenable()_11]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isUseCacheFunction()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[isUserLandError()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[markCurrentScopeAsDynamic()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[noSourceMap()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[node_modules_next_dist_esm_1_kobm0._.js]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[normalizeAppPath()_14]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[normalizeCacheBustingInput()_11]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[normalizeNextQueryParam()_4]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[normalizePathname()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[normalizeRepeatedSlashes()_9]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[normalizeRscURL()_14]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[notImplemented()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[omitUnusedArgs()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[parseFallbackField()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[parseLoaderTree()_3]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[parseMaxPostponedStateSize()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[parsePath()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[parsePositiveInt()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[parseRelativeUrl()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[parseSizeLimit()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[parseStaticPathsResult()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[pathHasPrefix()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[postponeWithTracking()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[preconnect()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[preloadFont()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[preloadStyle()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[redirect()_8]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[removeFromUint8Array()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[removePathPrefix()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[removeTrailingSlash()_10]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[resolveAbsoluteUrlWithPathname()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[resolveArray()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[resolveAsArrayOrUndefined()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[resolveIcon()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[resolveRelativeUrl()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[resolveTitle()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[resolveTitleTemplate()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[resolveUrl()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[responseCookiesToRequestCookies()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[routeKindToIncrementalCacheKind()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[sendError()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[sendStatusCode()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[setMessage()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[shouldServeStreamingMetadata()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[signalFromNodeResponse()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[streamFromBuffer()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[streamFromString()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[stringifyError()_9]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[stripFlightHeaders()]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[throwForSearchParamsAccessInUseCache()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[throwToInterruptStaticGeneration()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[throwWithStaticGenerationBailoutErrorWithDynamicError()_5]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[trackDynamicDataInDynamicRender()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[useDynamicRouteParams()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[useDynamicSearchParams()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[waitAtLeastOneReactRenderTask()_7]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+- [[wrapClientComponentLoader()_1]] - code - frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_esm_1_kobm0._.js
+
+## Live Query (requires Dataview plugin)
+
+```dataview
+TABLE source_file, type FROM #community/
+SORT file.name ASC
+```
+
+## Connections to other communities
+- 55 edges to [[_COMMUNITY_Abortandthrowonsynchronousrequ]]
+- 39 edges to [[_COMMUNITY_unnamed_26]]
+- 26 edges to [[_COMMUNITY_unnamed_31]]
+- 25 edges to [[_COMMUNITY_unnamed_40]]
+- 23 edges to [[_COMMUNITY_unnamed_32]]
+- 20 edges to [[_COMMUNITY_Buildinlinedsegmentprefetch()]]
+- 16 edges to [[_COMMUNITY_unnamed_53]]
+- 16 edges to [[_COMMUNITY_Chaintransformers()_1]]
+- 13 edges to [[_COMMUNITY_unnamed_70]]
+- 10 edges to [[_COMMUNITY_Createproxiedclientreferencema]]
+- 8 edges to [[_COMMUNITY_unnamed_37]]
+- 8 edges to [[_COMMUNITY_unnamed_54]]
+- 4 edges to [[_COMMUNITY_Getbottype()_4]]
+- 2 edges to [[_COMMUNITY_Searchparamstourlquery()]]
+- 2 edges to [[_COMMUNITY_Extractinterceptionrouteinform]]
+- 1 edge to [[_COMMUNITY_Apierror]]
+- 1 edge to [[_COMMUNITY_Bailouttocsrerror_6]]
+- 1 edge to [[_COMMUNITY_unnamed_170]]
+- 1 edge to [[_COMMUNITY_Creatededupedbycallsiteservere]]
+- 1 edge to [[_COMMUNITY_unnamed_94]]
+- 1 edge to [[_COMMUNITY_Lrunode]]
+- 1 edge to [[_COMMUNITY_Middlewarenotfounderror_6]]
+- 1 edge to [[_COMMUNITY_unnamed_140]]
+- 1 edge to [[_COMMUNITY_unnamed_171]]
+- 1 edge to [[_COMMUNITY_unnamed_172]]
+- 1 edge to [[_COMMUNITY_unnamed_133]]
+- 1 edge to [[_COMMUNITY_Streamtostring()]]
+
+## Top bridge nodes
+- [[node_modules_next_dist_esm_1_kobm0._.js]] - degree 519, connects to 27 communities
+- [[postponeWithTracking()_7]] - degree 7, connects to 1 community
+- [[getPlaceholderFallbackRouteParams()]] - degree 3, connects to 1 community

@@ -1,0 +1,19 @@
+---
+source_file: "frontend/.next-old/dev/server/chunks/ssr/node_modules_1br2cfr._.js"
+type: "code"
+community: "Background()"
+location: "L12310"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Background
+---
+
+# onPrefetchConnectionClosed()
+
+## Connections
+- [[node_modules_1br2cfr._.js]] - `contains` [EXTRACTED]
+- [[pingPrefetchScheduler()_6]] - `calls` [EXTRACTED]
+- [[spawnPrefetchSubtask()_6]] - `calls` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Background

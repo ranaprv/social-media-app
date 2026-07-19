@@ -5,7 +5,7 @@ import { DashboardLayout } from "@/components/layout/dashboard-layout"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { TrendingUp, Users, Plus, Loader2, Trash2, BarChart3, ArrowUpRight, ArrowDownRight } from "lucide-react"
+import { Plus, Loader2, Trash2, BarChart3, ArrowUpRight, ArrowDownRight } from "lucide-react"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
 

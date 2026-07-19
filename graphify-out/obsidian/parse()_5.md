@@ -1,0 +1,19 @@
+---
+source_file: "frontend/.next-old/dev/server/chunks/ssr/node_modules_next_dist_compiled_0d323sd._.js"
+type: "code"
+community: ""
+location: "L1506"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/
+---
+
+# parse()
+
+## Connections
+- [[bytes()]] - `calls` [EXTRACTED]
+- [[node_modules_next_dist_compiled_0d323sd._.js]] - `contains` [EXTRACTED]
+- [[tryDecode()_2]] - `calls` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/

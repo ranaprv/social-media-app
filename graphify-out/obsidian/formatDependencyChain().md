@@ -1,0 +1,18 @@
+---
+source_file: "frontend/.next-old/dev/server/chunks/[turbopack]_runtime.js"
+type: "code"
+community: "Applyecmascriptmergedupdatesha"
+location: "L875"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Applyecmascriptmergedupdatesha
+---
+
+# formatDependencyChain()
+
+## Connections
+- [[turbopack_runtime.js]] - `contains` [EXTRACTED]
+- [[computedInvalidatedModules()]] - `calls` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Applyecmascriptmergedupdatesha

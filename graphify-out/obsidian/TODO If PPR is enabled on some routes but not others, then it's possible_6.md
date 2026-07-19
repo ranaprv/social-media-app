@@ -1,0 +1,17 @@
+---
+source_file: "frontend/.next-old/dev/server/chunks/ssr/node_modules_1br2cfr._.js"
+type: "rationale"
+community: "Node Modules 1Br2Cfr"
+location: "L11762"
+tags:
+  - graphify/rationale
+  - graphify/EXTRACTED
+  - community/Node_Modules_1Br2Cfr
+---
+
+# TODO: If PPR is enabled on some routes but not others, then it's possible
+
+## Connections
+- [[node_modules_1br2cfr._.js]] - `rationale_for` [EXTRACTED]
+
+#graphify/rationale #graphify/EXTRACTED #community/Node_Modules_1Br2Cfr

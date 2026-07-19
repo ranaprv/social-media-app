@@ -21,6 +21,8 @@ logger = logging.getLogger(__name__)
 
 # All supported providers in preference order for fallback
 _PROVIDER_FALLBACK_ORDER: list[AIProvider] = [
+    AIProvider.OPENROUTER,
+    AIProvider.OMNIROUTE,
     AIProvider.OPENAI,
     AIProvider.CLAUDE,
     AIProvider.GEMINI,
@@ -80,6 +82,7 @@ class PlatformWorkflowFactory:
         # No override — pick first provider that has a configured API key
         settings = get_settings()
         key_map: dict[AIProvider, str | None] = {
+            AIProvider.OPENROUTER: settings.OPENROUTER_API_KEY or None,
             AIProvider.OPENAI: settings.OPENAI_API_KEY or None,
             AIProvider.CLAUDE: settings.ANTHROPIC_API_KEY or None,
             AIProvider.GEMINI: settings.GOOGLE_AI_API_KEY or None,
@@ -134,6 +137,7 @@ class PlatformWorkflowFactory:
         # Fallback: first available with API key
         settings = get_settings()
         key_map: dict[AIProvider, str | None] = {
+            AIProvider.OPENROUTER: settings.OPENROUTER_API_KEY or None,
             AIProvider.OPENAI: settings.OPENAI_API_KEY or None,
             AIProvider.CLAUDE: settings.ANTHROPIC_API_KEY or None,
             AIProvider.GEMINI: settings.GOOGLE_AI_API_KEY or None,
@@ -154,6 +158,8 @@ class PlatformWorkflowFactory:
             AIProvider.CLAUDE: settings.ANTHROPIC_API_KEY or None,
             AIProvider.OPENAI: settings.OPENAI_API_KEY or None,
             AIProvider.GEMINI: settings.GOOGLE_AI_API_KEY or None,
+            AIProvider.OPENROUTER: settings.OPENROUTER_API_KEY or None,
+            AIProvider.OMNIROUTE: settings.OPENROUTER_API_KEY or None,
         }
         generator_cls = cls._registry.get(provider)
         if generator_cls is None:
@@ -168,7 +174,11 @@ class PlatformWorkflowFactory:
         from app.services.ai_engine.claude_linkedin import ClaudeLinkedInGenerator
         from app.services.ai_engine.openai_x import OpenAIXGenerator
         from app.services.ai_engine.gemini_instagram import GeminiInstagramGenerator
+        from app.services.ai_engine.openrouter import OpenRouterGenerator
+        from app.services.ai_engine.omniroute import OmniRouteGenerator
 
         cls.register(AIProvider.CLAUDE, ClaudeLinkedInGenerator)
         cls.register(AIProvider.OPENAI, OpenAIXGenerator)
         cls.register(AIProvider.GEMINI, GeminiInstagramGenerator)
+        cls.register(AIProvider.OPENROUTER, OpenRouterGenerator)
+        cls.register(AIProvider.OMNIROUTE, OmniRouteGenerator)

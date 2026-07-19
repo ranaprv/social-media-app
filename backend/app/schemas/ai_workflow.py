@@ -34,6 +34,8 @@ class AIProvider(str, Enum):
     CLAUDE = "claude"
     OPENAI = "openai"
     GEMINI = "gemini"
+    OPENROUTER = "openrouter"
+    OMNIROUTE = "omniroute"
 
 
 # ── Content Idea (input) ──────────────────────────────────────────────────

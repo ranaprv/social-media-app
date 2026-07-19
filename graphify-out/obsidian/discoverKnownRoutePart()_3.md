@@ -1,0 +1,21 @@
+---
+source_file: "frontend/.next-old/dev/server/chunks/ssr/node_modules_0ij90is._.js"
+type: "code"
+community: "Coerceprefetchableurl()"
+location: "L3804"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/Coerceprefetchableurl
+---
+
+# discoverKnownRoutePart()
+
+## Connections
+- [[createEmptyPart()_3]] - `calls` [EXTRACTED]
+- [[discoverDynamicChild()_3]] - `calls` [EXTRACTED]
+- [[discoverKnownRoute()_3]] - `calls` [EXTRACTED]
+- [[get()_5]] - `calls` [EXTRACTED]
+- [[node_modules_0ij90is._.js]] - `contains` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/Coerceprefetchableurl

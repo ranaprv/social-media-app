@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { DashboardLayout } from "@/components/layout/dashboard-layout"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -15,7 +15,11 @@ import {
   Check,
   Loader2,
   Play,
+  Cpu,
+  Settings,
+  Circle,
 } from "lucide-react"
+import Link from "next/link"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
@@ -60,6 +64,7 @@ export default function AIAssistantPage() {
   const [activeTab, setActiveTab] = useState<Tab>("image")
   const [loading, setLoading] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [providerInfo, setProviderInfo] = useState<{ configured_count: number; total_models: number } | null>(null)
 
   // Image state
   const [imagePrompt, setImagePrompt] = useState("")
@@ -87,6 +92,13 @@ export default function AIAssistantPage() {
   const [captionEmojis, setCaptionEmojis] = useState(true)
   const [captionHashtags, setCaptionHashtags] = useState(true)
   const [captionResult, setCaptionResult] = useState<Record<string, unknown> | null>(null)
+
+  useEffect(() => {
+    fetch(`${API_URL}/ai/models/providers`)
+      .then(r => r.json())
+      .then(d => setProviderInfo({ configured_count: d.configured_count || 0, total_models: d.total_available_models || 0 }))
+      .catch(() => {})
+  }, [])
 
   async function generateImage() {
     setLoading(true)
@@ -186,6 +198,34 @@ export default function AIAssistantPage() {
         <div>
           <h1 className="text-3xl font-bold">AI Assistant</h1>
           <p className="text-muted-foreground">Generate images, videos, voiceovers, and captions with AI.</p>
+        </div>
+
+        {/* Model Status Banner */}
+        <div className="flex items-center justify-between rounded-xl border bg-card p-3">
+          <div className="flex items-center gap-3">
+            <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${providerInfo && providerInfo.configured_count > 0 ? "bg-green-100" : "bg-amber-100"}`}>
+              <Cpu className={`h-4 w-4 ${providerInfo && providerInfo.configured_count > 0 ? "text-green-600" : "text-amber-600"}`} />
+            </div>
+            <div>
+              <p className="text-sm font-medium">
+                {providerInfo
+                  ? providerInfo.configured_count > 0
+                    ? `${providerInfo.configured_count} provider${providerInfo.configured_count > 1 ? "s" : ""} connected · ${providerInfo.total_models} models`
+                    : "No providers connected"
+                  : "Checking providers..."}
+              </p>
+              <p className="text-xs text-muted-foreground">
+                {providerInfo && providerInfo.configured_count > 0
+                  ? "OmniRoute auto-selects the best model per task"
+                  : "Add an API key to enable AI generation"}
+              </p>
+            </div>
+          </div>
+          <Link href="/dashboard/settings/models">
+            <Button variant="ghost" size="sm" className="gap-1">
+              <Settings className="h-3 w-3" /> Configure
+            </Button>
+          </Link>
         </div>
 
         {/* Tabs */}
