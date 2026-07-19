@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { FileText, Plus, Download, Loader2, Calendar } from "lucide-react"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 export default function ReportsPage() {
   const [reports, setReports] = useState<Array<{ id: string; name: string; metrics: string[]; schedule: string; last_generated: string }>>([])

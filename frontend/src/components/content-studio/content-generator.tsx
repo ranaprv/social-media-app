@@ -9,7 +9,7 @@ import {
   Mic, Layout, MessageSquare, Video, Lightbulb, X, Mail,
 } from "lucide-react"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 const CONTENT_TYPES = [
   { id: "linkedin_post", label: "LinkedIn Post", icon: MessageSquare, color: "bg-blue-600 text-white" },

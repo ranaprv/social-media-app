@@ -11,7 +11,7 @@ import {
 } from "lucide-react"
 import type { MediaType, MediaAsset } from "@/types"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 interface PlatformContentType { id: string; label: string; icon: React.ElementType }
 interface PlatformDef { id: string; name: string; icon: React.ElementType; color: string; contentTypes: PlatformContentType[] }

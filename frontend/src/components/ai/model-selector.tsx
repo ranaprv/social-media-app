@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Cpu, Zap, DollarSign, Check, Circle, ChevronDown, ExternalLink } from "lucide-react"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 interface ModelInfo {
   id: string

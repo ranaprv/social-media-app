@@ -17,7 +17,7 @@ import {
   Loader2,
 } from "lucide-react"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 const statusColors: Record<string, string> = {
   published: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",

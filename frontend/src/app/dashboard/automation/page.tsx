@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Zap, Plus, Trash2, Play, Pause, Loader2 } from "lucide-react"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 interface Rule { id: string; trigger_type: string; trigger_value: string; action_type: string; response_text: string; platforms: string[]; is_active: boolean; trigger_count: number }
 

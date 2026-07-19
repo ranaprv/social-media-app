@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 import { User, Bell, Palette, Shield, Key, Eye, EyeOff, Check, Trash2, ExternalLink, Cpu } from "lucide-react"
 import Link from "next/link"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 interface KeyStatus {
   provider: string
