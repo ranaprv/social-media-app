@@ -9,7 +9,7 @@ import {
   Search, TrendingUp, Users, Key, Loader2, Cpu, BarChart3, Target, Lightbulb,
 } from "lucide-react"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 type Tab = "trends" | "competitors" | "keywords"
 

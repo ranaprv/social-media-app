@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, Play, Pause, BarChart3, Target, Loader2, CheckCircle, XCircle, Clock, Calendar } from "lucide-react"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 interface Strategy { id: string; name: string; status: string; goals: any[]; content_pillars: any[]; posting_frequency: Record<string, any>; computed_stats: any; last_generated_at: string | null }
 interface Plan { id: string; week_start: string; status: string; slot_count: number; approved_count: number }

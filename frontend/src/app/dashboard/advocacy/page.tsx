@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Share2, Users, BarChart3, Loader2, ExternalLink, Copy, Check } from "lucide-react"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 interface Shareable { id: string; title: string; platform: string; share_text: string; url: string; shares_count: number }
 interface Metrics { total_shares: number; total_reach_from_shares: number; active_advocates: number; top_advocates: Array<{ name: string; shares: number; reach: number }> }

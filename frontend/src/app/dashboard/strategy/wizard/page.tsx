@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ArrowLeft, ArrowRight, Target, BookOpen, Users, Clock, Mic, Check } from "lucide-react"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 interface Pillar { name: string; description: string; weight: number; platforms: string[]; tone: string; example_hooks: string[]; content_types: string[] }
 interface Goal { type: string; target: number; platform: string; period: string; baseline: number }
