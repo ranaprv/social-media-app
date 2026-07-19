@@ -44,7 +44,6 @@ export function CrossPlatformAnalytics() {
   const [loading, setLoading] = useState(true)
 
   const fetchData = useCallback(async () => {
-    setLoading(true)
     try {
       const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
       const headers: Record<string, string> = {}
@@ -59,7 +58,7 @@ export function CrossPlatformAnalytics() {
     }
   }, [])
 
-  useEffect(() => { fetchData() }, [fetchData])
+  useEffect(() => { void (async () => { await fetchData() })() }, [fetchData])
 
   const formatNum = (n: number) => {
     if (n >= 1000000) return `${(n / 1000000).toFixed(1)}M`

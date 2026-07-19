@@ -32,7 +32,6 @@ export function ContentPillarManager() {
   const [recommendations, setRecommendations] = useState<string[]>([])
 
   const fetchData = useCallback(async () => {
-    setLoading(true)
     try {
       const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
       const headers: Record<string, string> = {}

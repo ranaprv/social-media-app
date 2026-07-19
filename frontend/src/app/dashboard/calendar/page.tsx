@@ -143,7 +143,11 @@ function initSchedule(p: typeof PLATFORMS[0]): PlatformSchedule {
 
 export default function SchedulingPage() {
   const [activePlatform, setActivePlatform] = useState("linkedin")
-  const [schedules, setSchedules] = useState<Record<string, PlatformSchedule>>({})
+  const [schedules, setSchedules] = useState<Record<string, PlatformSchedule>>(() => {
+    const initial: Record<string, PlatformSchedule> = {}
+    for (const p of PLATFORMS) initial[p.id] = initSchedule(p)
+    return initial
+  })
   const [view, setView] = useState<"daily" | "weekly" | "monthly">("weekly")
   const [saved, setSaved] = useState(false)
   const [showStrategyForm, setShowStrategyForm] = useState(false)
@@ -155,11 +159,6 @@ export default function SchedulingPage() {
   const [editingSlot, setEditingSlot] = useState<string | null>(null)
   const [editSlotData, setEditSlotData] = useState<{ day: string; time: string; type: string; description: string }>({ day: "", time: "", type: "", description: "" })
 
-  useEffect(() => {
-    const initial: Record<string, PlatformSchedule> = {}
-    for (const p of PLATFORMS) initial[p.id] = initSchedule(p)
-    setSchedules(initial)
-  }, [])
 
   useEffect(() => {
     if (showMediaPicker) {

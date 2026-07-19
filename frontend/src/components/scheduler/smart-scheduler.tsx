@@ -71,7 +71,6 @@ export function SmartScheduler({ selectedPlatform }: SmartSchedulerProps) {
   const [activeTab, setActiveTab] = useState<"times" | "suggestions">("times")
 
   const fetchData = useCallback(async () => {
-    setLoading(true)
     try {
       const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
       const headers: Record<string, string> = {}
@@ -93,9 +92,7 @@ export function SmartScheduler({ selectedPlatform }: SmartSchedulerProps) {
     }
   }, [selectedPlatform])
 
-  useEffect(() => {
-    fetchData()
-  }, [fetchData])
+  useEffect(() => { void (async () => { await fetchData() })() }, [fetchData])
 
   const priorityColor = (p: string) => {
     if (p === "high") return "bg-red-100 text-red-700"

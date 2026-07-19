@@ -54,7 +54,6 @@ export function QueueView({ workspaceId }: QueueViewProps) {
   const [retryingId, setRetryingId] = useState<string | null>(null)
 
   const fetchQueue = useCallback(async () => {
-    setLoading(true)
     setError(null)
     try {
       const params = new URLSearchParams()
@@ -81,9 +80,7 @@ export function QueueView({ workspaceId }: QueueViewProps) {
     }
   }, [filters])
 
-  useEffect(() => {
-    fetchQueue()
-  }, [fetchQueue])
+  useEffect(() => { void (async () => { await fetchQueue() })() }, [fetchQueue])
 
   const handleRetry = async (itemId: string) => {
     setRetryingId(itemId)

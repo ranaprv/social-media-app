@@ -34,10 +34,6 @@ export default function StrategyPage() {
   const [strategies, setStrategies] = useState<Strategy[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetchStrategies()
-  }, [])
-
   async function fetchStrategies() {
     try {
       const token = localStorage.getItem("token")
@@ -53,6 +49,8 @@ export default function StrategyPage() {
       setLoading(false)
     }
   }
+
+  useEffect(() => { void (async () => { await fetchStrategies() })() }, [])
 
   async function handleQuickStart() {
     try {

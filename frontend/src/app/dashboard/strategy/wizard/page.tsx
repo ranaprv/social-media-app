@@ -12,7 +12,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
 
 interface Pillar { name: string; description: string; weight: number; platforms: string[]; tone: string; example_hooks: string[]; content_types: string[] }
 interface Goal { type: string; target: number; platform: string; period: string; baseline: number }
-interface Persona { name: string; demographics: Record<string, any>; pain_points: string[]; content_preferences: string[] }
+interface Persona { name: string; demographics: Record<string, string>; pain_points: string[]; content_preferences: string[] }
 interface Frequency { posts_per_week: number; preferred_days: number[]; preferred_hours: number[] }
 
 const STEPS = ["Goals", "Pillars", "Audience", "Frequency", "Brand Voice", "Review"]
@@ -62,8 +62,8 @@ export default function StrategyWizard() {
     if (pillars.length < 5) setPillars([...pillars, { name: "", description: "", weight: 0.2, platforms: [], tone: "professional", example_hooks: [], content_types: ["text_post"] }])
   }
 
-  function updatePillar(idx: number, field: string, value: any) {
-    const updated = [...pillars]; (updated[idx] as any)[field] = value; setPillars(updated)
+  function updatePillar(idx: number, field: string, value: string | number | string[]) {
+    const updated = [...pillars]; (updated[idx] as Record<string, unknown>)[field] = value; setPillars(updated)
   }
 
   const totalPerWeek = Object.values(frequency).reduce((sum, f) => sum + f.posts_per_week, 0)

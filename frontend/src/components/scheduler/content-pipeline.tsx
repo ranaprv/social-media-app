@@ -55,7 +55,6 @@ export function ContentPipelineVisualizer() {
   const [loading, setLoading] = useState(true)
 
   const fetchPipeline = useCallback(async () => {
-    setLoading(true)
     try {
       const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
       const headers: Record<string, string> = {}
@@ -70,7 +69,7 @@ export function ContentPipelineVisualizer() {
     }
   }, [])
 
-  useEffect(() => { fetchPipeline() }, [fetchPipeline])
+  useEffect(() => { void (async () => { await fetchPipeline() })() }, [fetchPipeline])
 
   if (loading) {
     return (

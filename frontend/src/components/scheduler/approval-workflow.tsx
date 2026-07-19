@@ -34,7 +34,6 @@ export function ApprovalWorkflow() {
   const [rejectReason, setRejectReason] = useState<Record<string, string>>({})
 
   const fetchApprovals = useCallback(async () => {
-    setLoading(true)
     try {
       const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
       const headers: Record<string, string> = {}
@@ -52,7 +51,7 @@ export function ApprovalWorkflow() {
     }
   }, [])
 
-  useEffect(() => { fetchApprovals() }, [fetchApprovals])
+  useEffect(() => { void (async () => { await fetchApprovals() })() }, [fetchApprovals])
 
   const handleApprove = async (postId: string) => {
     setActionLoading(postId)

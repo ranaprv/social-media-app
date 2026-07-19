@@ -54,7 +54,7 @@ export function CrisisPlaybook() {
     }
   }, [])
 
-  useEffect(() => { fetchData() }, [fetchData])
+  useEffect(() => { void (async () => { await fetchData() })() }, [fetchData])
 
   const severityColor = (s: string) => {
     if (s === "high") return "bg-red-100 text-red-700"
@@ -135,7 +135,7 @@ export function CrisisPlaybook() {
                 ))}
               </div>
               <div>
-                <h4 className="text-[10px] font-medium text-red-600 mb-1">✗ Don't</h4>
+                <h4 className="text-[10px] font-medium text-red-600 mb-1">✗ Don&apos;t</h4>
                 {activeScenario.dont.map((item, i) => (
                   <p key={i} className="text-[10px] text-muted-foreground">• {item}</p>
                 ))}

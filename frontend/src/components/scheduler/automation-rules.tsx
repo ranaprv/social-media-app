@@ -38,7 +38,6 @@ export function AutomationRules() {
   const [toggling, setToggling] = useState<string | null>(null)
 
   const fetchRules = useCallback(async () => {
-    setLoading(true)
     try {
       const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
       const headers: Record<string, string> = {}

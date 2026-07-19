@@ -9,7 +9,7 @@ import { ArrowLeft, Play, Pause, BarChart3, Target, Loader2, CheckCircle, XCircl
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
 
-interface Strategy { id: string; name: string; status: string; goals: any[]; content_pillars: any[]; posting_frequency: Record<string, any>; computed_stats: any; last_generated_at: string | null }
+interface Strategy { id: string; name: string; status: string; goals: string[]; content_pillars: string[]; posting_frequency: Record<string, string>; computed_stats: Record<string, number>; last_generated_at: string | null }
 interface Plan { id: string; week_start: string; status: string; slot_count: number; approved_count: number }
 interface Slot { id: string; pillar_name: string; platform: string; scheduled_date: string; scheduled_time: string; status: string; topic: string | null; generated_content: string | null; brand_voice_score: number | null }
 interface Adherence { adherence_score: number; total_slots: number; published: number; approved: number; rejected: number; pillar_distribution: Record<string, number>; platform_distribution: Record<string, number>; recommendations: string[] }

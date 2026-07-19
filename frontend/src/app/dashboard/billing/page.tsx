@@ -191,7 +191,7 @@ export default function BillingPage() {
       })
       const data = await res.json()
       if (data.checkout_url) {
-        window.location.href = data.checkout_url
+        window.location.replace(data.checkout_url)
       }
     } catch {
       // ignore

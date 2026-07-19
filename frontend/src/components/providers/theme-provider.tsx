@@ -26,13 +26,15 @@ function getSystemTheme(): "light" | "dark" {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("system")
-  const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light")
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "system"
+    return (localStorage.getItem("social-media-manager-theme") as Theme) || "system"
+  })
+  const resolvedTheme = theme === "system" ? getSystemTheme() : theme
   const [mounted, setMounted] = useState(false)
 
   const applyTheme = useCallback((t: Theme) => {
     const resolved = t === "system" ? getSystemTheme() : t
-    setResolvedTheme(resolved)
     const root = document.documentElement
     if (resolved === "dark") {
       root.classList.add("dark")
@@ -48,12 +50,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [applyTheme])
 
   useEffect(() => {
-    const stored = localStorage.getItem("social-media-manager-theme") as Theme | null
-    const initial = stored || "system"
-    setThemeState(initial)
-    applyTheme(initial)
+    applyTheme(theme)
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- mounted gates hydration-sensitive rendering
     setMounted(true)
-  }, [applyTheme])
+  }, [applyTheme, theme])
 
   // Listen for system theme changes when in "system" mode
   useEffect(() => {

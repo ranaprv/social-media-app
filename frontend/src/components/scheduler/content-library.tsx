@@ -37,7 +37,6 @@ export function ContentLibrary() {
   const [categories, setCategories] = useState<string[]>([])
 
   const fetchLibrary = useCallback(async () => {
-    setLoading(true)
     try {
       const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
       const headers: Record<string, string> = {}
@@ -61,7 +60,7 @@ export function ContentLibrary() {
     }
   }, [searchQuery, selectedCategory])
 
-  useEffect(() => { fetchLibrary() }, [fetchLibrary])
+  useEffect(() => { void (async () => { await fetchLibrary() })() }, [fetchLibrary])
 
   const handleRemove = async (postId: string) => {
     const token = typeof window !== "undefined" ? localStorage.getItem("token") : null

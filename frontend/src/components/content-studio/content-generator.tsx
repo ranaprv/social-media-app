@@ -60,10 +60,12 @@ export function ContentGenerator({ savedIdea, onClearIdea }: Props) {
   // Pre-fill from saved idea
   useEffect(() => {
     if (savedIdea) {
-      setTopic(savedIdea.title)
-      setCustomPrompt(savedIdea.description)
-      if (savedIdea.content_type) setContentType(savedIdea.content_type)
-      if (savedIdea.platforms && savedIdea.platforms.length > 0) setPlatform(savedIdea.platforms[0])
+      queueMicrotask(() => {
+        setTopic(savedIdea.title)
+        setCustomPrompt(savedIdea.description)
+        if (savedIdea.content_type) setContentType(savedIdea.content_type)
+        if (savedIdea.platforms && savedIdea.platforms.length > 0) setPlatform(savedIdea.platforms[0])
+      })
     }
   }, [savedIdea])
 
@@ -84,7 +86,6 @@ export function ContentGenerator({ savedIdea, onClearIdea }: Props) {
 
   const generate = async () => {
     if (!topic.trim()) return
-    setLoading(true)
     try {
       const res = await fetch(`${API_URL}/ai/generate-content`, {
         method: "POST",

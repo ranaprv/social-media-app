@@ -52,7 +52,6 @@ export function CalendarViewDB() {
   const [exporting, setExporting] = useState<string | null>(null)
 
   const fetchEvents = useCallback(async () => {
-    setLoading(true)
     try {
       const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
       const headers: Record<string, string> = {}
@@ -76,7 +75,7 @@ export function CalendarViewDB() {
     }
   }, [currentDate])
 
-  useEffect(() => { fetchEvents() }, [fetchEvents])
+  useEffect(() => { void (async () => { await fetchEvents() })() }, [fetchEvents])
 
   const navigate = (direction: number) => {
     setCurrentDate((prev) => {

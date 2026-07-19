@@ -18,7 +18,7 @@ interface RepurposeResult {
   route: string
   platform: string
   content: string
-  pieces?: any[]
+  pieces?: string[]
   error?: string
 }
 

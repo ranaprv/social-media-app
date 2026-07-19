@@ -60,14 +60,14 @@ export const authOptions: AuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id
-        token.accessToken = (user as any).accessToken
+        token.accessToken = (user as Record<string, unknown>).accessToken as string
       }
       return token
     },
     async session({ session, token }) {
       if (session.user) {
-        ;(session.user as any).id = token.id as string
-        ;(session as any).accessToken = token.accessToken
+        ;(session.user as Record<string, unknown>).id = token.id as string
+        ;(session as Record<string, unknown>).accessToken = token.accessToken
       }
       return session
     },

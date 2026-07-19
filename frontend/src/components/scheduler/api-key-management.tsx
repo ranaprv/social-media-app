@@ -118,7 +118,7 @@ export function APIKeyManagement({ onKeyCreated }: APIKeyManagementProps) {
           <div className="rounded-lg bg-yellow-50 border border-yellow-200 p-3 space-y-2">
             <div className="flex items-center gap-2 text-xs font-medium text-yellow-800">
               <Shield className="h-3.5 w-3.5" />
-              Save this key — it won't be shown again
+              Save this key — it won&apos;t be shown again
             </div>
             <div className="flex items-center gap-2">
               <code className="text-[10px] bg-white px-1.5 py-0.5 rounded flex-1 truncate border">

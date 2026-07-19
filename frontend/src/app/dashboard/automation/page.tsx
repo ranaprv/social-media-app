@@ -63,7 +63,7 @@ export default function AutomationPage() {
                 <div className="flex items-center gap-3">
                   <Zap className={`h-5 w-5 ${rule.is_active ? "text-green-500" : "text-gray-400"}`} />
                   <div>
-                    <h4 className="font-medium">"{rule.trigger_value}" → Auto-reply</h4>
+                    <h4 className="font-medium">&quot;{rule.trigger_value}&quot; → Auto-reply</h4>
                     <p className="text-sm text-muted-foreground truncate max-w-md">{rule.response_text}</p>
                     <div className="flex gap-1 mt-1">{rule.platforms.map((p) => <span key={p} className="rounded bg-muted px-1.5 py-0.5 text-[10px] capitalize">{p}</span>)}</div>
                   </div>

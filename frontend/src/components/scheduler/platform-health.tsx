@@ -42,7 +42,6 @@ export function PlatformHealthMonitor() {
 
   const fetchHealth = useCallback(async (checkAll = false) => {
     if (checkAll) setChecking(true)
-    else setLoading(true)
 
     try {
       const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
@@ -63,7 +62,7 @@ export function PlatformHealthMonitor() {
     }
   }, [])
 
-  useEffect(() => { fetchHealth() }, [fetchHealth])
+  useEffect(() => { void (async () => { await fetchHealth() })() }, [fetchHealth])
 
   const getStatusIcon = (status: string) => {
     switch (status) {

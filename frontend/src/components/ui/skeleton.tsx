@@ -1,3 +1,4 @@
+import { useMemo } from "react"
 import { cn } from "@/lib/utils"
 
 function Skeleton({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
@@ -37,15 +38,16 @@ export function SkeletonTable({ rows = 5 }: { rows?: number }) {
 }
 
 export function SkeletonChart() {
+  const [heights] = useState(() => Array.from({ length: 12 }).map(() => 30 + Math.random() * 70))
   return (
     <div className="h-[300px] w-full rounded-lg border p-4">
       <Skeleton className="mb-4 h-4 w-[140px]" />
       <div className="flex h-[240px] items-end gap-2">
-        {Array.from({ length: 12 }).map((_, i) => (
+        {heights.map((h, i) => (
           <Skeleton
             key={i}
             className="flex-1"
-            style={{ height: `${30 + Math.random() * 70}%` }}
+            style={{ height: `${h}%` }}
           />
         ))}
       </div>

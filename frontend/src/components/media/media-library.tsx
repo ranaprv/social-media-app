@@ -159,7 +159,7 @@ export function MediaLibrary() {
     let url = addForm.url || ""
     let content = ""
 
-    if (addTab === "image") { assetType = "image"; url = addForm.url || "https://picsum.photos/seed/" + Date.now() + "/800/600" }
+    if (addTab === "image") { assetType = "image"; url = addForm.url || "https://picsum.photos/seed/media-placeholder/800/600" }
     else if (addTab === "video") { assetType = "video"; url = addForm.url || "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" }
     else if (addTab === "text") { assetType = "pdf" as MediaType; content = addForm.content; url = `data:text/plain;base64,${btoa(addForm.content || addForm.title || "New text content")}` }
     else if (addTab === "pdf") { assetType = "pdf"; url = addForm.url || "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" }

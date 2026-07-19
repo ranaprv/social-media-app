@@ -57,7 +57,6 @@ export function ErrorDashboard() {
   const [retryingAll, setRetryingAll] = useState(false)
 
   const fetchData = useCallback(async () => {
-    setLoading(true)
     try {
       const token = typeof window !== "undefined" ? localStorage.getItem("token") : null
       const headers: Record<string, string> = {}
@@ -77,9 +76,7 @@ export function ErrorDashboard() {
     }
   }, [period])
 
-  useEffect(() => {
-    fetchData()
-  }, [fetchData])
+  useEffect(() => { void (async () => { await fetchData() })() }, [fetchData])
 
   const handleRetryAll = async (platform?: string) => {
     setRetryingAll(true)
