@@ -4,9 +4,9 @@ import GitHub from "next-auth/providers/github"
 import Credentials from "next-auth/providers/credentials"
 
 // Server-side: use Docker service name (AUTH_API_URL) if available, fallback to NEXT_PUBLIC
-const SERVER_API_URL = process.env.AUTH_API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const SERVER_API_URL = process.env.AUTH_API_URL || process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 // Client-side: use NEXT_PUBLIC_API_URL
-const CLIENT_API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const CLIENT_API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -60,7 +60,7 @@ export const authOptions: AuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id
-        token.accessToken = (user as Record<string, unknown>).accessToken as string
+        token.accessToken = (user as Record<string, unknown>)?.accessToken as string ?? ""
       }
       return token
     },

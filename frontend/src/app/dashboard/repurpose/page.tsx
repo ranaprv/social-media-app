@@ -11,7 +11,7 @@ import {
   ChevronDown, X,
 } from "lucide-react"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 type RepurposeMode = "micro-content" | "text-to-carousel" | "visual-to-text" | "audio-to-written"
 

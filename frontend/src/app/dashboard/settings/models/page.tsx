@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { ModelSelector } from "@/components/ai/model-selector"
 import { Cpu, Zap, Settings, Route, Check, Circle, ExternalLink, Sparkles } from "lucide-react"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 interface ProviderStatus {
   name: string

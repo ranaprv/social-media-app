@@ -10,7 +10,7 @@ import {
   BarChart3, MessageSquare, Globe, Filter, ArrowUpRight, ArrowDownRight,
 } from "lucide-react"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8002/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
 const PLATFORM_COLORS: Record<string, string> = {
   linkedin: "bg-blue-600 text-white",
