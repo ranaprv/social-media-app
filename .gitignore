@@ -12,3 +12,11 @@ venv/
 dist/
 build/
 *.egg-info/
+.gstack/
+
+# Next.js build cache
+.next/
+.next-old/
+
+# Backend venv
+.venv/

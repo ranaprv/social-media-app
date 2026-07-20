@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 import uuid
 from datetime import datetime, timedelta
-from sqlalchemy import select, func
+from sqlalchemy import select, func, desc, case
 
 from app.core.database import get_db
 from app.core.security import get_current_user

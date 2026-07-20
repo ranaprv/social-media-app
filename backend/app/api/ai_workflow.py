@@ -257,6 +257,17 @@ async def ingest_analytics(
     except Exception:
         logger.exception("Failed to persist analytics record (non-blocking)")
 
+    # ── Update prompt performance scores (self-improving loop) ─────────
+    try:
+        from app.services.prompt_evolution import update_prompt_performance
+        total_eng = request.engagements + request.shares + request.clicks
+        eng_rate = (total_eng / request.impressions * 100) if request.impressions > 0 else 0.0
+        # Find the post_id linked to this platform_post and update its prompt score
+        if platform_post and platform_post.content_item_id:
+            await update_prompt_performance(db, platform_post.id, eng_rate)
+    except Exception:
+        logger.exception("Failed to update prompt performance (non-blocking)")
+
     return score_response
 
 

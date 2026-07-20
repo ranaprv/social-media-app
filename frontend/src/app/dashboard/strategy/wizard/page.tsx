@@ -6,7 +6,7 @@ import { DashboardLayout } from "@/components/layout/dashboard-layout"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { ArrowLeft, ArrowRight, Target, BookOpen, Users, Clock, Mic, Check } from "lucide-react"
+import { ArrowLeft, ArrowRight, Target, BookOpen, Users, Clock, Mic, Check, Lightbulb } from "lucide-react"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
@@ -34,6 +34,33 @@ export default function StrategyWizard() {
     x: { posts_per_week: 5, preferred_days: [0, 1, 2, 3, 4], preferred_hours: [8, 12, 17, 20] },
   })
   const [submitting, setSubmitting] = useState(false)
+  const [researchItems, setResearchItems] = useState<Array<{ topic: string; category: string; pillar?: string; score?: number }>>([])
+  const [researchLoaded, setResearchLoaded] = useState(false)
+
+  // Load research items from localStorage on mount
+  useEffect(() => {
+    try {
+      const items = JSON.parse(localStorage.getItem("research_strategy_items") || "[]")
+      setResearchItems(items)
+    } catch { setResearchItems([]) }
+  }, [])
+
+  function loadFromResearch() {
+    if (researchItems.length === 0) return
+    const topics = researchItems.map(r => r.topic)
+    const uniqueTopics = [...new Set(topics)].slice(0, 5)
+    const newPillars: Pillar[] = uniqueTopics.map((topic, i) => ({
+      name: topic,
+      description: researchItems.find(r => r.topic === topic)?.category ? `Researched ${researchItems.find(r => r.topic === topic)!.category} topic` : "From research",
+      weight: i === 0 ? 0.4 : i === 1 ? 0.3 : 0.3 / Math.max(1, uniqueTopics.length - 2),
+      platforms: ["linkedin", "x"],
+      tone: "professional",
+      example_hooks: [`Here's what we found about ${topic}...`],
+      content_types: ["text_post"],
+    }))
+    setPillars(newPillars)
+    setResearchLoaded(true)
+  }
 
   async function handleCreate(activate: boolean = false) {
     setSubmitting(true)
@@ -63,7 +90,7 @@ export default function StrategyWizard() {
   }
 
   function updatePillar(idx: number, field: string, value: string | number | string[]) {
-    const updated = [...pillars]; (updated[idx] as Record<string, unknown>)[field] = value; setPillars(updated)
+    const updated = [...pillars]; (updated[idx] as unknown as Record<string, unknown>)[field] = value; setPillars(updated)
   }
 
   const totalPerWeek = Object.values(frequency).reduce((sum, f) => sum + f.posts_per_week, 0)
@@ -116,6 +143,16 @@ export default function StrategyWizard() {
 
             {step === 1 && (
               <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    {researchItems.length > 0 && (
+                      <Button variant="outline" size="sm" onClick={loadFromResearch} className="gap-1 text-xs">
+                        <Lightbulb className="h-3 w-3" /> Load from Research ({researchItems.length} items)
+                      </Button>
+                    )}
+                    {researchLoaded && <span className="text-xs text-green-600">Pre-populated from research</span>}
+                  </div>
+                </div>
                 {pillars.map((p, i) => (
                   <div key={i} className="border rounded-lg p-4 space-y-3">
                     <div className="flex gap-3">

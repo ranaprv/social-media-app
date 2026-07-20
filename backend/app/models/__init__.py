@@ -13,6 +13,7 @@ from app.models.content import (
 from app.models.ai_workflow import ContentItem, PlatformPost, PlatformAnalytics, PlatformProviderConfig
 from app.models.post_platform import PostPlatform
 from app.models.strategy import ContentStrategy, ContentPlan, ContentSlot, StrategyAuditLog
+from app.models.research import ResearchItem
 
 __all__ = [
     "User",
@@ -37,4 +38,5 @@ __all__ = [
     "ContentPlan",
     "ContentSlot",
     "StrategyAuditLog",
+    "ResearchItem",
 ]

@@ -11,6 +11,7 @@ from app.core.config import get_settings
 
 # Import all models so Alembic can detect them
 from app.models import user, workspace, content  # noqa: F401
+from app.models import prompt_versions, ai_workflow, research  # noqa: F401
 
 config = context.config
 settings = get_settings()

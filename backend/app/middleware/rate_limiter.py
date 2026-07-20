@@ -3,6 +3,7 @@
 Uses sliding window algorithm with Redis backend.
 Falls back to in-memory if Redis is unavailable.
 """
+import os
 import time
 import logging
 from collections import defaultdict
@@ -11,6 +12,9 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 logger = logging.getLogger(__name__)
+
+# Skip rate limiting in test mode
+SKIP_RATE_LIMITING = os.environ.get("TESTING") == "1" or os.environ.get("DATABASE_URL", "").startswith("sqlite")
 
 # In-memory fallback storage
 _memory_store: dict[str, list[float]] = defaultdict(list)
@@ -46,6 +50,10 @@ class RateLimiterMiddleware(BaseHTTPMiddleware):
         self.redis = redis_client
 
     async def dispatch(self, request: Request, call_next):
+        # Skip rate limiting in test mode
+        if SKIP_RATE_LIMITING:
+            return await call_next(request)
+
         # Skip rate limiting for health checks and docs
         path = request.url.path
         if path in ("/api/health", "/api/docs", "/api/redoc", "/openapi.json"):

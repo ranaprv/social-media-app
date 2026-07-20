@@ -1,5 +1,3 @@
-version: "3.8"
-
 # Social Media Manager — Docker Compose
 # Usage: docker compose up --build
 # Production: docker compose -f docker-compose.yml up -d
@@ -69,7 +67,7 @@ services:
         condition: service_healthy
     volumes:
       - ./backend:/app
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    command: sh -c "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
     restart: unless-stopped
     deploy:
       resources:

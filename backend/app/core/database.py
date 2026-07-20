@@ -2,33 +2,30 @@
 
 Production-ready connection pool settings prevent exhaustion under load.
 """
+import os
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase
 from app.core.config import get_settings
 
 settings = get_settings()
 
-# ─── Connection Pool Configuration ─────────────────────────────────────────
-# pool_size:        Base connections in pool (default 5 → set to 20)
-# max_overflow:     Extra connections under burst load (10 more)
-# pool_timeout:     Seconds to wait for a connection before raising
-# pool_recycle:     Recycle connections after N seconds (prevent stale connections)
-# pool_pre_ping:    Validate connections before use (prevents "connection closed" errors)
+# Allow overriding DATABASE_URL for tests (set before this module imports)
+DATABASE_URL = os.environ.get("DATABASE_URL") or settings.DATABASE_URL
 
-engine = create_async_engine(
-    settings.DATABASE_URL,
-    echo=False,
-    # Pool tuning
-    pool_size=20,
-    max_overflow=10,
-    pool_timeout=30,
-    pool_recycle=1800,       # Recycle every 30 minutes
-    pool_pre_ping=True,
-    # Query optimization
-    execution_options={
-        "compiled_cache": {},  # Enable query cache
-    },
-)
+# Pool settings only apply to non-SQLite backends
+_is_sqlite = DATABASE_URL.startswith("sqlite")
+_engine_kwargs = {
+    "echo": False,
+    **({} if _is_sqlite else {
+        "pool_size": 20,
+        "max_overflow": 10,
+        "pool_timeout": 30,
+        "pool_recycle": 1800,
+        "pool_pre_ping": True,
+    }),
+}
+
+engine = create_async_engine(DATABASE_URL, **_engine_kwargs)
 
 AsyncSessionLocal = async_sessionmaker(
     engine,

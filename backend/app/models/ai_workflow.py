@@ -11,8 +11,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Optional
 
-from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint
-from sqlalchemy.dialects.postgresql import JSON, ARRAY
+from sqlalchemy import Column, DateTime, Float, ForeignKey, Integer, String, Text, UniqueConstraint, JSON
 from sqlalchemy.orm import relationship
 
 from app.core.database import Base
@@ -60,7 +59,7 @@ class PlatformPost(Base):
     platform = Column(String(32), nullable=False, index=True)
     platform_post_id = Column(String, index=True)          # native ID once published
     post_text = Column(Text, nullable=False)
-    media_urls = Column(ARRAY(String), default=list)
+    media_urls = Column(JSON, default=list)
     status = Column(String(32), nullable=False, default="pending_approval")
     published_at = Column(DateTime)
     meta = Column("metadata", JSON, default=dict)

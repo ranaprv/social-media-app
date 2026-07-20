@@ -1,43 +1,30 @@
 """Shared test fixtures."""
-import pytest
-import asyncio
-from httpx import AsyncClient, ASGITransport
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
+import os
 
-from app.core.database import Base, get_db
+# Must set DATABASE_URL before any app imports that trigger database.py
+os.environ["DATABASE_URL"] = "sqlite+aiosqlite:///:memory:"
+
+import pytest
+import pytest_asyncio
+from httpx import AsyncClient, ASGITransport
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
+
+from app.core.database import Base, get_db, engine
 from app.main import app
 
-TEST_DATABASE_URL = "sqlite+aiosqlite:///./test.db"
 
-
-@pytest.fixture(scope="session")
-def event_loop():
-    loop = asyncio.new_event_loop()
-    yield loop
-    loop.close()
-
-
-@pytest.fixture(scope="session")
-async def engine():
-    engine = create_async_engine(TEST_DATABASE_URL, echo=False)
+@pytest_asyncio.fixture(autouse=True)
+async def setup_db():
+    """Create all tables before each test, drop after."""
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-    yield engine
+    yield
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.drop_all)
-    await engine.dispose()
 
 
-@pytest.fixture
-async def db_session(engine):
-    session_factory = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
-    async with session_factory() as session:
-        yield session
-        await session.rollback()
-
-
-@pytest.fixture
-async def client(engine):
+@pytest_asyncio.fixture
+async def client():
     session_factory = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
     async def override_get_db():
@@ -56,7 +43,7 @@ async def client(engine):
     app.dependency_overrides.clear()
 
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def auth_headers(client):
     """Register and login a test user, return auth headers."""
     await client.post("/api/auth/register", json={

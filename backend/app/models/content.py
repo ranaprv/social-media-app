@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, DateTime, ForeignKey, JSON, ARRAY, Integer
+from sqlalchemy import Column, String, DateTime, ForeignKey, JSON, Integer
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.core.database import Base
@@ -12,7 +12,7 @@ class Post(Base):
     author_id = Column(String, ForeignKey("users.id"), nullable=False)
     title = Column(String)
     content = Column(String, nullable=False)
-    media_urls = Column(ARRAY(String), default=[])
+    media_urls = Column(JSON, default=[])
     platform = Column(String, nullable=False)
     status = Column(String, default="draft")
     scheduled_at = Column(DateTime)
@@ -109,7 +109,7 @@ class BrandVoice(Base):
     formatting = Column(String)
     vocabulary = Column(String)
     technical_depth = Column(String)
-    sample_posts = Column(ARRAY(String), default=[])
+    sample_posts = Column(JSON, default=[])
     training_sources = Column(JSON, default=[])
     approval_history = Column(JSON, default=[])
     created_at = Column(DateTime, default=datetime.utcnow)

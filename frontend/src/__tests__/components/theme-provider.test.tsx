@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react"
-import { describe, it, expect, vi } from "vitest"
+import { render, screen, waitFor, act } from "@testing-library/react"
+import { describe, it, expect, vi, beforeEach } from "vitest"
 import { ThemeProvider, useTheme } from "@/components/providers/theme-provider"
 
 // Mock localStorage
@@ -39,32 +39,50 @@ function TestComponent() {
 }
 
 describe("ThemeProvider", () => {
-  it("provides default theme", () => {
-    render(
-      <ThemeProvider>
-        <TestComponent />
-      </ThemeProvider>
-    )
-    expect(screen.getByTestId("theme").textContent).toBe("system")
+  beforeEach(() => {
+    localStorageMock.clear()
   })
 
-  it("allows theme changes", () => {
+  it("provides default theme", async () => {
     render(
       <ThemeProvider>
         <TestComponent />
       </ThemeProvider>
     )
-    screen.getByText("Set Dark").click()
-    expect(screen.getByTestId("theme").textContent).toBe("dark")
+    await waitFor(() => {
+      expect(screen.getByTestId("theme").textContent).toBe("system")
+    })
   })
 
-  it("persists to localStorage", () => {
+  it("allows theme changes", async () => {
     render(
       <ThemeProvider>
         <TestComponent />
       </ThemeProvider>
     )
-    screen.getByText("Set Light").click()
+    await waitFor(() => {
+      expect(screen.getByTestId("theme").textContent).toBe("system")
+    })
+    await act(async () => {
+      screen.getByText("Set Dark").click()
+    })
+    await waitFor(() => {
+      expect(screen.getByTestId("theme").textContent).toBe("dark")
+    })
+  })
+
+  it("persists to localStorage", async () => {
+    render(
+      <ThemeProvider>
+        <TestComponent />
+      </ThemeProvider>
+    )
+    await waitFor(() => {
+      expect(screen.getByTestId("theme").textContent).toBe("system")
+    })
+    await act(async () => {
+      screen.getByText("Set Light").click()
+    })
     expect(localStorageMock.getItem("social-media-manager-theme")).toBe("light")
   })
 })

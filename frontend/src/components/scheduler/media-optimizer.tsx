@@ -25,6 +25,7 @@ interface MediaSpec {
 }
 
 interface AnalysisResult {
+  asset_name?: string
   platform: string
   media_type: string
   status: "ok" | "needs_optimization" | "unknown"

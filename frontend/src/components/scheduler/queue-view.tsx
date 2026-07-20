@@ -242,16 +242,16 @@ export function QueueView({ workspaceId }: QueueViewProps) {
                     <div className="flex items-center gap-3 mt-0.5 text-xs text-muted-foreground">
                       <span className="flex items-center gap-1">
                         <Clock className="h-3 w-3" />
-                        {formatDateTime(item.scheduled_at)}
+                        {formatDateTime(item.scheduledAt)}
                       </span>
-                      {item.retry_count > 0 && (
+                      {item.retryCount > 0 && (
                         <span className="text-orange-600">
-                          {item.retry_count}/{item.max_retries} retries
+                          {item.retryCount}/{item.maxRetries} retries
                         </span>
                       )}
-                      {item.error_message && (
+                      {item.errorMessage && (
                         <span className="text-red-500 truncate max-w-[200px]">
-                          {item.error_message}
+                          {item.errorMessage}
                         </span>
                       )}
                     </div>

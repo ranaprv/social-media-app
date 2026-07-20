@@ -131,15 +131,51 @@ class ContentOrchestrator:
     async def _stage_research(
         self, request: ContentIdeaRequest, generator: AIContentGenerator
     ) -> None:
-        """Stage 1: Research — gather context and notes on the topic."""
+        """Stage 1: Research — gather real context via web search + LLM analysis."""
         self._current_status = ContentStatus.RESEARCH
-        # In production this would call web search APIs, trend data, etc.
-        self._research_notes = (
-            f"Research summary for '{request.topic}' on {request.platform.value}. "
-            f"Target audience: {request.target_audience or 'general'}. "
-            "Key trends identified: growing interest, seasonal relevance, competitor gaps."
-        )
-        logger.info("Research complete — %d chars", len(self._research_notes))
+
+        try:
+            from app.services.web_search import research_topic
+
+            research = await research_topic(
+                topic=request.topic,
+                platform=request.platform.value,
+                aspect="general",
+            )
+
+            # Build research notes from real data
+            parts = [
+                f"Research for '{request.topic}' on {request.platform.value}.",
+            ]
+
+            if research.get("summary"):
+                parts.append(f"\nSummary: {research['summary']}")
+
+            if research.get("key_insights"):
+                parts.append("\nKey insights:")
+                for insight in research["key_insights"][:5]:
+                    parts.append(f"  - {insight}")
+
+            if research.get("suggested_angles"):
+                parts.append("\nSuggested content angles:")
+                for angle in research["suggested_angles"][:3]:
+                    parts.append(f"  - {angle}")
+
+            if request.target_audience:
+                parts.append(f"\nTarget audience: {request.target_audience}")
+
+            self._research_notes = "\n".join(parts)
+            logger.info("Research complete — %d chars, %d web results",
+                        len(self._research_notes), len(research.get("web_results", [])))
+
+        except Exception as e:
+            # Graceful fallback — don't block generation if research fails
+            logger.warning("Research failed, using fallback: %s", e)
+            self._research_notes = (
+                f"Research summary for '{request.topic}' on {request.platform.value}. "
+                f"Target audience: {request.target_audience or 'general'}. "
+                "Key trends identified: growing interest, seasonal relevance."
+            )
 
     async def _stage_draft(
         self, request: ContentIdeaRequest, generator: AIContentGenerator

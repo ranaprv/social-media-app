@@ -13,7 +13,7 @@ import {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
 
-type RepurposeMode = "micro-content" | "text-to-carousel" | "visual-to-text" | "audio-to-written"
+type RepurposeMode = "micro-content" | "text-to-carousel" | "visual-to-text" | "audio-to-written" | "from-research"
 
 interface ModeConfig {
   id: RepurposeMode
@@ -67,6 +67,16 @@ const MODES: ModeConfig[] = [
     outputs: ["Email Newsletter", "Blog Post", "LinkedIn Article", "Twitter Thread", "Key Takeaways List"],
     color: "bg-amber-50 border-amber-200",
   },
+  {
+    id: "from-research",
+    label: "From Research",
+    description: "Turn researched topics into multi-platform content using your saved findings",
+    icon: BookOpen,
+    inputLabel: "Select Research Items",
+    inputPlaceholder: "Choose from saved research items...",
+    outputs: ["LinkedIn Post", "Instagram Carousel", "Twitter Thread", "YouTube Script", "Blog Post"],
+    color: "bg-cyan-50 border-cyan-200",
+  },
 ]
 
 const PLATFORMS = [
@@ -87,6 +97,18 @@ export default function RepurposePage() {
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null)
   const [savedToMedia, setSavedToMedia] = useState<number | null>(null)
   const [targetPlatform, setTargetPlatform] = useState("linkedin")
+  const [researchItems, setResearchItems] = useState<Array<{ topic: string; category: string; score?: number }>>([])
+  const [selectedResearchTopics, setSelectedResearchTopics] = useState<Set<number>>(new Set())
+
+  // Load research items from localStorage when "from-research" mode is selected
+  useEffect(() => {
+    if (mode === "from-research") {
+      try {
+        const items = JSON.parse(localStorage.getItem("research_strategy_items") || "[]")
+        setResearchItems(items)
+      } catch { setResearchItems([]) }
+    }
+  }, [mode])
 
   const currentMode = MODES.find(m => m.id === mode)
 

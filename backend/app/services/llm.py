@@ -105,12 +105,31 @@ async def call_llm_json(
     model: Optional[str] = None,
     temperature: float = 0.7,
     max_tokens: int = 3000,
+    retries: int = 3,
 ) -> Optional[list | dict]:
-    """Call LLM and parse JSON response. Returns parsed data or None."""
-    raw = await call_llm(prompt, system_prompt, provider, model, temperature, max_tokens)
-    if not raw:
-        return None
-    return _parse_json_response(raw)
+    """Call LLM and parse JSON response. Retries on failure with exponential backoff."""
+    import asyncio
+
+    last_error = None
+    for attempt in range(retries):
+        try:
+            raw = await call_llm(prompt, system_prompt, provider, model, temperature, max_tokens)
+            if raw:
+                result = _parse_json_response(raw)
+                if result is not None:
+                    return result
+            last_error = "Empty or unparseable response"
+        except Exception as e:
+            last_error = str(e)
+            logger.warning(f"LLM call attempt {attempt + 1}/{retries} failed: {e}")
+
+        if attempt < retries - 1:
+            delay = 2 ** attempt
+            logger.info(f"Retrying in {delay}s...")
+            await asyncio.sleep(delay)
+
+    logger.error(f"LLM call failed after {retries} attempts: {last_error}")
+    return None
 
 
 async def multi_model_brainstorm(

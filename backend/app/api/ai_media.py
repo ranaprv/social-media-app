@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 import uuid
 
@@ -6,6 +6,7 @@ from app.core.database import get_db
 from app.core.security import get_current_user
 from app.core.config import get_settings
 from app.models.user import User
+from app.services.ai_media_service import generate_image as generate_image_service
 
 router = APIRouter(prefix="/ai/media", tags=["ai-media"])
 
@@ -49,26 +50,33 @@ async def generate_image(
     current_user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """Generate an AI image asset."""
+    """Generate an AI image asset using DALL-E 3."""
     asset_type = request.get("asset_type", "social-graphic")
     prompt = request.get("prompt", "")
     style = request.get("style", "Modern Minimalist")
+    platform = request.get("platform", "instagram")
     brand_colors = request.get("brand_colors", [])
     text_overlay = request.get("text_overlay", "")
 
-    # In production, this would call DALL-E or similar
-    return {
-        "id": str(uuid.uuid4()),
-        "status": "generated",
-        "asset_type": asset_type,
-        "prompt": prompt,
-        "style": style,
-        "url": f"/generated/images/{uuid.uuid4()}.png",
-        "thumbnail_url": f"/generated/thumbs/{uuid.uuid4()}.png",
-        "dimensions": ASSET_TYPES.get(asset_type, {}).get("dimensions", "1080x1080"),
-        "text_overlay": text_overlay,
-        "message": "Image generation requires DALL-E API key. Add OPENAI_API_KEY to .env for real generation.",
-    }
+    if not prompt:
+        raise HTTPException(status_code=400, detail="Prompt is required")
+
+    if asset_type not in ASSET_TYPES:
+        raise HTTPException(status_code=400, detail=f"Invalid asset_type. Must be one of: {list(ASSET_TYPES.keys())}")
+
+    result = await generate_image_service(
+        prompt=prompt,
+        asset_type=asset_type,
+        style=style,
+        platform=platform,
+        brand_colors=brand_colors,
+        text_overlay=text_overlay,
+    )
+
+    if result.get("status") == "error":
+        raise HTTPException(status_code=502, detail=result.get("message", "Image generation failed"))
+
+    return result
 
 
 @router.post("/generate-video")

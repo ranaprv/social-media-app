@@ -158,6 +158,10 @@ export default function SchedulingPage() {
   const [currentDate, setCurrentDate] = useState(new Date())
   const [editingSlot, setEditingSlot] = useState<string | null>(null)
   const [editSlotData, setEditSlotData] = useState<{ day: string; time: string; type: string; description: string }>({ day: "", time: "", type: "", description: "" })
+  const [showResearchModal, setShowResearchModal] = useState(false)
+  const [researchItems, setResearchItems] = useState<Array<{ id: string; topic: string; category: string; video_seo_score?: number; trend_velocity?: number; platform?: string }>>([])
+  const [selectedResearch, setSelectedResearch] = useState<Set<string>>(new Set())
+  const [researchLoading, setResearchLoading] = useState(false)
 
 
   useEffect(() => {
@@ -214,6 +218,48 @@ export default function SchedulingPage() {
   }
   function saveSchedule() { setSaved(true); setTimeout(() => setSaved(false), 2000) }
 
+  async function loadResearchTopics() {
+    setResearchLoading(true)
+    try {
+      const token = localStorage.getItem("token")
+      const [risingRes, topRes] = await Promise.all([
+        fetch(`${API_URL}/research/rising?platform=${activePlatform}&limit=5`, { headers: { Authorization: `Bearer ${token}` } }),
+        fetch(`${API_URL}/research/top-scoring?limit=5`, { headers: { Authorization: `Bearer ${token}` } }),
+      ])
+      const rising = risingRes.ok ? (await risingRes.json()).items || [] : []
+      const top = topRes.ok ? (await topRes.json()).items || [] : []
+      const all = [...rising, ...top]
+      // Dedupe by topic
+      const seen = new Set<string>()
+      const deduped = all.filter((item: { topic: string }) => { if (seen.has(item.topic)) return false; seen.add(item.topic); return true })
+      setResearchItems(deduped)
+      setSelectedResearch(new Set(deduped.map((i: { id: string }) => i.id)))
+    } catch { setResearchItems([]) }
+    setResearchLoading(false)
+    setShowResearchModal(true)
+  }
+
+  function applyResearchSlots() {
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri"]
+    const selected = researchItems.filter(i => selectedResearch.has(i.id))
+    const newSlots = selected.map((item, idx) => ({
+      id: `research-${item.id}-${Date.now()}`,
+      day: days[idx % days.length],
+      time: "10:00",
+      type: "Text Post",
+      description: `${item.topic}${item.video_seo_score ? ` (SEO: ${item.video_seo_score})` : ""}`,
+      frequency: "research",
+    }))
+    setSchedules(prev => ({
+      ...prev, [activePlatform]: {
+        ...prev[activePlatform],
+        slots: [...prev[activePlatform].slots, ...newSlots],
+        posts_per_week: prev[activePlatform].posts_per_week + newSlots.length,
+      },
+    }))
+    setShowResearchModal(false)
+  }
+
   const goal = current?.strategy.goal
   const perMonth = goal ? Math.round((goal.target - goal.current) / (goal.months || 6)) : 0
 
@@ -239,10 +285,15 @@ export default function SchedulingPage() {
             <h1 className="text-3xl font-bold tracking-tight">Content Scheduling</h1>
             <p className="text-muted-foreground">Plan platform-specific content strategies based on your growth targets.</p>
           </div>
-          <Button onClick={saveSchedule} className="gap-2">
-            {saved ? <Check className="h-4 w-4" /> : <Save className="h-4 w-4" />}
-            {saved ? "Saved!" : "Save All"}
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={loadResearchTopics} className="gap-2">
+              <TrendingUp className="h-4 w-4" /> Use Researched Topics
+            </Button>
+            <Button onClick={saveSchedule} className="gap-2">
+              {saved ? <Check className="h-4 w-4" /> : <Save className="h-4 w-4" />}
+              {saved ? "Saved!" : "Save All"}
+            </Button>
+          </div>
         </div>
 
         <Tabs value={activePlatform} onValueChange={setActivePlatform}>
@@ -474,6 +525,49 @@ export default function SchedulingPage() {
             </TabsContent>
           ))}
         </Tabs>
+
+        {/* Research Topics Modal */}
+        {showResearchModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+            <Card className="w-full max-w-lg mx-4 max-h-[70vh] flex flex-col">
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-base flex items-center gap-2"><TrendingUp className="h-4 w-4" /> Use Researched Topics</CardTitle>
+                  <button onClick={() => setShowResearchModal(false)} className="text-muted-foreground hover:text-foreground">×</button>
+                </div>
+                <CardDescription>Select research items to add as calendar slots on {PLATFORMS.find(p => p.id === activePlatform)?.name}.</CardDescription>
+              </CardHeader>
+              <CardContent className="overflow-y-auto flex-1 space-y-3">
+                {researchLoading ? (
+                  <div className="py-8 text-center text-sm text-muted-foreground">Loading research items...</div>
+                ) : researchItems.length === 0 ? (
+                  <div className="py-8 text-center text-sm text-muted-foreground"><p>No research items found.</p><p className="mt-1">Run keyword or trend research first, then come back.</p></div>
+                ) : (
+                  <>
+                    <div className="space-y-2">
+                      {researchItems.map(item => (
+                        <label key={item.id} className="flex items-center gap-3 rounded-lg border p-3 cursor-pointer hover:bg-muted/50 transition-colors">
+                          <input type="checkbox" checked={selectedResearch.has(item.id)} onChange={() => setSelectedResearch(prev => { const next = new Set(prev); next.has(item.id) ? next.delete(item.id) : next.add(item.id); return next })} className="rounded" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium truncate">{item.topic}</p>
+                            <div className="flex gap-2 mt-0.5">
+                              <span className="text-[10px] text-muted-foreground">{item.category}</span>
+                              {item.video_seo_score && <span className="text-[10px] text-green-600">SEO: {item.video_seo_score}</span>}
+                              {item.trend_velocity && <span className="text-[10px] text-blue-600">Vel: {item.trend_velocity}</span>}
+                            </div>
+                          </div>
+                        </label>
+                      ))}
+                    </div>
+                    <Button onClick={applyResearchSlots} disabled={selectedResearch.size === 0} className="w-full gap-2">
+                      <Plus className="h-4 w-4" /> Add {selectedResearch.size} Topic{selectedResearch.size !== 1 ? "s" : ""} to Calendar
+                    </Button>
+                  </>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
     </DashboardLayout>
   )

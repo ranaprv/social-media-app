@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
   PenTool, Sparkles, Loader2, Copy, Check, Cpu, Save, Image, Film, FileText,
-  Mic, Layout, MessageSquare, Video, Lightbulb, X, Mail,
+  Mic, Layout, MessageSquare, Video, Lightbulb, X, Mail, Clapperboard, Search, Globe,
 } from "lucide-react"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api"
@@ -17,6 +17,7 @@ const CONTENT_TYPES = [
   { id: "article", label: "Article", icon: FileText, color: "bg-blue-100 text-blue-700" },
   { id: "carousel", label: "Carousel", icon: Layout, color: "bg-purple-100 text-purple-700" },
   { id: "reel", label: "Reel", icon: Mic, color: "bg-gradient-to-r from-purple-500 to-pink-500 text-white" },
+  { id: "video_script", label: "Video Script", icon: Clapperboard, color: "bg-orange-100 text-orange-700" },
   { id: "short_video", label: "Short Video", icon: Video, color: "bg-red-100 text-red-700" },
   { id: "image", label: "Image Prompt", icon: Image, color: "bg-pink-100 text-pink-700" },
   { id: "email", label: "Newsletter", icon: Mail, color: "bg-amber-100 text-amber-700" },
@@ -57,6 +58,27 @@ export function ContentGenerator({ savedIdea, onClearIdea }: Props) {
   const [loading, setLoading] = useState(false)
   const [copied, setCopied] = useState(false)
 
+  // Variant mode
+  const [variantMode, setVariantMode] = useState(false)
+  const [variants, setVariants] = useState<Array<{
+    rank: number; content: string; combined_score: number;
+    rubric_score: number; viral_score: number; rubric_suggestions: string[];
+  }>>([])
+  const [selectedVariant, setSelectedVariant] = useState<number | null>(null)
+  const [variantSummary, setVariantSummary] = useState<{ avg_combined_score: number; best_combined_score: number } | null>(null)
+
+  // Video script result
+  const [videoResult, setVideoResult] = useState<{
+    script: Record<string, unknown>; voiceover_text: string; thumbnail_prompt: string;
+    storyboard: Record<string, unknown> | null;
+  } | null>(null)
+
+  // Research context
+  const [research, setResearch] = useState<{
+    summary: string; key_insights: string[]; suggested_angles: string[];
+  } | null>(null)
+  const [researchLoading, setResearchLoading] = useState(false)
+
   // Pre-fill from saved idea
   useEffect(() => {
     if (savedIdea) {
@@ -87,31 +109,108 @@ export function ContentGenerator({ savedIdea, onClearIdea }: Props) {
   const generate = async () => {
     if (!topic.trim()) return
     setLoading(true)
+    setVariants([])
+    setSelectedVariant(null)
+    setVariantSummary(null)
+    setVideoResult(null)
+    setResearch(null)
     try {
-      const res = await fetch(`${API_URL}/ai/generate-content`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          content_type: contentType,
-          topic,
-          platform,
-          provider: selectedProvider,
-          model: selectedModel || undefined,
-          custom_prompt: customPrompt,
-          tone,
-          keywords: keywords.split(",").map((k) => k.trim()).filter(Boolean),
-          length,
-        }),
-      })
-      if (res.ok) {
-        const data = await res.json()
-        setResult(data)
-      } else {
-        // Fallback: generate placeholder
-        setResult({
-          content: generatePlaceholder(contentType, topic, tone),
-          hashtags: [`#${topic.replace(/\s+/g, "").slice(0, 20)}`, "#ContentCreator", "#SocialMediaTips"],
+      // Auto-research when generating
+      if (["video_script", "reel", "short_video"].includes(contentType)) {
+        setResearchLoading(true)
+        fetch(`${API_URL}/ai/quick-research`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ topic, platform, aspect: "general" }),
+        }).then(r => r.ok ? r.json() : null).then(data => {
+          if (data) setResearch(data)
+        }).catch(() => {}).finally(() => setResearchLoading(false))
+      }
+
+      if (contentType === "video_script") {
+        // Video script generation with storyboard
+        const res = await fetch(`${API_URL}/ai/generate-video-script`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem("token") || ""}`,
+          },
+          body: JSON.stringify({
+            topic, platform: platform === "linkedin" ? "youtube" : platform,
+            provider: selectedProvider, model: selectedModel || undefined,
+            duration: 60, style: tone,
+          }),
         })
+        if (res.ok) {
+          const data = await res.json()
+          setVideoResult(data)
+          setResult({ content: JSON.stringify(data.script, null, 2), hashtags: [] })
+        }
+      } else if (variantMode) {
+        // Multi-variant generation
+        const res = await fetch(`${API_URL}/ai/generate-content-variants`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            content_type: contentType,
+            topic,
+            platform,
+            provider: selectedProvider,
+            model: selectedModel || undefined,
+            tone,
+            keywords: keywords.split(",").map((k) => k.trim()).filter(Boolean),
+            length,
+            variant_count: 3,
+          }),
+        })
+        if (res.ok) {
+          const data = await res.json()
+          setVariants(data.variants || [])
+          setVariantSummary(data.scores_summary || null)
+          if (data.best_content) {
+            setResult({ content: data.best_content, hashtags: data.hashtags || [] })
+            setSelectedVariant(data.best_index ?? 0)
+          }
+        } else {
+          // Fallback to single generation
+          const fallback = await fetch(`${API_URL}/ai/generate-content`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              content_type: contentType, topic, platform,
+              provider: selectedProvider, model: selectedModel || undefined,
+              custom_prompt: customPrompt, tone,
+              keywords: keywords.split(",").map((k) => k.trim()).filter(Boolean),
+              length,
+            }),
+          })
+          if (fallback.ok) {
+            const data = await fallback.json()
+            setResult(data)
+          }
+        }
+      } else {
+        // Single generation (existing flow)
+        const res = await fetch(`${API_URL}/ai/generate-content`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            content_type: contentType, topic, platform,
+            provider: selectedProvider, model: selectedModel || undefined,
+            custom_prompt: customPrompt, tone,
+            keywords: keywords.split(",").map((k) => k.trim()).filter(Boolean),
+            length,
+          }),
+        })
+        if (res.ok) {
+          const data = await res.json()
+          setResult(data)
+        } else {
+          setResult({
+            content: generatePlaceholder(contentType, topic, tone),
+            hashtags: [`#${topic.replace(/\s+/g, "").slice(0, 20)}`, "#ContentCreator", "#SocialMediaTips"],
+          })
+        }
       }
     } catch {
       setResult({
@@ -260,12 +359,177 @@ export function ContentGenerator({ savedIdea, onClearIdea }: Props) {
           </div>
 
           {/* Generate */}
-          <Button onClick={generate} disabled={loading || !topic.trim()} className="w-full gap-2">
-            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
-            Generate Content
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={generate} disabled={loading || !topic.trim()} className="flex-1 gap-2">
+              {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Sparkles className="h-4 w-4" />}
+              {variantMode ? "Generate Variants" : "Generate Content"}
+            </Button>
+            <button
+              onClick={() => setVariantMode(!variantMode)}
+              className={`rounded-lg border px-3 py-2 text-xs font-medium transition-all ${variantMode ? "border-primary bg-primary/10 text-primary" : "bg-background text-muted-foreground hover:bg-muted"}`}
+              title={variantMode ? "Single generation mode" : "Multi-variant mode (generates 3 variants, shows scores)"}
+            >
+              {variantMode ? "3x" : "1x"}
+            </button>
+          </div>
+          {variantMode && (
+            <p className="text-xs text-muted-foreground">Multi-variant mode: generates 3 variants with different angles, scores each, and lets you pick the best.</p>
+          )}
         </CardContent>
       </Card>
+
+      {/* Variant Selection */}
+      {variants.length > 0 && (
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <CardTitle className="flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-primary" />
+                Variants ({variants.length})
+              </CardTitle>
+              {variantSummary && (
+                <span className="text-xs text-muted-foreground">
+                  Avg score: {variantSummary.avg_combined_score} | Best: {variantSummary.best_combined_score}
+                </span>
+              )}
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {variants.map((v) => (
+                <button
+                  key={v.rank}
+                  onClick={() => { setSelectedVariant(v.rank - 1); setResult({ content: v.content, hashtags: result?.hashtags || [] }) }}
+                  className={`w-full text-left rounded-lg border p-4 transition-all ${
+                    selectedVariant === v.rank - 1
+                      ? "border-primary bg-primary/5 ring-2 ring-primary/20"
+                      : "bg-background hover:bg-muted/50"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-medium">
+                      #{v.rank} {v.rank === 1 && <span className="text-green-600 text-xs">(Best)</span>}
+                    </span>
+                    <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <span title="Combined score">Score: <strong className="text-foreground">{v.combined_score}</strong></span>
+                      <span title="Quality rubric score">Quality: {v.rubric_score}</span>
+                      <span title="Viral potential score">Viral: {v.viral_score}</span>
+                    </div>
+                  </div>
+                  <p className="text-xs text-muted-foreground line-clamp-3">{v.content.slice(0, 200)}...</p>
+                  {v.rubric_suggestions.length > 0 && (
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      {v.rubric_suggestions.slice(0, 2).map((s, i) => (
+                        <span key={i} className="rounded-full bg-yellow-100 px-2 py-0.5 text-xs text-yellow-700">{s}</span>
+                      ))}
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Research Panel */}
+      {(researchLoading || research) && (
+        <Card className="border-blue-200 bg-blue-50/50">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2 text-sm">
+              <Globe className="h-4 w-4 text-blue-600" />
+              Research Context
+              {researchLoading && <Loader2 className="h-3 w-3 animate-spin text-blue-400" />}
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="text-xs space-y-2">
+            {research?.summary && <p className="text-muted-foreground">{research.summary}</p>}
+            {research?.key_insights && research.key_insights.length > 0 && (
+              <div>
+                <p className="font-medium text-foreground mb-1">Key Insights:</p>
+                <ul className="list-disc list-inside space-y-0.5 text-muted-foreground">
+                  {research.key_insights.slice(0, 3).map((insight, i) => <li key={i}>{insight}</li>)}
+                </ul>
+              </div>
+            )}
+            {research?.suggested_angles && research.suggested_angles.length > 0 && (
+              <div>
+                <p className="font-medium text-foreground mb-1">Suggested Angles:</p>
+                <div className="flex flex-wrap gap-1">
+                  {research.suggested_angles.map((angle, i) => (
+                    <span key={i} className="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-700">{angle}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Video Storyboard */}
+      {videoResult?.storyboard && (
+        <Card className="border-orange-200 bg-orange-50/50">
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center gap-2 text-sm">
+              <Clapperboard className="h-4 w-4 text-orange-600" />
+              Storyboard
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="text-xs space-y-3">
+            {/* Thumbnail Concepts */}
+            {!!videoResult.storyboard.thumbnail_concepts && (
+              <div>
+                <p className="font-medium text-foreground mb-1">Thumbnail A/B Options:</p>
+                <div className="grid grid-cols-3 gap-2">
+                  {(videoResult.storyboard.thumbnail_concepts as Array<Record<string, unknown>>).map((tc, i) => (
+                    <div key={i} className="rounded-lg border p-2 bg-background">
+                      <p className="font-medium">{String(tc.concept_text || `Option ${i + 1}`)}</p>
+                      <p className="text-muted-foreground">{String(tc.visual_description || "").slice(0, 60)}</p>
+                      {Array.isArray(tc.color_scheme) && (
+                        <div className="flex gap-1 mt-1">
+                          {(tc.color_scheme as string[]).map((c, j) => (
+                            <span key={j} className="h-4 w-4 rounded-full border" style={{ backgroundColor: c }} />
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Shot breakdown */}
+            {!!videoResult.storyboard.storyboard && (
+              <div>
+                <p className="font-medium text-foreground mb-1">Shot Breakdown:</p>
+                <div className="space-y-1">
+                  {(videoResult.storyboard.storyboard as Array<Record<string, unknown>>).slice(0, 5).map((shot, i) => (
+                    <div key={i} className="flex gap-2 text-muted-foreground">
+                      <span className="font-mono text-orange-600 w-12">{String(shot.timestamp || `${i}`)}</span>
+                      <span className="flex-1">{String(shot.visual_description || shot.visual || "")}</span>
+                      {!!shot.mood && <span className="text-xs italic">({String(shot.mood)})</span>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Image prompts */}
+            {!!videoResult.storyboard.image_prompts && (
+              <div>
+                <p className="font-medium text-foreground mb-1">Image Generation Prompts:</p>
+                <div className="space-y-1">
+                  {Object.entries(videoResult.storyboard.image_prompts as Record<string, string>).map(([provider, prompt]) => (
+                    <div key={provider} className="rounded bg-background p-1.5">
+                      <span className="font-medium text-orange-600">{provider}:</span>{" "}
+                      <span className="text-muted-foreground">{String(prompt).slice(0, 100)}...</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
 
       {/* Result */}
       {result && (
